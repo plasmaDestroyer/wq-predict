@@ -532,6 +532,35 @@
 
     .issue p { margin: 0; color: var(--muted); font-size: 13px; }
 
+    .priority-list { display: grid; gap: 10px; }
+
+    .priority-item {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .priority-item > b {
+      color: var(--accent);
+      font: 700 12px/1.5 var(--mono);
+    }
+
+    .priority-item p { margin-bottom: 8px; color: var(--muted); }
+    .priority-item p:last-child { margin-bottom: 0; }
+
+    .decision {
+      padding: 20px;
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+    }
+
+    .decision p:last-child { margin-bottom: 0; }
+
     footer {
       max-width: 1120px;
       padding-top: 24px;
@@ -559,6 +588,7 @@
       .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
       .flow-item:nth-child(2n)::after { display: none; }
       .split, .detail-body, .callout { grid-template-columns: 1fr; }
+      .priority-item { grid-template-columns: 1fr; gap: 6px; }
     }
 
     @media (max-width: 620px) {
@@ -613,6 +643,7 @@
         <a href="#example">Worked example</a>
         <a href="#results">Results</a>
         <a href="#ml">ML replacement</a>
+        <a href="#data">Data needed</a>
         <a href="#limits">Limitations</a>
       </nav>
       <div class="side-note">
@@ -860,13 +891,13 @@ pollutant values -> GIS maps</div>
       </section>
 
       <section id="ml" aria-labelledby="ml-title">
-        <h2 id="ml-title">How machine learning replaces it</h2>
-        <p class="section-intro">ML should replace subjective industry ratings with predictions of measured pollution impact. Policy still defines what matters most.</p>
+        <h2 id="ml-title">Complete ML replacement</h2>
+        <p class="section-intro">Replace expert estimates of environmental impact with predictions learned from repeated measurements. Keep legal limits and public-health priorities as explicit policy rules.</p>
 
         <div class="callout">
           <div>
-            <h3>Do not train on fuzzy scores</h3>
-            <p>That would copy expert judgments. Train on observed outlet loads, downstream changes, groundwater changes, or regulatory violations.</p>
+            <h3>The current data are not enough</h3>
+            <p>The paper reports 33 sources and 109 samples, but not a reusable source-by-date dataset with paired outcomes. We can choose candidate algorithms now. We can choose the final model only after collecting and auditing the data.</p>
           </div>
           <div class="formula">fuzzy model:
 expert opinion -> rank
@@ -875,43 +906,122 @@ ML replacement:
 measurements -> predicted impact -> rank</div>
         </div>
 
-        <div class="flow" style="margin-top: 12px">
-          <div class="flow-item"><b>Measure</b><p>Record source, date, pollutant concentration, discharge flow, treatment, season, and location.</p></div>
-          <div class="flow-item"><b>Define target</b><p>Use pollutant load, downstream concentration change, groundwater change, or violation outcome.</p></div>
-          <div class="flow-item"><b>Train</b><p>Compare Elastic Net, Random Forest, XGBoost, and SVR on identical data splits.</p></div>
-          <div class="flow-item"><b>Validate</b><p>Test on future dates and unseen industries. Never rely only on random row splitting.</p></div>
-          <div class="flow-item"><b>Explain</b><p>Report feature importance and prediction uncertainty. Importance does not prove causation.</p></div>
-          <div class="flow-item"><b>Check limits</b><p>Convert predicted concentrations and loads into standard exceedance ratios.</p></div>
-          <div class="flow-item"><b>Score risk</b><p>Combine exceedance, toxicity, river impact, groundwater impact, and public-health policy weights.</p></div>
-          <div class="flow-item"><b>Prioritize</b><p>Rank industrial sources by predicted intervention need.</p></div>
+        <h3 style="margin-top: 30px">What replaces each fuzzy component</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Paper component</th><th>What it did</th><th>ML replacement</th></tr></thead>
+            <tbody>
+              <tr><td>Expert linguistic ratings</td><td>Estimated severity and importance</td><td>Measured features and measured outcomes</td></tr>
+              <tr><td>Pairwise AHP matrix</td><td>Converted opinions into relative preferences</td><td>Training examples linking conditions to outcomes</td></tr>
+              <tr><td>Interval fuzzy number</td><td>Preserved disagreement among three experts</td><td>Prediction intervals from bootstrap or quantile models</td></tr>
+              <tr><td>Defuzzified local weight</td><td>Gave each source one score under each criterion</td><td>Predicted load, environmental change, or violation probability</td></tr>
+              <tr><td>Weighted final score</td><td>Combined ten criteria into a ranking</td><td>Transparent risk rule applied to model outputs</td></tr>
+              <tr><td>GIS maps</td><td>Displayed measured spatial patterns</td><td>Map predictions and uncertainty at monitored locations</td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="worked" style="margin-top: 12px">
+        <h3 style="margin-top: 30px">The targets the model must learn</h3>
+        <div class="worked">
           <div class="panel">
-            <h3>Recommended first models</h3>
-            <p>Elastic Net provides a linear baseline. Random Forest handles nonlinear tabular data. XGBoost is the primary candidate. SVR is useful for small, clean datasets.</p>
-            <p>Skip neural networks until several years of dense time-series data exist.</p>
+            <p>Train one model per pollutant and outcome first. This is easier to validate and explain than one large model that hides different pollutant behaviour.</p>
+            <div class="formula">outlet_load = outlet_concentration x discharge_flow
+
+river_change = downstream_concentration - upstream_concentration
+
+groundwater_change = near_well_concentration - control_well_concentration
+
+exceedance_ratio = observed_concentration / permitted_limit
+
+violation = 1 when observed_concentration > permitted_limit</div>
           </div>
           <div class="panel">
-            <h3>Prediction targets</h3>
-            <div class="formula">pollutant_load = concentration x flow
+            <h3>Final intervention score</h3>
+            <p>The model predicts physical outcomes. A separate documented rule combines exceedance, pollutant toxicity, predicted river change, predicted groundwater change, exposed population, and prediction uncertainty.</p>
+            <p>This policy layer replaces the paper's weighted sum. It must be approved by domain and regulatory experts; ML cannot learn what society should value from chemistry alone.</p>
+          </div>
+        </div>
 
-river_impact = downstream - upstream
+        <h3 style="margin-top: 30px">Models to compare</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Model</th><th>Role</th><th>Use when</th><th>Main caution</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Elastic Net</strong></td><td>Required baseline</td><td>Small data; approximately linear effects</td><td>Misses complex interactions</td></tr>
+              <tr><td><strong>XGBoost</strong></td><td>Primary candidate</td><td>Structured nonlinear data with enough repeated records</td><td>Can overfit small site counts</td></tr>
+              <tr><td><strong>Random Forest</strong></td><td>Tree comparison</td><td>Nonlinear effects and robust tabular baseline</td><td>Poor extrapolation outside training range</td></tr>
+              <tr><td><strong>SVR</strong></td><td>Small-data comparison</td><td>Clean, scaled data with moderate feature count</td><td>Sensitive to scaling and tuning</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="decision" style="margin-top: 12px">
+          <p><strong>Do not choose the winner now.</strong> Start with Elastic Net. Compare XGBoost, Random Forest, and SVR on identical held-out sites and future dates. Select the simplest model with stable error and useful uncertainty.</p>
+          <p>Do not use deep learning with this expected sample size. Do not use reinforcement learning: no repeated control action, reward, or safe simulator exists in the present study.</p>
+        </div>
 
-groundwater_impact = near_well - control_well
+        <h3 style="margin-top: 30px">How to build and test it</h3>
+        <div class="flow">
+          <div class="flow-item"><b>Define outcomes</b><p>Choose the pollutant, location, prediction horizon, and physical target before sampling.</p></div>
+          <div class="flow-item"><b>Sample repeatedly</b><p>Measure sources and paired environmental locations on matching dates across seasons.</p></div>
+          <div class="flow-item"><b>Audit data</b><p>Standardize units, retain detection limits, flag missingness, and prevent impossible values.</p></div>
+          <div class="flow-item"><b>Split correctly</b><p>Hold out entire sources and future dates. Never split repeated rows randomly.</p></div>
+          <div class="flow-item"><b>Train baseline</b><p>Fit Elastic Net first, then compare three nonlinear candidates using the same folds.</p></div>
+          <div class="flow-item"><b>Measure error</b><p>Use MAE and RMSE for quantities; recall, precision, and calibration for violations.</p></div>
+          <div class="flow-item"><b>Quantify uncertainty</b><p>Report prediction intervals. A rank without uncertainty is incomplete.</p></div>
+          <div class="flow-item"><b>Rank and monitor</b><p>Apply the policy rule, map risk, then retrain only when new validated data improve it.</p></div>
+        </div>
+      </section>
 
-violation = observed / permitted_limit</div>
+      <section id="data" aria-labelledby="data-title">
+        <h2 id="data-title">Exact data needed</h2>
+        <p class="section-intro">Priority runs from low to highest. One observation must join source conditions and environmental outcomes from the same sampling event.</p>
+
+        <div class="priority-list">
+          <div class="priority-item">
+            <b>Priority 1<br>Low</b>
+            <div><h3>Administrative context</h3><p>Stable source ID, industry type, products, applicable legal limits, inspection history, complaints, and enforcement history.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 2<br>Low-medium</b>
+            <div><h3>Spatial context</h3><p>Outlet coordinates, river reach, flow direction, distances, upstream and downstream stations, nearby and control wells, settlements, drinking-water intakes, drainage, and aquifer information.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 3<br>Medium</b>
+            <div><h3>Time, weather, and river conditions</h3><p>Date and time, season, recent rainfall, river level, river discharge, and water temperature where relevant.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 4<br>Medium-high</b>
+            <div><h3>Treatment and production</h3><p>ETP or CETP type, operating status, design capacity, actual inflow, inlet and outlet flow, downtime, maintenance, production rate, chemical use, and process settings.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 5<br>High</b>
+            <div><h3>Repeated effluent measurements</h3><p>At each outlet: discharge flow, pH, BOD, COD, TSS, TDS, chromium, fluoride, lead, nickel, cadmium, arsenic, iron, copper, zinc, and industry-specific toxic pollutants.</p><p>For every result: unit, laboratory method, detection limit, quantification limit, replicate or quality-control flag, and missing-value reason.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 6<br>Very high</b>
+            <div><h3>Paired measured outcomes</h3><p>On matching dates, measure the same pollutant panel upstream and downstream, in a nearby well and a comparable control well. These paired differences are the labels used to train the environmental-impact models.</p></div>
+          </div>
+          <div class="priority-item">
+            <b>Priority 7<br>Highest</b>
+            <div><h3>Repeated observations over time</h3><p>Repeat the complete sampling event at fixed sources and stations, monthly if practical, across all seasons and preferably multiple years. Keep source and station IDs unchanged.</p><p>Without repeated paired measurements, there is no defensible supervised model for environmental impact.</p></div>
           </div>
         </div>
 
         <div class="panel" style="margin-top: 12px">
-          <h3>Minimum useful record</h3>
-          <p>One row represents one industrial source at one sampling time. It needs industry type, treatment details, flow, inlet and outlet measurements, upstream and downstream observations, season, rainfall, river flow, coordinates, and applicable limits.</p>
-          <div class="formula">source x date -> features -> measured target
+          <h3>Minimum machine-learning row</h3>
+          <div class="formula">one row = one source x one sampling event x one pollutant
 
-33 sources x repeated monthly observations
+IDs: source_id, outlet_id, station_ids, sample_id
+time: date_time, season
+source: industry_type, production_rate, treatment_status
+hydrology: rainfall, river_flow, discharge_flow
+chemistry: inlet, outlet, upstream, downstream, near_well, control_well
+quality: unit, method, detection_limit, QA_flag, missing_reason
+target: load, river_change, groundwater_change, or violation</div>
+        </div>
 
-No repeated measurements = no defensible supervised model</div>
+        <div class="decision" style="margin-top: 12px">
+          <p><strong>Collection rule:</strong> concentration without discharge flow cannot estimate load. Downstream without upstream cannot isolate river change. A nearby well without a control well cannot estimate local groundwater change. A single visit cannot teach seasonal or future behaviour.</p>
         </div>
       </section>
 
