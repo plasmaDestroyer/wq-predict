@@ -643,6 +643,7 @@
         <a href="#example">Worked example</a>
         <a href="#results">Results</a>
         <a href="#ml">ML replacement</a>
+        <a href="#missing-data">Missing paper data</a>
         <a href="#data">Data needed</a>
         <a href="#limits">Limitations</a>
       </nav>
@@ -969,6 +970,99 @@ violation = 1 when observed_concentration > permitted_limit</div>
           <div class="flow-item"><b>Measure error</b><p>Use MAE and RMSE for quantities; recall, precision, and calibration for violations.</p></div>
           <div class="flow-item"><b>Quantify uncertainty</b><p>Report prediction intervals. A rank without uncertainty is incomplete.</p></div>
           <div class="flow-item"><b>Rank and monitor</b><p>Apply the policy rule, map risk, then retrain only when new validated data improve it.</p></div>
+        </div>
+      </section>
+
+      <section id="missing-data" aria-labelledby="missing-data-title">
+        <h2 id="missing-data-title">Data the paper used but did not publish</h2>
+        <p class="section-intro">The paper prints examples and final weights, not the complete source data. These missing tables are required to reproduce the fuzzy calculation exactly.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Required table</th><th>What the paper prints</th><th>What is missing</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sampling-station register</strong></td><td>Table 1 covers site-1, Banthar, and site-2</td><td>Magarwara-I and Magarwara-II station details</td></tr>
+              <tr><td><strong>Laboratory measurements</strong></td><td>Table 2 shows only CETP Unnao inlet and outlet</td><td>Complete 54 effluent and 55 groundwater sample records</td></tr>
+              <tr><td><strong>Expert source ratings</strong></td><td>Table 6 shows nine site-2 sources for C3 only</td><td>Ratings for every source under every criterion</td></tr>
+              <tr><td><strong>Pairwise matrices</strong></td><td>Table 7 shows site-2 under C3 only</td><td>Remaining criteria, sites, and criterion-importance matrices</td></tr>
+              <tr><td><strong>Detailed fuzzy calculations</strong></td><td>Tables 8 and 9 show site-2 under C3 only</td><td>Fuzzy matrices and weights for every remaining criterion and site</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="method" style="margin-top: 12px">
+          <details open>
+            <summary><span class="number">A</span><span>Complete sampling-station register</span><span class="open-label">Partly published</span></summary>
+            <div class="detail-body">
+              <div><h3>What is absent</h3><p>The authors explicitly omit station information for Magarwara-I and Magarwara-II. We need the identity and location of every source, inlet, outlet, drain, river station, and groundwater well.</p></div>
+              <div class="formula">source_id
+industrial_area
+industry_or_drain_name
+sampling_station_id
+station_type
+inlet_or_outlet
+latitude, longitude
+receiving_drain_or_river</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">B</span><span>Complete laboratory measurement table</span><span class="open-label">Highest-value missing table</span></summary>
+            <div class="detail-body">
+              <div><h3>All 109 samples</h3><p>The study used 54 effluent samples and 55 groundwater samples in pre-monsoon and post-monsoon 2012. Only one CETP example is printed. We need every row, including nondetects and missing results.</p></div>
+              <div class="formula">sample_id, source_id, station_id
+sampling_date, season, sample_type
+inlet_or_outlet, discharge_flow
+pH, TDS, TSS, BOD, COD
+Cu, Ni, Pb, Cd, Zn, Cr, As, F, Fe
+unit, detection_limit, QA_flag</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">C</span><span>Complete expert-rating table</span><span class="open-label">About 963 ratings absent</span></summary>
+            <div class="detail-body">
+              <div><h3>Original questionnaire answers</h3><p>A complete table requires 33 sources x 10 criteria x 3 experts, or 990 source-level ratings. Table 6 prints only 27 ratings for nine site-2 sources under C3, leaving about 963 unprinted.</p></div>
+              <div class="formula">expert_id
+expert_role
+industrial_area
+source_id
+criterion_id
+linguistic_rating
+numeric_rating
+questionnaire_date</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">D</span><span>Pairwise-comparison matrices</span><span class="open-label">Can be regenerated</span></summary>
+            <div class="detail-body">
+              <div><h3>Derived, not essential to request</h3><p>The complete AHP matrices and inconsistency ratios are absent. If we receive the original expert ratings and the exact comparison rule, we can calculate these again.</p></div>
+              <div class="formula">expert_id
+industrial_area
+criterion_id
+source_i, source_j
+pairwise_value
+matrix_IR</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">E</span><span>Fuzzy matrices and intermediate weights</span><span class="open-label">Can be regenerated</span></summary>
+            <div class="detail-body">
+              <div><h3>Derived, not raw data</h3><p>The full interval-valued matrices, row geometric means, normalized fuzzy weights, and defuzzified weights are not printed. They can be reproduced after obtaining the expert ratings and resolving the paper's pairwise-rule ambiguity.</p></div>
+              <div class="formula">p_prime, p, q, r, r_prime
+row_geometric_mean
+normalized_fuzzy_weight
+defuzzified_local_weight
+final_weight</div>
+            </div>
+          </details>
+        </div>
+
+        <div class="decision" style="margin-top: 12px">
+          <p><strong>Minimum request to reproduce the paper:</strong> the complete station register, all 109 laboratory records, all 990 expert source ratings, and the exact rule or software export used to convert rating differences into pairwise values.</p>
+          <p><strong>For ML:</strong> do not use expert ratings, pairwise matrices, fuzzy weights, or Table 10 final scores as training labels. Use repeated measured environmental outcomes from the next section.</p>
         </div>
       </section>
 
