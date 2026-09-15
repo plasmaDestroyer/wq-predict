@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Step-by-step dashboard explaining the interval-valued fuzzy AHP method used to assess industrial wastewater impacts in the Ganges River basin.">
+  <title>Ganges Industrial Wastewater Assessment</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f3f5f1;
+      --surface: #fbfcf9;
+      --surface-2: #e8ede7;
+      --text: #162019;
+      --muted: #526158;
+      --line: #cad3cc;
+      --accent: #176647;
+      --accent-soft: #d9eee4;
+      --danger: #8b3d31;
+      --radius: 14px;
+      --shadow: 0 16px 44px rgba(40, 61, 48, .10);
+      --mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: "Aptos", "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #101512;
+      --surface: #171e1a;
+      --surface-2: #202a24;
+      --text: #edf3ee;
+      --muted: #a7b5ac;
+      --line: #36443b;
+      --accent: #70c99d;
+      --accent-soft: #18382a;
+      --danger: #e39a8d;
+      --shadow: 0 16px 44px rgba(0, 0, 0, .24);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg: #101512;
+        --surface: #171e1a;
+        --surface-2: #202a24;
+        --text: #edf3ee;
+        --muted: #a7b5ac;
+        --line: #36443b;
+        --accent: #70c99d;
+        --accent-soft: #18382a;
+        --danger: #e39a8d;
+        --shadow: 0 16px 44px rgba(0, 0, 0, .24);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    a { color: inherit; }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand strong { font-size: 15px; }
+    .brand span { color: var(--muted); font-size: 13px; }
+
+    .top-actions { display: flex; gap: 8px; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font: 650 13px var(--sans);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover { border-color: var(--accent); }
+    .button:active { transform: translateY(1px); }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      width: min(1500px, 100%);
+      margin: 0 auto;
+    }
+
+    aside {
+      position: sticky;
+      top: 65px;
+      align-self: start;
+      height: calc(100dvh - 65px);
+      padding: 28px 20px;
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+
+    nav { display: grid; gap: 4px; }
+
+    nav a {
+      padding: 9px 11px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .side-note {
+      margin-top: 28px;
+      padding: 14px;
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    main {
+      min-width: 0;
+      padding: 42px clamp(20px, 4vw, 64px) 80px;
+    }
+
+    section {
+      max-width: 1120px;
+      margin-bottom: 72px;
+      scroll-margin-top: 90px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .75fr);
+      gap: 34px;
+      align-items: end;
+      min-height: min(620px, calc(100dvh - 110px));
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font: 700 12px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 850px;
+      margin-bottom: 20px;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    h2 {
+      max-width: 760px;
+      margin-bottom: 14px;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.06;
+      letter-spacing: -.035em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .lead {
+      max-width: 65ch;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-fact {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-fact strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: clamp(52px, 7vw, 92px);
+      line-height: .9;
+      letter-spacing: -.06em;
+    }
+
+    .hero-fact p { margin: 0; color: var(--muted); }
+
+    .section-intro {
+      max-width: 65ch;
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .metric {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+    }
+
+    .metric:last-child { border-right: 0; }
+
+    .metric b {
+      display: block;
+      font: 700 clamp(28px, 4vw, 46px)/1 var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .metric span { color: var(--muted); font-size: 13px; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .flow-item {
+      position: relative;
+      min-height: 150px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .flow-item::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -11px;
+      width: 11px;
+      border-top: 1px solid var(--accent);
+    }
+
+    .flow-item:nth-child(4n)::after,
+    .flow-item:last-child::after { display: none; }
+
+    .flow-item b {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--accent);
+      font: 700 13px var(--mono);
+    }
+
+    .flow-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .panel p:last-child { margin-bottom: 0; }
+
+    .group-list { display: grid; gap: 10px; }
+
+    .group {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 13px 15px;
+      border-radius: var(--radius);
+      background: var(--surface-2);
+    }
+
+    .group span { color: var(--muted); font-size: 13px; }
+    .group b { font: 700 18px var(--mono); }
+
+    .criteria {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .criterion {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .criterion code {
+      color: var(--accent);
+      font: 700 14px var(--mono);
+    }
+
+    .criterion span { color: var(--muted); font-size: 13px; }
+    .criterion b { font: 700 13px var(--mono); }
+
+    .method { display: grid; gap: 10px; }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    summary {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 17px 19px;
+      cursor: pointer;
+      font-weight: 750;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary .number {
+      color: var(--accent);
+      font: 700 13px var(--mono);
+    }
+
+    summary .open-label { color: var(--muted); font-size: 12px; }
+
+    details[open] summary { border-bottom: 1px solid var(--line); }
+
+    .detail-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, .72fr);
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .detail-body p, .detail-body li { color: var(--muted); }
+
+    .detail-body ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .formula {
+      overflow-x: auto;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: var(--surface-2);
+      color: var(--text);
+      font: 600 13px/1.7 var(--mono);
+      white-space: pre-wrap;
+    }
+
+    .scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .scale div {
+      padding: 14px 8px;
+      border-radius: var(--radius);
+      background: var(--surface-2);
+      text-align: center;
+    }
+
+    .scale b { display: block; font: 700 18px var(--mono); }
+    .scale span { color: var(--muted); font-size: 11px; }
+
+    .worked {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .worked .panel:first-child { background: var(--accent-soft); }
+
+    .equation-result {
+      margin: 16px 0 0;
+      color: var(--accent);
+      font: 750 clamp(18px, 3vw, 28px)/1.3 var(--mono);
+    }
+
+    .weights { display: grid; gap: 9px; }
+
+    .weight {
+      display: grid;
+      grid-template-columns: 44px minmax(100px, 1fr) 52px;
+      gap: 12px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .weight code { color: var(--accent); font-weight: 750; }
+
+    .bar {
+      display: block;
+      height: 8px;
+      width: var(--w);
+      min-width: 4px;
+      border-radius: var(--radius);
+      background: var(--accent);
+    }
+
+    .weight b { text-align: right; font: 700 12px var(--mono); }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+    th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+    td strong { color: var(--danger); }
+    td.good { color: var(--accent); font-weight: 750; }
+
+    .callout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: 28px;
+      padding: clamp(22px, 4vw, 38px);
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .callout p { max-width: 60ch; margin-bottom: 0; opacity: .9; }
+
+    .callout .formula {
+      align-self: center;
+      background: color-mix(in srgb, var(--bg) 12%, transparent);
+      color: var(--bg);
+    }
+
+    .issues {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .issue {
+      padding: 18px;
+      border-left: 4px solid var(--danger);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .issue p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    footer {
+      max-width: 1120px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      aside {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 12px 18px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      nav { display: flex; overflow-x: auto; }
+      nav a { flex: 0 0 auto; }
+      .side-note { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .metrics, .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .flow-item:nth-child(2n)::after { display: none; }
+      .split, .detail-body, .callout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .topbar { padding: 10px 14px; }
+      .brand span { display: none; }
+      main { padding: 30px 16px 60px; }
+      section { margin-bottom: 54px; }
+      h1 { font-size: 42px; }
+      .metrics, .flow, .criteria, .worked, .issues { grid-template-columns: 1fr; }
+      .metric { border-right: 0; border-bottom: 1px solid var(--line); }
+      .metric:last-child { border-bottom: 0; }
+      .flow-item::after { display: none; }
+      summary { grid-template-columns: 34px 1fr; }
+      summary .open-label { display: none; }
+      .scale { grid-template-columns: 1fr; }
+      .scale div { display: flex; align-items: baseline; justify-content: space-between; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+
+    @media print {
+      .topbar, aside { display: none; }
+      .shell { display: block; }
+      main { padding: 0; }
+      section { break-inside: avoid; margin-bottom: 36px; }
+      details > * { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <strong>WQ Research Notes</strong>
+      <span>Fuzzy assessment method</span>
+    </div>
+    <div class="top-actions">
+      <a class="button" href="s10668-017-9994-9.pdf">Open paper</a>
+      <button class="button" id="theme-toggle" type="button" aria-label="Switch color theme">Theme</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside>
+      <nav aria-label="Dashboard sections">
+        <a href="#overview">Overview</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#criteria">Criteria</a>
+        <a href="#method">Method</a>
+        <a href="#example">Worked example</a>
+        <a href="#results">Results</a>
+        <a href="#ml">ML replacement</a>
+        <a href="#limits">Limitations</a>
+      </nav>
+      <div class="side-note">
+        Core idea: experts supply judgments. Fuzzy AHP preserves disagreement, produces weights, and ranks pollution sources.
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero" id="overview">
+        <div>
+          <p class="kicker">Research method explained</p>
+          <h1>How fuzzy logic ranked industrial pollution</h1>
+          <p class="lead">A complete walkthrough of Srinivas and Singh's Ganges River basin assessment, from field evidence to final ranking.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#method">See method</a>
+            <a class="button" href="#example">Check calculation</a>
+          </div>
+        </div>
+        <div class="hero-fact">
+          <strong>0.066</strong>
+          <p>Final score for CETP Unnao at Industrial site-2. Lower score means greater pollution priority.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="study-title">
+        <h2 id="study-title">Study at a glance</h2>
+        <p class="section-intro">The model combines monitored evidence with judgments from three institutions. It assesses impact; it does not forecast future water quality.</p>
+        <div class="metrics">
+          <div class="metric"><b>33</b><span>industrial sources</span></div>
+          <div class="metric"><b>10</b><span>decision criteria</span></div>
+          <div class="metric"><b>3</b><span>expert decision makers</span></div>
+          <div class="metric"><b>109</b><span>water and effluent samples</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="pipeline-title">
+        <h2 id="pipeline-title">Entire research pipeline</h2>
+        <p class="section-intro">Each block produces the input required by the next block.</p>
+        <div class="flow">
+          <div class="flow-item"><b>Evidence</b><p>Collect effluent and groundwater observations in pre-monsoon and post-monsoon periods.</p></div>
+          <div class="flow-item"><b>Structure</b><p>Define 33 alternatives, ten impact criteria, and one ranking objective.</p></div>
+          <div class="flow-item"><b>Judgment</b><p>Three experts rate criteria and industries with five linguistic levels.</p></div>
+          <div class="flow-item"><b>AHP</b><p>Convert ratings into reciprocal pairwise comparison matrices.</p></div>
+          <div class="flow-item"><b>Fuzzify</b><p>Combine expert comparisons into interval-valued triangular fuzzy numbers.</p></div>
+          <div class="flow-item"><b>Weight</b><p>Use fuzzy geometric means and normalization to calculate relative weights.</p></div>
+          <div class="flow-item"><b>Rank</b><p>Defuzzify, multiply local weights by criterion weights, and order industries.</p></div>
+          <div class="flow-item"><b>Map</b><p>Display critical pollutants in ArcGIS and propose management actions.</p></div>
+        </div>
+      </section>
+
+      <section id="evidence" aria-labelledby="evidence-title">
+        <div class="split">
+          <div>
+            <h2 id="evidence-title">Evidence and study design</h2>
+            <p class="section-intro">UPPCB monitoring data guided expert ratings and later supported qualitative comparison with model rankings.</p>
+          </div>
+          <div class="group-list">
+            <div class="group"><div><strong>Industrial site-1 and Banthar</strong><br><span>Industries, CETP, and drains</span></div><b>9</b></div>
+            <div class="group"><div><strong>Industrial site-2</strong><br><span>Industries, CETP, and drains</span></div><b>9</b></div>
+            <div class="group"><div><strong>Magarwara-I</strong><br><span>Industrial sources and drains</span></div><b>8</b></div>
+            <div class="group"><div><strong>Magarwara-II</strong><br><span>Industrial sources</span></div><b>7</b></div>
+            <div class="panel"><h3>Sampling</h3><p>54 wastewater or effluent samples and 55 groundwater samples. Deep and shallow aquifers. Pre-monsoon and post-monsoon observations from 2012.</p></div>
+            <div class="panel"><h3>Measured pollutants</h3><p>pH, BOD, COD, TSS, TDS, chromium, fluoride, lead, nickel, cadmium, arsenic, iron, copper, and zinc.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="criteria" aria-labelledby="criteria-title">
+        <h2 id="criteria-title">Ten criteria</h2>
+        <p class="section-intro">C10 receives greatest final weight. Ratings for C1, C3, and C4 require reverse interpretation because high values mean worse pollution.</p>
+        <div class="criteria">
+          <div class="criterion"><code>C1</code><span>Effluent discharge quantity</span><b>0.139</b></div>
+          <div class="criterion"><code>C2</code><span>ETP or CETP efficiency</span><b>0.072</b></div>
+          <div class="criterion"><code>C3</code><span>Critical parameters, pre-monsoon</span><b>0.148</b></div>
+          <div class="criterion"><code>C4</code><span>Critical parameters, post-monsoon</span><b>0.096</b></div>
+          <div class="criterion"><code>C5</code><span>Effluent or waste type</span><b>0.096</b></div>
+          <div class="criterion"><code>C6</code><span>River impact, pre-monsoon</span><b>0.139</b></div>
+          <div class="criterion"><code>C7</code><span>River impact, post-monsoon</span><b>0.030</b></div>
+          <div class="criterion"><code>C8</code><span>Groundwater impact, pre-monsoon</span><b>0.096</b></div>
+          <div class="criterion"><code>C9</code><span>Groundwater impact, post-monsoon</span><b>0.029</b></div>
+          <div class="criterion"><code>C10</code><span>Public-health impact</span><b>0.235</b></div>
+        </div>
+      </section>
+
+      <section id="method" aria-labelledby="method-title">
+        <h2 id="method-title">Fuzzy method, step by step</h2>
+        <p class="section-intro">Open each step for inputs, operation, and output.</p>
+        <div class="method">
+          <details open>
+            <summary><span class="number">01</span><span>Collect expert ratings</span><span class="open-label">Questionnaire</span></summary>
+            <div class="detail-body">
+              <div><h3>Three experts, five levels</h3><p>Experts rate criterion importance and every industry under every criterion. Linguistic answers become crisp values.</p></div>
+              <div class="scale"><div><b>1</b><span>Very low</span></div><div><b>3</b><span>Low</span></div><div><b>5</b><span>Medium</span></div><div><b>7</b><span>High</span></div><div><b>9</b><span>Very high</span></div></div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">02</span><span>Build pairwise AHP matrices</span><span class="open-label">Relative preference</span></summary>
+            <div class="detail-body">
+              <div><h3>Compare every pair</h3><p>Equal alternatives receive 1. One to four linguistic-level gaps receive 3, 5, 7, or 9. Worse direction receives the reciprocal.</p></div>
+              <div class="formula">equal = 1
+one level = 3
+two levels = 5
+reverse = 1/3 or 1/5</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">03</span><span>Check consistency</span><span class="open-label">IR below 0.1</span></summary>
+            <div class="detail-body">
+              <div><h3>Reject inconsistent judgments</h3><p>They calculate matrix inconsistency from the largest eigenvalue. Experts should revise ratings when the ratio reaches 0.1.</p></div>
+              <div class="formula">II = (lambda_max - n) / (n - 1)
+IR = II / RII
+accept when IR &lt; 0.1</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">04</span><span>Combine experts into one fuzzy number</span><span class="open-label">IVTFN</span></summary>
+            <div class="detail-body">
+              <div><h3>Preserve disagreement</h3><p>Minimum and maximum retain the expert range. Geometric mean gives the center. Two midpoints form inner bounds.</p></div>
+              <div class="formula">q = geometric_mean(Z1, Z2, Z3)
+p' = min(Z)
+p  = (min(Z) + q) / 2
+r  = (q + max(Z)) / 2
+r' = max(Z)
+
+Z_fuzzy = [(p', p); q; (r, r')]</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">05</span><span>Build group fuzzy comparison matrix</span><span class="open-label">Reciprocal matrix</span></summary>
+            <div class="detail-body">
+              <div><h3>One matrix represents all experts</h3><p>Every pair contains five fuzzy components. The opposite comparison uses reciprocal values in reverse order.</p></div>
+              <div class="formula">if Zij = [(p',p); q; (r,r')]
+
+Zji = [(1/r',1/r); 1/q; (1/p,1/p')]</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">06</span><span>Calculate fuzzy relative weights</span><span class="open-label">Geometric mean</span></summary>
+            <div class="detail-body">
+              <div><h3>Aggregate each matrix row</h3><p>Multiply every fuzzy comparison in one row, take the nth root, then normalize against the sum of all rows.</p></div>
+              <div class="formula">Xi = (Zi1 x Zi2 x ... x Zin)^(1/n)
+
+Wi = Xi x (X1 + X2 + ... + Xn)^(-1)</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">07</span><span>Defuzzify</span><span class="open-label">One crisp weight</span></summary>
+            <div class="detail-body">
+              <div><h3>Collapse five values into one</h3><p>The central component receives double weight. Result becomes one local performance value.</p></div>
+              <div class="formula">W* = (w1' + w1 + 2w2 + w3 + w3') / 6</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="number">08</span><span>Calculate final score and ranking</span><span class="open-label">Weighted sum</span></summary>
+            <div class="detail-body">
+              <div><h3>Combine criteria</h3><p>Each industry local weight is multiplied by corresponding criterion importance. The ten products are added.</p></div>
+              <div class="formula">Final(i) = sum[ CriterionWeight(j) x LocalWeight(i,j) ]
+
+lower score = more critical source
+higher score = less critical source</div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section id="example" aria-labelledby="example-title">
+        <h2 id="example-title">Worked example</h2>
+        <p class="section-intro">S1 compared with S2 under C3 at Industrial site-2.</p>
+        <div class="worked">
+          <div class="panel">
+            <h3>Expert judgments</h3>
+            <p>E1: 1/3<br>E2: 1/3<br>E3: 1</p>
+            <div class="formula">q = (1/3 x 1/3 x 1)^(1/3)
+q = 0.481
+
+fuzzy comparison:
+[(0.333, 0.407); 0.481; (0.740, 1.000)]</div>
+          </div>
+          <div class="panel">
+            <h3>After row weighting</h3>
+            <div class="formula">S1 fuzzy weight:
+[(0.031, 0.037); 0.044; (0.057, 0.070)]
+
+crisp weight:
+(0.031 + 0.037 + 2x0.044 + 0.057 + 0.070) / 6</div>
+            <p class="equation-result">S1 under C3 = 0.047</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="weights-title">
+        <div class="split">
+          <div>
+            <h2 id="weights-title">What drove the ranking</h2>
+            <p class="section-intro">Public health received greatest expert weight. Post-monsoon river and groundwater criteria received least.</p>
+          </div>
+          <div class="panel weights" aria-label="Criterion weights">
+            <div class="weight"><code>C10</code><span class="bar" style="--w:100%"></span><b>0.235</b></div>
+            <div class="weight"><code>C3</code><span class="bar" style="--w:63%"></span><b>0.148</b></div>
+            <div class="weight"><code>C1</code><span class="bar" style="--w:59%"></span><b>0.139</b></div>
+            <div class="weight"><code>C6</code><span class="bar" style="--w:59%"></span><b>0.139</b></div>
+            <div class="weight"><code>C4</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
+            <div class="weight"><code>C5</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
+            <div class="weight"><code>C8</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
+            <div class="weight"><code>C2</code><span class="bar" style="--w:31%"></span><b>0.072</b></div>
+            <div class="weight"><code>C7</code><span class="bar" style="--w:13%"></span><b>0.030</b></div>
+            <div class="weight"><code>C9</code><span class="bar" style="--w:12%"></span><b>0.029</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" aria-labelledby="results-title">
+        <h2 id="results-title">Reported area results</h2>
+        <p class="section-intro">Each area is normalized and ranked separately. Low score means high intervention priority.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Industrial area</th><th>Most critical</th><th>Score</th><th>Least critical</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr><td>Site-1 and Banthar</td><td><strong>S4 in Table 10</strong></td><td>0.046</td><td class="good">S6 and S8</td><td>0.233</td></tr>
+              <tr><td>Industrial site-2</td><td><strong>S1, CETP Unnao</strong></td><td>0.066</td><td class="good">S8, Omega International</td><td>0.258</td></tr>
+              <tr><td>Magarwara-I</td><td><strong>S1, City Jail Drain</strong></td><td>0.073</td><td class="good">S4, Sadaf Enterprises</td><td>0.267</td></tr>
+              <tr><td>Magarwara-II</td><td><strong>S1, Global Rimjhim</strong></td><td>0.087</td><td class="good">S4, ACI Oils</td><td>0.193</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="gis-title">
+        <div class="callout">
+          <div>
+            <h2 id="gis-title">GIS came after fuzzy ranking</h2>
+            <p>ArcGIS mapped BOD, COD, pH, TSS, fluoride, and chromium. Spatial maps supported interpretation but did not enter fuzzy equations.</p>
+          </div>
+          <div class="formula">monitoring data -> expert ratings
+expert ratings -> fuzzy ranking
+pollutant values -> GIS maps</div>
+        </div>
+      </section>
+
+      <section id="ml" aria-labelledby="ml-title">
+        <h2 id="ml-title">How machine learning replaces it</h2>
+        <p class="section-intro">ML should replace subjective industry ratings with predictions of measured pollution impact. Policy still defines what matters most.</p>
+
+        <div class="callout">
+          <div>
+            <h3>Do not train on fuzzy scores</h3>
+            <p>That would copy expert judgments. Train on observed outlet loads, downstream changes, groundwater changes, or regulatory violations.</p>
+          </div>
+          <div class="formula">fuzzy model:
+expert opinion -> rank
+
+ML replacement:
+measurements -> predicted impact -> rank</div>
+        </div>
+
+        <div class="flow" style="margin-top: 12px">
+          <div class="flow-item"><b>Measure</b><p>Record source, date, pollutant concentration, discharge flow, treatment, season, and location.</p></div>
+          <div class="flow-item"><b>Define target</b><p>Use pollutant load, downstream concentration change, groundwater change, or violation outcome.</p></div>
+          <div class="flow-item"><b>Train</b><p>Compare Elastic Net, Random Forest, XGBoost, and SVR on identical data splits.</p></div>
+          <div class="flow-item"><b>Validate</b><p>Test on future dates and unseen industries. Never rely only on random row splitting.</p></div>
+          <div class="flow-item"><b>Explain</b><p>Report feature importance and prediction uncertainty. Importance does not prove causation.</p></div>
+          <div class="flow-item"><b>Check limits</b><p>Convert predicted concentrations and loads into standard exceedance ratios.</p></div>
+          <div class="flow-item"><b>Score risk</b><p>Combine exceedance, toxicity, river impact, groundwater impact, and public-health policy weights.</p></div>
+          <div class="flow-item"><b>Prioritize</b><p>Rank industrial sources by predicted intervention need.</p></div>
+        </div>
+
+        <div class="worked" style="margin-top: 12px">
+          <div class="panel">
+            <h3>Recommended first models</h3>
+            <p>Elastic Net provides a linear baseline. Random Forest handles nonlinear tabular data. XGBoost is the primary candidate. SVR is useful for small, clean datasets.</p>
+            <p>Skip neural networks until several years of dense time-series data exist.</p>
+          </div>
+          <div class="panel">
+            <h3>Prediction targets</h3>
+            <div class="formula">pollutant_load = concentration x flow
+
+river_impact = downstream - upstream
+
+groundwater_impact = near_well - control_well
+
+violation = observed / permitted_limit</div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 12px">
+          <h3>Minimum useful record</h3>
+          <p>One row represents one industrial source at one sampling time. It needs industry type, treatment details, flow, inlet and outlet measurements, upstream and downstream observations, season, rainfall, river flow, coordinates, and applicable limits.</p>
+          <div class="formula">source x date -> features -> measured target
+
+33 sources x repeated monthly observations
+
+No repeated measurements = no defensible supervised model</div>
+        </div>
+      </section>
+
+      <section id="limits" aria-labelledby="limits-title">
+        <h2 id="limits-title">What to treat carefully</h2>
+        <p class="section-intro">These issues matter if the method is reproduced or replaced with machine learning.</p>
+        <div class="issues">
+          <div class="issue"><h3>Missing raw judgments</h3><p>Only one complete C3 example is shown. Full expert ratings for all 33 sources and ten criteria are absent.</p></div>
+          <div class="issue"><h3>Pairwise formula mismatch</h3><p>Equation 2 states a ratio. Table 7 behaves like linguistic-level distance on Saaty's scale.</p></div>
+          <div class="issue"><h3>Weights do not sum to one</h3><p>Published criterion weights sum to 1.08. Final score remains relative, not a probability.</p></div>
+          <div class="issue"><h3>Ranking contradiction</h3><p>Site-1 prose names S3 as worst. Table 10 gives S4 a lower score.</p></div>
+          <div class="issue"><h3>Validation is not independent</h3><p>Monitoring observations informed experts, then similar observations were used to support rankings.</p></div>
+          <div class="issue"><h3>No prediction</h3><p>Model aggregates expert preferences. It does not learn temporal patterns or forecast concentrations.</p></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="meaning-title">
+        <div class="panel">
+          <h2 id="meaning-title">Exact role of fuzzy logic</h2>
+          <p>Fuzzy logic preserves disagreement between three experts while AHP calculates relative importance. It replaces a simple average with an interval around the group judgment. Defuzzification then collapses that interval into one ranking weight.</p>
+          <p>It does not model laboratory uncertainty, pollutant transport, future water quality, or cause and effect.</p>
+        </div>
+      </section>
+
+      <footer>
+        Based on: R. Srinivas and Ajit Pratap Singh, "Impact assessment of industrial wastewater discharge in a river basin using interval-valued fuzzy group decision-making and spatial approach," Environment, Development and Sustainability, 2018.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById("theme-toggle");
+    const savedTheme = localStorage.getItem("wq-theme");
+    if (savedTheme) root.dataset.theme = savedTheme;
+
+    const currentTheme = () => root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const updateToggle = () => {
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      toggle.textContent = next === "dark" ? "Dark theme" : "Light theme";
+      toggle.setAttribute("aria-label", `Switch to ${next} theme`);
+    };
+    updateToggle();
+
+    toggle.addEventListener("click", () => {
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      localStorage.setItem("wq-theme", next);
+      updateToggle();
+    });
+  </script>
+</body>
+</html>
