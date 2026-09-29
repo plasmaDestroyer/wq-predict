@@ -1,1 +1,4 @@
 *.pdf
+.ipynb_checkpoints/
+__pycache__/
+data/echo/raw/
