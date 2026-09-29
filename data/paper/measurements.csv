@@ -1,0 +1,40 @@
+source_id,industrial_area,industry_type,sample_date,pollutant,discharge_flow_mld,production_rate,treatment_status,rainfall_mm,river_flow_m3s,inlet,outlet,upstream,downstream,near_well,control_well,detection_limit,season,ref,note
+site2-S1,site2,cetp,,pH,1.6,,,,,7.9,8,,,,,,pre_monsoon,Table 2,pH units; flow from Table 2 footnote (text p.2388 says >100 MLD)
+site2-S1,site2,cetp,,TDS,1.6,,,,,12243,11226,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,TSS,1.6,,,,,390,245,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Cu,1.6,,,,,0.03,0.02,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Ni,1.6,,,,,0.15,0.09,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Pb,1.6,,,,,0.08,0.05,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Cd,1.6,,,,,0.01,0.01,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Zn,1.6,,,,,0.63,0.07,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,Cr,1.6,,,,,3.06,1.31,,,,,,pre_monsoon,Table 2,total chromium
+site2-S1,site2,cetp,,COD,1.6,,,,,3788,1240,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,BOD,1.6,,,,,680,98,,,,,,pre_monsoon,Table 2,
+site2-S1,site2,cetp,,pH,1.6,,,,,7.6,7.7,,,,,,post_monsoon,Table 2,pH units
+site2-S1,site2,cetp,,TDS,1.6,,,,,9900,9500,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,Cu,1.6,,,,,0.18,0.15,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,Ni,1.6,,,,,0.19,0.06,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,Pb,1.6,,,,,0.06,0.04,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,Cd,1.6,,,,,0,0,,,,,,post_monsoon,Table 2,ND (not detected); detection limit not reported
+site2-S1,site2,cetp,,Zn,1.6,,,,,0.16,0.09,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,Cr,1.6,,,,,6.87,3.67,,,,,,post_monsoon,Table 2,total chromium
+site2-S1,site2,cetp,,As,1.6,,,,,0.09,0.08,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,F,1.6,,,,,1.5,1.5,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,COD,1.6,,,,,2650,850,,,,,,post_monsoon,Table 2,
+site2-S1,site2,cetp,,BOD,1.6,,,,,902,353,,,,,,post_monsoon,Table 2,
+site1_banthar-S6,site1_banthar,food,,BOD,0.02,,,,,,59,,,,,,,text p.2388,Rustom Food Pvt. Ltd.; 20 KLD
+site1_banthar-S3,site1_banthar,drain,,TSS,100,,,,,,455,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
+site1_banthar-S3,site1_banthar,drain,,COD,100,,,,,,570,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
+site1_banthar-S3,site1_banthar,drain,,BOD,100,,,,,,160,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
+site2-S8,site2,,,BOD,0.009,,,,,,353,,,,,,,text p.2388,Omega International; 9 KLD; BOD equals CETP Unnao value (possible copy error in paper)
+magarwara1-S4,magarwara1,tannery,,TDS,,,,,,,145,,,,,,,text p.2388,Sadaf Enterprises Pvt. Ltd.; text compares to a 100 mg/L limit which is the TSS standard (TDS may be a typo for TSS)
+magarwara1-S4,magarwara1,tannery,,BOD,,,,,,,98,,,,,,,text p.2388,Sadaf Enterprises Pvt. Ltd.; leather industry
+magarwara1-S1,magarwara1,drain,,TSS,15,,,,,,175,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
+magarwara1-S1,magarwara1,drain,,Fe,15,,,,,,21.6,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
+magarwara1-S1,magarwara1,drain,,COD,15,,,,,,640,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
+magarwara1-S1,magarwara1,drain,,BOD,15,,,,,,215,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
+magarwara2-S1,magarwara2,steel,,pH,0.05,,,,,,11.2,,,,,,,text p.2388,Global Rimjhim Stainless Steel; 50 KLD; pH units
+magarwara2-S1,magarwara2,steel,,Pb,0.05,,,,,,0.53,,,,,,,text p.2388,Global Rimjhim Stainless Steel; 50 KLD
+magarwara2-S1,magarwara2,steel,,F,0.05,,,,,,270,,,,,,,text p.2388,Global Rimjhim Stainless Steel; 50 KLD
+magarwara2-S4,magarwara2,oil,,COD,0.05,,,,,,760,,,,,,,text p.2392,ACI Oils; 50 KLD
+magarwara2-S4,magarwara2,oil,,BOD,0.05,,,,,,150,,,,,,,text p.2392,ACI Oils; 50 KLD

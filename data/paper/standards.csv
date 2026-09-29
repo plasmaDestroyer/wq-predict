@@ -1,0 +1,14 @@
+pollutant,min,max,unit,ref
+pH,6.5,8,pH units,Table 2
+TDS,,2100,mg/L,Table 2
+TSS,,100,mg/L,Table 2
+Cu,,3,mg/L,Table 2
+Ni,,3,mg/L,Table 2
+Pb,,0.1,mg/L,Table 2
+Cd,,1,mg/L,Table 2
+Zn,,5,mg/L,Table 2
+Cr,,2,mg/L,Table 2 (total chromium)
+As,,0.2,mg/L,Table 2
+F,,2,mg/L,Table 2
+COD,,250,mg/L,Table 2
+BOD,,30,mg/L,Table 2

@@ -1,0 +1,11 @@
+criterion,definition,E1,E2,E3,weight
+C1,Effluent discharge from the industry,VH,H,H,0.139
+C2,Efficiency of ETP/CETP with respect to critical elements,H,H,M,0.072
+C3,Number of critical parameters: pre-monsoon,VH,H,H,0.148
+C4,Number of critical parameters: post-monsoon,H,H,H,0.096
+C5,Type of effluents/waste released,H,H,H,0.096
+C6,Impact of critical parameters on River Ganges: pre-monsoon,VH,H,H,0.139
+C7,Impact of critical parameters on River Ganges: post-monsoon,M,M,L,0.030
+C8,Impact of critical parameters on groundwater: pre-monsoon,H,H,H,0.096
+C9,Impact of critical parameters on groundwater: post-monsoon,M,M,L,0.029
+C10,Harmful impact of critical parameter on public health,VH,VH,VH,0.235

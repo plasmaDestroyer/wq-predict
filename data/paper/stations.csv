@@ -1,0 +1,39 @@
+source_id,industrial_area,industry_type,station_id,role,name,ref
+site2-S1,site2,cetp,SW-1,inlet,CETP Unnao inlet at plant,Table 1
+site2-S1,site2,cetp,SW-2,outlet,CETP Unnao outlet at plant,Table 1
+site2-S1,site2,cetp,SW-3,upstream,Loni drain before CETP Unnao outlet joins,Table 1 + Fig. 3 (derived pairing)
+site2-S1,site2,cetp,SW-4,downstream,Loni drain after CETP Unnao outlet joins,Table 1 + Fig. 3 (derived pairing)
+site2-S2,site2,drain,SW-3,outlet,U/S of Loni drain at railway bridge before joining of CETP Unnao outlet,Table 1
+site2-S3,site2,drain,SW-4,outlet,Loni drain after joining of CETP Unnao outlet,Table 1
+site2-S4,site2,drain,SW-5,outlet,UPSIDC drain at bridge near CETP Unnao,Table 1
+site2-S4,site2,drain,SW-4,upstream,Loni drain before UPSIDC + sewage drains join,Fig. 3 (derived; downstream shared with S5)
+site2-S4,site2,drain,SW-7,downstream,Loni drain after UPSIDC + sewage drains join,Fig. 3 (derived; shared with S5)
+site2-S5,site2,drain,SW-6,outlet,Unlined sewage drain at bridge near CETP,Table 1
+site2-S5,site2,drain,SW-4,upstream,Loni drain before UPSIDC + sewage drains join,Fig. 3 (derived; downstream shared with S4)
+site2-S5,site2,drain,SW-7,downstream,Loni drain after UPSIDC + sewage drains join,Fig. 3 (derived; shared with S4)
+site2-S6,site2,drain,SW-7,outlet,Loni drain D/S of the bridge after joining of UPSIDC drain and sewage drain,Table 1
+site2-S7,site2,food,SW-23,inlet,ETP inlet of M/s Indagro Foods Ltd.,Table 1
+site2-S7,site2,food,SW-24,outlet,ETP outlet of M/s Indagro Foods Ltd.,Table 1
+site2-S8,site2,,SW-27,inlet,ETP inlet of M/s Omega International,Table 1
+site2-S8,site2,,SW-28,outlet,ETP outlet of M/s Omega International,Table 1
+site2-S9,site2,tannery,SW-29,inlet,ETP inlet of M/s Allied Leather Finisher Pvt. Ltd.,Table 1
+site2-S9,site2,tannery,SW-30,outlet,ETP outlet of M/s Allied Leather Finisher Pvt. Ltd.,Table 1
+site1_banthar-S1,site1_banthar,drain,SW-8,outlet,CETP Banthar drain before mixing,Table 1
+site1_banthar-S2,site1_banthar,drain,SW-9,outlet,UPSIDC drain,Table 1
+site1_banthar-S3,site1_banthar,drain,SW-10,outlet,UPSIDC drain,Table 1
+site1_banthar-S4,site1_banthar,cetp,SW-11,inlet,CETP Banthar inlet at plant,Table 1
+site1_banthar-S4,site1_banthar,cetp,SW-12,outlet,CETP Banthar outlet at plant,Table 1
+site1_banthar-S5,site1_banthar,,SW-25,inlet,ETP inlet of M/s AOV Exports Pvt. Ltd.,Table 1
+site1_banthar-S5,site1_banthar,,SW-26,outlet,ETP outlet of M/s AOV Exports Pvt. Ltd.,Table 1
+site1_banthar-S6,site1_banthar,food,SW-31,inlet,ETP inlet of M/s Rustom Food Pvt. Ltd.,Table 1
+site1_banthar-S6,site1_banthar,food,SW-32,outlet,ETP outlet of M/s Rustom Food Pvt. Ltd.,Table 1
+site1_banthar-S7,site1_banthar,,SW-33,inlet,ETP inlet of M/s Falak Enterprizes & Asharfi Agri Bioproduct,Table 1
+site1_banthar-S7,site1_banthar,,SW-34,outlet,ETP outlet of M/s Falak Enterprizes & Asharfi Agro Byoproducts,Table 1
+site1_banthar-S8,site1_banthar,paper_pulp,SW-40,inlet,ETP inlet of M/s Bajaj Kagaj Udyog Ltd.,Table 1
+site1_banthar-S8,site1_banthar,paper_pulp,SW-41,outlet,ETP outlet of M/s Bajaj Kagaj Udyog Ltd.,Table 1
+site1_banthar-S9,site1_banthar,,SW-42,inlet,ETP inlet of M/s J S International,Table 1
+site1_banthar-S9,site1_banthar,,SW-43,outlet,ETP outlet of M/s J S International,Table 1
+magarwara1-S1,magarwara1,drain,,,City Jail Drain,text p.2388 (station table omitted by authors)
+magarwara1-S4,magarwara1,tannery,,,Sadaf Enterprises Pvt. Ltd.,text p.2388 (leather industry)
+magarwara2-S1,magarwara2,steel,,,Global Rimjhim Stainless Steel,text p.2388
+magarwara2-S4,magarwara2,oil,,,ACI Oils,text p.2392

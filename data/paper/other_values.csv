@@ -1,0 +1,12 @@
+what,pollutant,value,min,max,unit,ref
+River Ganges near Unnao,BOD,12.5,,,mg/L,text p.2388 (CWC 2016)
+River Ganges near Unnao,Cr,6.7,,,mg/L,text p.2388; permissible 0.05
+Unnao drains average (UPJN/UPPCB/CPCB 2017),BOD,200,,,mg/L,text p.2387
+Unnao drains average (UPJN/UPPCB/CPCB 2017),COD,400,,,mg/L,text p.2387
+Revised BOD discharge standard recommended,BOD,10,,,mg/L,text p.2393 (current 30)
+GIS map range all sampling points,BOD,,59,1012,mg/L,Fig. 5 legend
+GIS map range all sampling points,COD,,0,2200,mg/L,Fig. 6 legend
+GIS map range all sampling points,pH,,0,11.2,pH units,Fig. 7 legend (0 = not measured)
+GIS map range all sampling points,TSS,,0,920,mg/L,Fig. 8 legend
+GIS map range all sampling points,F,,0,270,mg/L,Fig. 9 legend
+GIS map range all sampling points,Cr,,0,14.7,mg/L,Fig. 10 legend

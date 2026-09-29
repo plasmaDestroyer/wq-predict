@@ -1,0 +1,5 @@
+station_id,campaign,sample_date,season,discharge_flow_mld,pH,TDS,TSS,Copper,Nickel,Lead,Cadmium,Zinc,Total chromium,Arsenic,Fluoride,COD,BOD
+SW-1,2012-pre,,pre_monsoon,1.6,7.9,12243,390,0.03,0.15,0.08,0.01,0.63,3.06,-,-,3788,680
+SW-1,2012-post,,post_monsoon,1.6,7.6,9900,-,0.18,0.19,0.06,ND,0.16,6.87,0.09,1.5,2650,902
+SW-2,2012-pre,,pre_monsoon,1.6,8,11226,245,0.02,0.09,0.05,0.01,0.07,1.31,-,-,1240,98
+SW-2,2012-post,,post_monsoon,1.6,7.7,9500,-,0.15,0.06,0.04,ND,0.09,3.67,0.08,1.5,850,353
