@@ -907,6 +907,24 @@ ML replacement:
 measurements -> predicted impact -> rank</div>
         </div>
 
+        <h3 style="margin-top: 30px">Four ways to replace the fuzzy step</h3>
+        <p class="section-intro">Fuzzy AHP is not a predictor. It turns expert opinion into a ranking and is never checked against a true answer. The real choice is what the ML learns from. Repeated observations are needed only for option 4.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Option</th><th>Learns from</th><th>Repeated data?</th><th>Main caution</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1. Imitate the fuzzy model</strong></td><td>Table 10 scores, predicted from measured values per source</td><td class="good">No</td><td>Learns the experts' judgment and cannot beat it. Only 33 rows, so use a simple model</td></tr>
+              <tr><td><strong>2. Snapshot outcome model</strong></td><td>Violation or exceedance per source, pollutant and season</td><td class="good">No</td><td>Cannot forecast. Cannot separate the facility from its conditions</td></tr>
+              <tr><td><strong>3. Data-driven weights</strong></td><td>Measurements only: entropy weights or PCA, then TOPSIS</td><td class="good">No</td><td>Not learning. Weights reflect how much each measurement varies, not how harmful it is</td></tr>
+              <tr><td><strong>4. Physical impact and forecasting</strong></td><td>River and groundwater change over time</td><td>Yes</td><td>Strongest scientifically. Needs paired, repeated sampling</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="decision" style="margin-top: 12px">
+          <p><strong>Recommended order:</strong> build option 1 as a direct swap that can be compared with the paper, and option 3 as a baseline that needs no labels. Keep option 4 for when repeated monitoring exists.</p>
+          <p><strong>Stand-in test:</strong> real US EPA discharge reports (ECHO, 2019–2024; 38 textile, paper, meat and tannery plants; median 57 monthly reports each) were run through options 2 and 4. Every model did worse than predicting the average for plants it had not seen. More months per plant did not help, because plants differ in production, treatment and receiving water, which the inputs did not capture. Collect those facility details as well as more samples.</p>
+        </div>
+
         <h3 style="margin-top: 30px">What replaces each fuzzy component</h3>
         <div class="table-wrap">
           <table>
