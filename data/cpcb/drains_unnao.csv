@@ -1,0 +1,17 @@
+drain,year,season,flow_mld,bod_load_tpd,bod_mgL,cod_mgL,source,note
+City Jail,2012,both,22.3,,,,UPPCB/NIH 2013 Table 3.3,15 MLD of it untreated sewage
+Loni,2012,both,10.12,,,,UPPCB/NIH 2013 Table 3.3,
+City Jail,2018,pre_monsoon,7.00,1.18,168,,CPCB Identified_drains_premonsoon-2018,
+Loni,2018,pre_monsoon,31.00,1.63,53,,CPCB Identified_drains_premonsoon-2018,
+City Jail,2018,post_monsoon,27.50,3.36,,,CPCB Identified_drains_postmonsoon-2018,variation table
+Loni,2018,post_monsoon,12.40,0.07,,,CPCB Identified_drains_postmonsoon-2018,variation table
+City Jail,2020,post_monsoon,35.42,3.61,102,,CPCB Identified_drains_postmonsoon-2020,
+Loni,2020,post_monsoon,,,,,CPCB Identified_drains_postmonsoon-2020,sample was not collected
+City Jail,2021,post_monsoon,,,,,CPCB Identified_drains_postmonsoon-2021,not measured
+Loni,2021,post_monsoon,,,11.2,,CPCB Identified_drains_postmonsoon-2021,flow not measured; 11.2 read as BOD (column uncertain)
+City Jail,2022,pre_monsoon,28.74,3.94,137,,CPCB Identified_drains_premonsoon-2022,
+Loni,2022,pre_monsoon,41.47,0.95,23,,CPCB Identified_drains_premonsoon-2022,listed under Kanpur town
+City Jail,2022,post_monsoon,12.07,1.71,142,,CPCB Identified_drains_postmonsoon-2022,
+Loni,2022,post_monsoon,9.39,0.29,30.4,,CPCB Identified_drains_postmonsoon-2022,
+City Jail,2023,post_monsoon,33.18,10.02,302,390,CPCB Identified_drains_postmonsoon-2023,
+Loni,2023,post_monsoon,22.81,0.19,8.33,39.6,CPCB Identified_drains_postmonsoon-2023,
