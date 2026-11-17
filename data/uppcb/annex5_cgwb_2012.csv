@@ -1,0 +1,70 @@
+no,location,type,pH,EC,Cr6_ugL,Cr_ugL,F
+1,Left Effluent Benther,Effluent,7.67,1310,ND,1,1.25
+2,Right Effluent Benther,Effluent,7.78,4000,ND,6,2.11
+3,Mixed Effluent CEPT Benther,Effluent,7.61,1860,ND,-,1.29
+4,TW near CEPT,SP,7.52,668,ND,-,1.48
+5,J S Slaughter House,Effluent,7.62,698,ND,11,1.17
+6,Benthar,IM II,7.22,746,ND,6,0.96
+7,Lauikhera,DW,8.01,5860,ND,45,0.98
+8,"Gaya prasad, Laukhera",IM II,7.25,4170,ND,31,0.76
+9,"Sambhu, Laukhera",IM II,7.42,781,ND,0,0.98
+10,"Manglal, Laukhera",IM II,7.28,982,1.39,2,0.79
+11,"Sushil, Laukhera",HP,7.26,763,ND,11,3.21
+12,Jagannath Jalimkhera,DW,7.38,2030,ND,26,1.18
+13,Ramkumar Jalimkhera,HP,7.21,1630,ND,26,0.99
+14,Jagawath Jalimkhera,HP,7.17,1490,ND,26,1.07
+15,"Raj Bhadur, Dakari",HP,6.98,6120,ND,50,0.91
+16,"Mahesh Singh, Dakari",HP,7.02,3330,ND,-,0.4
+17,"Khadi bhawan, Shuklaganj",HP,7.44,1880,ND,-,1.52
+18,"Ayurwedik hospital, Maswari",IM II,7.06,2050,ND,-,0.49
+19,Maduwasi,IM II,7.46,4310,ND,-,0.88
+20,"Drain in side, Maduwasi",Drain,7.72,1710,ND,-,3.31
+21,"Sankar Singh, Maduwasi",IM II,6.94,3040,0.21,-,1.75
+22,"Horilal, Maduwasi",IM II,7.34,1860,ND,102,0.72
+23,"Kanya Vidyalay, Maduwasi",IM II,7.18,4600,ND,-,1.05
+24,"Mirza tannery drain, Unnao",Drain,7.58,1330,ND,4455,2.75
+25,Unnao distillery,Drain,7.98,795,ND,31,0.72
+26,"Makanpur ghat, Temple",IM II,6.98,312,-,-,0.37
+27,"Makanpur ghat, Ganga",River,7.31,341,-,-,0.22
+28,"Makanpur ghat, Ganga",River,7.89,279,-,-,0.4
+29,"Gangasagar, Katari in field",TW,7.01,431,-,-,0.22
+30,PWD Ganghut,IM II,7.03,405,-,-,0
+31,Melalam sah,DW,7.28,342,-,-,0.35
+32,Pond on road,SW,7.23,285,-,-,0.18
+33,"Prim School, Munnipurwa",IM II,7.18,1020,-,-,1.72
+34,"Indra Pal, Munnipurwa",HP,6.99,708,-,-,0.12
+35,"Rupan, Bhudda",HP,6.75,549,-,-,0.22
+36,"Nanhu, Bhudda",IM II,6.94,590,-,-,0.06
+37,"Nanhu, Bhudda",HP,6.73,1240,-,-,0.45
+38,"Subedar, Antwa",HP,7.01,711,-,-,0.08
+39,"Jagdish, Antwa",IM II,7.08,467,-,-,0.75
+40,"Prim School, Antwa",IM II,7.01,532,-,-,0.28
+41,Antwa Xing,HP,6.96,542,-,-,0.25
+42,"Dalla, Bhudda",HP,7.01,553,-,-,0.41
+43,"Asha Singh, Bhudda",HP,6.98,524,-,-,0.35
+44,"Jairam, Naubatganj",IM II,6.81,1520,-,-,0.06
+45,"Jairam, Naubatganj",HP,6.93,2000,-,-,0.18
+46,"Jairam, Naubatganj",DW,7.38,1830,-,-,0.12
+47,"PHC, Naubatganj",IM II,7.08,1500,-,-,0.03
+48,"Munna Awasthi, Rishinagar",HP,7.08,1664,ND,16,0.45
+49,New Krishna sweet,IM II,7.42,902,ND,35,0.26
+50,"D C Dwedi, Risinagar",HP,7.85,1204,ND,6,1.13
+51,"J L Dwedi, Risinagar",HP,7.65,1440,ND,20,1.24
+52,"Pal Traders,Subasnagar",HP,7.64,1227,ND,16,0.56
+53,Hanuman Temple,IM II,7.72,643,ND,16,0.35
+54,"Vinod Rathor,Suklaganj",HP,7.48,1664,ND,16,0.59
+55,"JHS Singrausi, Darmkanta",IM II,7.70,888,ND,11,1.82
+56,"JAR Inter college, Daramkanta",SW,7.76,3516,2070,4012,0.37
+57,"JAR Inter college,Daramkanta",TW,7.76,2985,352,602,1.08
+58,"Pintu Gupta, Shivnagar",HP,7.90,3552,ND,141,7.32
+59,"CEPT, Dahi Chowki",Effluent,7.29,7398,ND,3984,0.94
+60,"CEPT, Dahi Chowki",Effluent,7.26,19706,ND,3310,0.01
+61,"CEPT, Dahi Chowki",IM II,7.60,1758,ND,21,1.01
+62,"Garhi, Nr tower",HP,7.52,1068,ND,16,0.77
+63,Jhanjhari,DW,7.71,2726,ND,21,0.89
+64,Central School,IM II,7.74,674,ND,45,0.44
+65,Masnagar,IM II,7.49,1262,ND,54,0.44
+66,Masnagar in village,DW,7.26,2738,ND,21,1.08
+67,Masnagar on road,DW,7.06,952,ND,11,0.74
+68,CEPT,Effluent,7.08,23482,ND,-,0.01
+69,J S Slaughter House,Effluent,7.87,1782,ND,-,1.21

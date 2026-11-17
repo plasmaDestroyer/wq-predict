@@ -1,0 +1,56 @@
+well_id,location,type,depth_ft,locality
+G-1,Chandpur village,TW,160,Ind. Area Site-1
+G-2,"Opp. Shivam Medical Store, Dahi Chowk",IM II,80,Ind. Area Site-1
+G-3,"H/o Sri Pintoo Gupta, Shivnagar",Pvt. ,50,Ind. Area Site-1
+G-4,"M/s Janta Timber Mart, Dharam Kanta",Pvt. ,40,Ind. Area Site-1
+G-5,"Boiler Point, Dakari",Pvt. ,45,Unnao
+G-6,"Opp. H/o Sri Shankar Singh, Maswasi",IM II,80,Maswasi
+G-7,CETP Unnao Complex,IM II,140,Ind. Area Site-2
+G-8,Haze Manzoor Alam India Ltd.,IM II,80,Ind. Area Site-1
+G-9,"Babuganj Nagar Palika, TW No.11",TW,650,Ind. Area Site-1
+G-10,Babuganj Hata Temple,IM II,80,Ind. Area Site-1
+G-11,"Opp. Super House Ltd., Roadways Workshop",IM II,100,Ind. Area Site-1
+G-12,"Opp. Super House Ltd., Roadways Workshop",IM II,80,Ind. Area Site-1
+G-13,Rustam Food Ltd.,IM II,80,Ind. Area Site-1
+G-14,"H/o Sri Ram Gopal, Chandpur",IM II,80,Ind. Area Site-1
+G-15,Indian Industries Association,IM II,100,Ind. Area Site-1
+G-16,"Near H/o Sri Dhani Ram, Gajauli village",IM II,80,Ind. Area Site-1
+G-17,Village Rambakhs Khera,IM II,80,Ind. Area Site-1
+G-18,"H/o Sri Ramsajeevan, Rambakhs Khera",Pvt. ,50,Ind. Area Site-1
+G-19,"Near H/o Sri Vinod, Durjan Khera",Pvt. ,80,Ind. Area Site-1
+G-20,Durjan Khera village,IM II,40,Ind. Area Site-1
+G-21,Opp. M/s Cresent Tanners Pvt. Ltd.,IM II,85,Ind. Area Site-2
+G-22,"Teekar Railway Crossing, Gate No. 31",IM II,85,Ind. Area Site-2
+G-23,"H/o Sri Munnulal, village Mukund Khera",Pvt.H,70,Ind. Area Site-2
+G-24,"Gayatri Coaching Centre, Teekar Crossing",IM II,110,Ind. Area Site-2
+G-25,"H/o Shyam Mohan, Teekar Crossing",Pvt. ,40,Ind. Area Site-2
+G-26,Opp. M/s Elena Company,IM II,80,Ind. Area Site-2
+G-27,"Police Chowki, Dahi",Sub. ,110,Ind. Area Site-2
+G-28,"Opp. Amar Dharam Kanta, village Jhanjari",IM II,80,Ind. Area Site-2
+G-29,"Opp. H/o Sri Suryapal Yadav, village Jhanjari",IM II,80,Ind. Area Site-2
+G-30,"H/o Sri Rajesh Yadav, village Jhanjari",Pvt. ,50,Ind. Area Site-2
+G-31,"Power House, Leather Technology            Park,",IM II,80,Ind. Area Site-2
+G-32,"H/o Sri Chhote Lal, UPSIDC, Banthar",Sub.P,130,Ind. Area Site-2
+G-33,"H/o Sri Sudhir Gupta, Banthar",IM II,200,Ind. Area Site-2
+G-34,CETP Banthar,Sub. ,150,Ind. Area Site-2
+G-35,"Nagar Palika Parishad, Pitambar Nagar, TW No.",TW,650,Magarwara
+G-36,"Nagar Palika Parishad, Kashif Ali Sarai, TW",TW,650,Magarwara
+G-37,"Opp. H/o Sri Deshraj, Dalit Basti, Gadan Khera",IM II,80,Magarwara
+G-38,"H/o Sri Rajjan Lal Yadav, Adarsh Nagar",IM II,110,Magarwara
+G-39,"Opp. M/s Zamzam Tannery, Shekhpur",IM II,120,Magarwara
+G-40,"M/s Super Tannery Limited, Akrampur",Sub. ,120,Akrampur
+G-41,Gokul Baba Crossing,IM II,80,Magarwara
+G-42,Gokul Baba Temple,IM II,110,Magarwara
+G-43,"Payjal Yojna, Maswasi",TW,1750,Maswasi
+G-44,"Payjal Yojna, Maswasi",IM II,80,Maswasi
+G-45,"Near H/o Sri Ashok Kumar, Galgala",IM II,80,Unnao
+G-46,"Nagar Palika Parishad, Lily Park, Awas Vikas,",TW,1500,Unnao
+G-47,"Opp. H/o Sri Jagan Nath, Jalim Khera",OW,15,Unnao
+G-48,"H/o Sri Jagan Nath, Jalim Khera",Pvt. ,30,Unnao
+G-49,"H/o Shiv Mangal, Laukhera",IM II,80,Unnao
+G-50,"Prathmik Vidyalaya, Karni Bijalamau",IM II,80,Unnao
+G-51,"Opp. H/o Sri Bachchu Singh, Tribhuvan Khera",Pvt. ,30,Unnao
+G-52,"H/o Sri Bhopal Verma, Bijalamau",Pvt. ,30,Unnao
+G-53,"Marhala Crossing, Chandrashekhar Azad Marg",Pvt. ,65,Unnao
+G-54,"H/o Sri Suraj Singh, Deora Khurd",Pvt. ,50,Unnao
+G-55,"Opp. Banerjee Hospital, Magarwara",IM II,80,Magarwara

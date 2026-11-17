@@ -1,0 +1,682 @@
+table,station_id,season,parameter,pollutant,value,standard
+Table 7.1,SW-1,pre_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.1,SW-1,post_monsoon,pH,pH,7.6,5.5-9.0
+Table 7.1,SW-2,pre_monsoon,pH,pH,8.0,5.5-9.0
+Table 7.1,SW-2,post_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.1,SW-1,pre_monsoon,"TDS, mg/L",TDS,12243,2100
+Table 7.1,SW-1,post_monsoon,"TDS, mg/L",TDS,9900,2100
+Table 7.1,SW-2,pre_monsoon,"TDS, mg/L",TDS,11226,2100
+Table 7.1,SW-2,post_monsoon,"TDS, mg/L",TDS,9500,2100
+Table 7.1,SW-1,pre_monsoon,"TSS, mg/L",TSS,390,100
+Table 7.1,SW-1,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.1,SW-2,pre_monsoon,"TSS, mg/L",TSS,245,100
+Table 7.1,SW-2,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.1,SW-1,pre_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.1,SW-1,post_monsoon,"Copper, mg/L",Cu,0.18,3
+Table 7.1,SW-2,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.1,SW-2,post_monsoon,"Copper, mg/L",Cu,0.15,3
+Table 7.1,SW-1,pre_monsoon,"Nickel, mg/L",Ni,0.15,3
+Table 7.1,SW-1,post_monsoon,"Nickel, mg/L",Ni,0.19,3
+Table 7.1,SW-2,pre_monsoon,"Nickel, mg/L",Ni,0.09,3
+Table 7.1,SW-2,post_monsoon,"Nickel, mg/L",Ni,0.06,3
+Table 7.1,SW-1,pre_monsoon,"Lead, mg/L",Pb,0.08,0.1
+Table 7.1,SW-1,post_monsoon,"Lead, mg/L",Pb,0.06,0.1
+Table 7.1,SW-2,pre_monsoon,"Lead, mg/L",Pb,0.05,0.1
+Table 7.1,SW-2,post_monsoon,"Lead, mg/L",Pb,0.04,0.1
+Table 7.1,SW-1,pre_monsoon,"Cadmium, mg/L",Cd,0.01,1
+Table 7.1,SW-1,post_monsoon,"Cadmium, mg/L",Cd,ND,1
+Table 7.1,SW-2,pre_monsoon,"Cadmium, mg/L",Cd,0.01,1
+Table 7.1,SW-2,post_monsoon,"Cadmium, mg/L",Cd,ND,1
+Table 7.1,SW-1,pre_monsoon,"Zinc, mg/L",Zn,0.63,5
+Table 7.1,SW-1,post_monsoon,"Zinc, mg/L",Zn,0.16,5
+Table 7.1,SW-2,pre_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.1,SW-2,post_monsoon,"Zinc, mg/L",Zn,0.09,5
+Table 7.1,SW-1,pre_monsoon,"Total Chromium, mg/L",Cr,3.06,2
+Table 7.1,SW-1,post_monsoon,"Total Chromium, mg/L",Cr,6.87,2
+Table 7.1,SW-2,pre_monsoon,"Total Chromium, mg/L",Cr,1.31,2
+Table 7.1,SW-2,post_monsoon,"Total Chromium, mg/L",Cr,3.67,2
+Table 7.1,SW-1,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.1,SW-1,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.1,SW-2,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.1,SW-2,post_monsoon,"Arsenic, mg/L",As,0.08,0.2
+Table 7.1,SW-1,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.1,SW-1,post_monsoon,"Fluoride, mg/L",F,1.5,2
+Table 7.1,SW-2,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.1,SW-2,post_monsoon,"Fluoride, mg/L",F,1.5,2
+Table 7.1,SW-1,pre_monsoon,"COD, mg/L",COD,3788,250
+Table 7.1,SW-1,post_monsoon,"COD, mg/L",COD,2650,250
+Table 7.1,SW-2,pre_monsoon,"COD, mg/L",COD,1240,250
+Table 7.1,SW-2,post_monsoon,"COD, mg/L",COD,850,250
+Table 7.1,SW-1,pre_monsoon,"BOD, mg/L",BOD,680,30
+Table 7.1,SW-1,post_monsoon,"BOD, mg/L",BOD,902,30
+Table 7.1,SW-2,pre_monsoon,"BOD, mg/L",BOD,98,30
+Table 7.1,SW-2,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.2,SW-5,pre_monsoon,pH,pH,7.5,5.5-9.0
+Table 7.2,SW-5,post_monsoon,pH,pH,7.5,5.5-9.0
+Table 7.2,SW-6,pre_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.2,SW-6,post_monsoon,pH,pH,7.6,5.5-9.0
+Table 7.2,SW-5,pre_monsoon,"TSS, mg/L",TSS,455,100
+Table 7.2,SW-5,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.2,SW-6,pre_monsoon,"TSS, mg/L",TSS,60,100
+Table 7.2,SW-6,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.2,SW-5,pre_monsoon,"Iron, mg/L",Fe,1.95,3
+Table 7.2,SW-5,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.2,SW-6,pre_monsoon,"Iron, mg/L",Fe,1.09,3
+Table 7.2,SW-6,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.2,SW-5,pre_monsoon,"Manganese, mg/L",Mn,0.26,2
+Table 7.2,SW-5,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.2,SW-6,pre_monsoon,"Manganese, mg/L",Mn,0.68,2
+Table 7.2,SW-6,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.2,SW-5,pre_monsoon,"Copper, mg/L",Cu,0.01,3
+Table 7.2,SW-5,post_monsoon,"Copper, mg/L",Cu,0.04,3
+Table 7.2,SW-6,pre_monsoon,"Copper, mg/L",Cu,0.01,3
+Table 7.2,SW-6,post_monsoon,"Copper, mg/L",Cu,0.04,3
+Table 7.2,SW-5,pre_monsoon,"Nickel, mg/L",Ni,0.03,3
+Table 7.2,SW-5,post_monsoon,"Nickel, mg/L",Ni,0.02,3
+Table 7.2,SW-6,pre_monsoon,"Nickel, mg/L",Ni,0.15,3
+Table 7.2,SW-6,post_monsoon,"Nickel, mg/L",Ni,0.02,3
+Table 7.2,SW-5,pre_monsoon,"Lead, mg/L",Pb,0.08,0.1
+Table 7.2,SW-5,post_monsoon,"Lead, mg/L",Pb,0.05,0.1
+Table 7.2,SW-6,pre_monsoon,"Lead, mg/L",Pb,ND,0.1
+Table 7.2,SW-6,post_monsoon,"Lead, mg/L",Pb,0.02,0.1
+Table 7.2,SW-5,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.2,SW-5,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.2,SW-6,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.2,SW-6,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.2,SW-5,pre_monsoon,"Zinc, mg/L",Zn,0.15,5
+Table 7.2,SW-5,post_monsoon,"Zinc, mg/L",Zn,0.08,5
+Table 7.2,SW-6,pre_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.2,SW-6,post_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.2,SW-5,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.03,0.1
+Table 7.2,SW-5,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.2,SW-6,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.2,SW-6,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.2,SW-5,pre_monsoon,"Total Chromium, mg/L",Cr,0.85,2
+Table 7.2,SW-5,post_monsoon,"Total Chromium, mg/L",Cr,1.61,2
+Table 7.2,SW-6,pre_monsoon,"Total Chromium, mg/L",Cr,0.09,2
+Table 7.2,SW-6,post_monsoon,"Total Chromium, mg/L",Cr,0.34,2
+Table 7.2,SW-5,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.2,SW-5,post_monsoon,"Arsenic, mg/L",As,0.05,0.2
+Table 7.2,SW-6,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.2,SW-6,post_monsoon,"Arsenic, mg/L",As,0.11,0.2
+Table 7.2,SW-5,pre_monsoon,"Nitrate-N, mg/L",NO3,1.13,10
+Table 7.2,SW-5,post_monsoon,"Nitrate-N, mg/L",NO3,2.37,10
+Table 7.2,SW-6,pre_monsoon,"Nitrate-N, mg/L",NO3,0.90,10
+Table 7.2,SW-6,post_monsoon,"Nitrate-N, mg/L",NO3,7.9,10
+Table 7.2,SW-5,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.2,SW-5,post_monsoon,"Phosphate-P, mg/L",PO4,2.63,5
+Table 7.2,SW-6,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.2,SW-6,post_monsoon,"Phosphate-P, mg/L",PO4,5.73,5
+Table 7.2,SW-5,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.2,SW-5,post_monsoon,"Fluoride, mg/L",F,1.6,2
+Table 7.2,SW-6,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.2,SW-6,post_monsoon,"Fluoride, mg/L",F,2.6,2
+Table 7.2,SW-5,pre_monsoon,"COD, mg/L",COD,1752,250
+Table 7.2,SW-5,post_monsoon,"COD, mg/L",COD,780,250
+Table 7.2,SW-6,pre_monsoon,"COD, mg/L",COD,220,250
+Table 7.2,SW-6,post_monsoon,"COD, mg/L",COD,425,250
+Table 7.2,SW-5,pre_monsoon,"BOD, mg/L",BOD,1012,30
+Table 7.2,SW-5,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.2,SW-6,pre_monsoon,"BOD, mg/L",BOD,108,30
+Table 7.2,SW-6,post_monsoon,"BOD, mg/L",BOD,215,30
+Table 7.3,SW-3,pre_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.3,SW-3,post_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.3,SW-4,pre_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.3,SW-4,post_monsoon,pH,pH,7.8,5.5-9.0
+Table 7.3,SW-7,pre_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.3,SW-7,post_monsoon,pH,pH,7.6,5.5-9.0
+Table 7.3,SW-3,pre_monsoon,"TSS, mg/L",TSS,170,100
+Table 7.3,SW-3,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.3,SW-4,pre_monsoon,"TSS, mg/L",TSS,615,100
+Table 7.3,SW-4,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.3,SW-7,pre_monsoon,"TSS, mg/L",TSS,920,100
+Table 7.3,SW-7,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.3,SW-3,pre_monsoon,"Iron, mg/L",Fe,1.89,3
+Table 7.3,SW-3,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.3,SW-4,pre_monsoon,"Iron, mg/L",Fe,2.36,3
+Table 7.3,SW-4,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.3,SW-7,pre_monsoon,"Iron, mg/L",Fe,2.57,3
+Table 7.3,SW-7,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.3,SW-3,pre_monsoon,"Manganese, mg/L",Mn,0.65,2
+Table 7.3,SW-3,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.3,SW-4,pre_monsoon,"Manganese, mg/L",Mn,0.27,2
+Table 7.3,SW-4,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.3,SW-7,pre_monsoon,"Manganese, mg/L",Mn,0.03,2
+Table 7.3,SW-7,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.3,SW-3,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.3,SW-3,post_monsoon,"Copper, mg/L",Cu,0.07,3
+Table 7.3,SW-4,pre_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.3,SW-4,post_monsoon,"Copper, mg/L",Cu,0.11,3
+Table 7.3,SW-7,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.3,SW-7,post_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.3,SW-3,pre_monsoon,"Nickel, mg/L",Ni,0.10,3
+Table 7.3,SW-3,post_monsoon,"Nickel, mg/L",Ni,0.10,3
+Table 7.3,SW-4,pre_monsoon,"Nickel, mg/L",Ni,0.09,3
+Table 7.3,SW-4,post_monsoon,"Nickel, mg/L",Ni,0.12,3
+Table 7.3,SW-7,pre_monsoon,"Nickel, mg/L",Ni,0.08,3
+Table 7.3,SW-7,post_monsoon,"Nickel, mg/L",Ni,0.03,3
+Table 7.3,SW-3,pre_monsoon,"Lead, mg/L",Pb,0.06,0.1
+Table 7.3,SW-3,post_monsoon,"Lead, mg/L",Pb,0.05,0.1
+Table 7.3,SW-4,pre_monsoon,"Lead, mg/L",Pb,0.03,0.1
+Table 7.3,SW-4,post_monsoon,"Lead, mg/L",Pb,0.04,0.1
+Table 7.3,SW-7,pre_monsoon,"Lead, mg/L",Pb,0.08,0.1
+Table 7.3,SW-7,post_monsoon,"Lead, mg/L",Pb,0.03,0.1
+Table 7.3,SW-3,pre_monsoon,"Cadmium, mg/L",Cd,0.01,2
+Table 7.3,SW-3,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.3,SW-4,pre_monsoon,"Cadmium, mg/L",Cd,0.01,2
+Table 7.3,SW-4,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.3,SW-7,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.3,SW-7,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.3,SW-3,pre_monsoon,"Zinc, mg/L",Zn,0.11,5
+Table 7.3,SW-3,post_monsoon,"Zinc, mg/L",Zn,0.18,5
+Table 7.3,SW-4,pre_monsoon,"Zinc, mg/L",Zn,0.08,5
+Table 7.3,SW-4,post_monsoon,"Zinc, mg/L",Zn,0.10,5
+Table 7.3,SW-7,pre_monsoon,"Zinc, mg/L",Zn,0.03,5
+Table 7.3,SW-7,post_monsoon,"Zinc, mg/L",Zn,0.41,5
+Table 7.3,SW-3,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.3,SW-3,post_monsoon,"Chromium (VI), mg/L",Cr6,0.01,0.1
+Table 7.3,SW-4,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.3,SW-4,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.3,SW-7,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.03,0.1
+Table 7.3,SW-7,post_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.3,SW-3,pre_monsoon,"Total Chromium, mg/L",Cr,0.45,2
+Table 7.3,SW-3,post_monsoon,"Total Chromium, mg/L",Cr,0.54,2
+Table 7.3,SW-4,pre_monsoon,"Total Chromium, mg/L",Cr,1.04,2
+Table 7.3,SW-4,post_monsoon,"Total Chromium, mg/L",Cr,0.37,2
+Table 7.3,SW-7,pre_monsoon,"Total Chromium, mg/L",Cr,0.06,2
+Table 7.3,SW-7,post_monsoon,"Total Chromium, mg/L",Cr,1.66,2
+Table 7.3,SW-3,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.3,SW-3,post_monsoon,"Arsenic, mg/L",As,0.07,0.2
+Table 7.3,SW-4,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.3,SW-7,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.3,SW-7,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.3,SW-3,pre_monsoon,"Nitrate-N, mg/L",NO3,ND,10
+Table 7.3,SW-3,post_monsoon,"Nitrate-N, mg/L",NO3,ND,10
+Table 7.3,SW-4,pre_monsoon,"Nitrate-N, mg/L",NO3,3.8,10
+Table 7.3,SW-4,post_monsoon,"Nitrate-N, mg/L",NO3,ND,10
+Table 7.3,SW-7,pre_monsoon,"Nitrate-N, mg/L",NO3,1.6,10
+Table 7.3,SW-7,post_monsoon,"Nitrate-N, mg/L",NO3,8.5,10
+Table 7.3,SW-3,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.3,SW-3,post_monsoon,"Phosphate-P, mg/L",PO4,4.72,5
+Table 7.3,SW-4,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.3,SW-4,post_monsoon,"Phosphate-P, mg/L",PO4,0.40,5
+Table 7.3,SW-7,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.3,SW-7,post_monsoon,"Phosphate-P, mg/L",PO4,2.19,5
+Table 7.3,SW-3,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.3,SW-3,post_monsoon,"Fluoride, mg/L",F,1.4,2
+Table 7.3,SW-4,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.3,SW-4,post_monsoon,"Fluoride, mg/L",F,1.5,2
+Table 7.3,SW-7,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.3,SW-7,post_monsoon,"Fluoride, mg/L",F,2.2,2
+Table 7.3,SW-3,pre_monsoon,"COD, mg/L",COD,440,250
+Table 7.3,SW-3,post_monsoon,"COD, mg/L",COD,790,250
+Table 7.3,SW-4,pre_monsoon,"COD, mg/L",COD,564,250
+Table 7.3,SW-4,post_monsoon,"COD, mg/L",COD,900,250
+Table 7.3,SW-7,pre_monsoon,"COD, mg/L",COD,965,250
+Table 7.3,SW-7,post_monsoon,"COD, mg/L",COD,580,250
+Table 7.3,SW-3,pre_monsoon,"BOD, mg/L",BOD,280,30
+Table 7.3,SW-3,post_monsoon,"BOD, mg/L",BOD,216,30
+Table 7.3,SW-4,pre_monsoon,"BOD, mg/L",BOD,126,30
+Table 7.3,SW-4,post_monsoon,"BOD, mg/L",BOD,470,30
+Table 7.3,SW-7,pre_monsoon,"BOD, mg/L",BOD,478,30
+Table 7.3,SW-7,post_monsoon,"BOD, mg/L",BOD,373,30
+Table 7.4,SW-11,pre_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.4,SW-11,post_monsoon,pH,pH,7.8,5.5-9.0
+Table 7.4,SW-12,pre_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.4,SW-12,post_monsoon,pH,pH,7.6,5.5-9.0
+Table 7.4,SW-11,pre_monsoon,"TDS, mg/L",TDS,16484,2100
+Table 7.4,SW-11,post_monsoon,"TDS, mg/L",TDS,10700,2100
+Table 7.4,SW-12,pre_monsoon,"TDS, mg/L",TDS,16058,2100
+Table 7.4,SW-12,post_monsoon,"TDS, mg/L",TDS,10500,2100
+Table 7.4,SW-11,pre_monsoon,"TSS, mg/L",TSS,990,100
+Table 7.4,SW-11,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.4,SW-12,pre_monsoon,"TSS, mg/L",TSS,265,100
+Table 7.4,SW-12,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.4,SW-11,pre_monsoon,"Copper, mg/L",Cu,0.18,3
+Table 7.4,SW-11,post_monsoon,"Copper, mg/L",Cu,0.14,3
+Table 7.4,SW-12,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.4,SW-12,post_monsoon,"Copper, mg/L",Cu,0.07,3
+Table 7.4,SW-11,pre_monsoon,"Nickel, mg/L",Ni,0.18,3
+Table 7.4,SW-11,post_monsoon,"Nickel, mg/L",Ni,0.22,3
+Table 7.4,SW-12,pre_monsoon,"Nickel, mg/L",Ni,0.16,3
+Table 7.4,SW-12,post_monsoon,"Nickel, mg/L",Ni,0.17,3
+Table 7.4,SW-11,pre_monsoon,"Lead, mg/L",Pb,0.08,0.1
+Table 7.4,SW-11,post_monsoon,"Lead, mg/L",Pb,0.09,0.1
+Table 7.4,SW-12,pre_monsoon,"Lead, mg/L",Pb,0.07,0.1
+Table 7.4,SW-12,post_monsoon,"Lead, mg/L",Pb,0.06,0.1
+Table 7.4,SW-11,pre_monsoon,"Cadmium, mg/L",Cd,0.03,2
+Table 7.4,SW-11,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.4,SW-12,pre_monsoon,"Cadmium, mg/L",Cd,0.02,2
+Table 7.4,SW-12,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.4,SW-11,pre_monsoon,"Zinc, mg/L",Zn,0.08,5
+Table 7.4,SW-11,post_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.4,SW-12,pre_monsoon,"Zinc, mg/L",Zn,0.04,5
+Table 7.4,SW-12,post_monsoon,"Zinc, mg/L",Zn,0.04,5
+Table 7.4,SW-11,pre_monsoon,"Total Chromium, mg/L",Cr,1.74,2
+Table 7.4,SW-11,post_monsoon,"Total Chromium, mg/L",Cr,4.67,2
+Table 7.4,SW-12,pre_monsoon,"Total Chromium, mg/L",Cr,0.98,2
+Table 7.4,SW-12,post_monsoon,"Total Chromium, mg/L",Cr,3.35,2
+Table 7.4,SW-11,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.4,SW-11,post_monsoon,"Arsenic, mg/L",As,0.15,0.2
+Table 7.4,SW-12,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.4,SW-12,post_monsoon,"Arsenic, mg/L",As,0.15,0.2
+Table 7.4,SW-11,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.4,SW-11,post_monsoon,"Fluoride, mg/L",F,1.1,2
+Table 7.4,SW-12,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.4,SW-12,post_monsoon,"Fluoride, mg/L",F,0.7,2
+Table 7.4,SW-11,pre_monsoon,"COD, mg/L",COD,2973,250
+Table 7.4,SW-11,post_monsoon,"COD, mg/L",COD,2300,250
+Table 7.4,SW-12,pre_monsoon,"COD, mg/L",COD,683,250
+Table 7.4,SW-12,post_monsoon,"COD, mg/L",COD,2080,250
+Table 7.4,SW-11,pre_monsoon,"BOD, mg/L",BOD,1011,30
+Table 7.4,SW-11,post_monsoon,"BOD, mg/L",BOD,1137,30
+Table 7.4,SW-12,pre_monsoon,"BOD, mg/L",BOD,103,30
+Table 7.4,SW-12,post_monsoon,"BOD, mg/L",BOD,784,30
+Table 7.5,SW-8,pre_monsoon,pH,pH,7.8,5.5-9.0
+Table 7.5,SW-8,post_monsoon,pH,pH,-,5.5-9.0
+Table 7.5,SW-9,pre_monsoon,pH,pH,7.5,5.5-9.0
+Table 7.5,SW-9,post_monsoon,pH,pH,8.0,5.5-9.0
+Table 7.5,SW-10,pre_monsoon,pH,pH,7.2,5.5-9.0
+Table 7.5,SW-10,post_monsoon,pH,pH,7.8,5.5-9.0
+Table 7.5,SW-8,pre_monsoon,"TSS, mg/L",TSS,410,100
+Table 7.5,SW-8,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.5,SW-9,pre_monsoon,"TSS, mg/L",TSS,605,100
+Table 7.5,SW-9,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.5,SW-10,pre_monsoon,"TSS, mg/L",TSS,455,100
+Table 7.5,SW-10,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.5,SW-8,pre_monsoon,"Iron, mg/L",Fe,1.00,3
+Table 7.5,SW-8,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.5,SW-9,pre_monsoon,"Iron, mg/L",Fe,1.86,3
+Table 7.5,SW-9,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.5,SW-10,pre_monsoon,"Iron, mg/L",Fe,0.89,3
+Table 7.5,SW-10,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.5,SW-8,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.5,SW-9,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.5,SW-10,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.5,SW-8,pre_monsoon,"Manganese, mg/L",Mn,0.10,2
+Table 7.5,SW-9,pre_monsoon,"Manganese, mg/L",Mn,0.15,2
+Table 7.5,SW-10,pre_monsoon,"Manganese, mg/L",Mn,0.11,2
+Table 7.5,SW-8,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.5,SW-8,post_monsoon,"Copper, mg/L",Cu,-,3
+Table 7.5,SW-9,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.5,SW-9,post_monsoon,"Copper, mg/L",Cu,0.11,3
+Table 7.5,SW-10,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.5,SW-10,post_monsoon,"Copper, mg/L",Cu,0.10,3
+Table 7.5,SW-8,pre_monsoon,"Nickel, mg/L",Ni,0.02,3
+Table 7.5,SW-8,post_monsoon,"Nickel, mg/L",Ni,-,3
+Table 7.5,SW-9,pre_monsoon,"Nickel, mg/L",Ni,0.02,3
+Table 7.5,SW-9,post_monsoon,"Nickel, mg/L",Ni,0.04,3
+Table 7.5,SW-10,pre_monsoon,"Nickel, mg/L",Ni,0.04,3
+Table 7.5,SW-10,post_monsoon,"Nickel, mg/L",Ni,0.07,3
+Table 7.5,SW-8,pre_monsoon,"Lead, mg/L",Pb,0.03,0.1
+Table 7.5,SW-8,post_monsoon,"Lead, mg/L",Pb,-,0.1
+Table 7.5,SW-9,pre_monsoon,"Lead, mg/L",Pb,ND,0.1
+Table 7.5,SW-9,post_monsoon,"Lead, mg/L",Pb,0.04,0.1
+Table 7.5,SW-10,pre_monsoon,"Lead, mg/L",Pb,ND,0.1
+Table 7.5,SW-10,post_monsoon,"Lead, mg/L",Pb,0.04,0.1
+Table 7.5,SW-8,pre_monsoon,"Cadmium, mg/L",Cd,0.02,2
+Table 7.5,SW-8,post_monsoon,"Cadmium, mg/L",Cd,-,2
+Table 7.5,SW-9,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.5,SW-9,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.5,SW-10,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.5,SW-10,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.5,SW-8,pre_monsoon,"Zinc, mg/L",Zn,0.05,5
+Table 7.5,SW-8,post_monsoon,"Zinc, mg/L",Zn,-,5
+Table 7.5,SW-9,pre_monsoon,"Zinc, mg/L",Zn,0.12,5
+Table 7.5,SW-9,post_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.5,SW-10,pre_monsoon,"Zinc, mg/L",Zn,0.06,5
+Table 7.5,SW-10,post_monsoon,"Zinc, mg/L",Zn,0.09,5
+Table 7.5,SW-8,post_monsoon,"Chromium (VI), mg/L",Cr6,-,0.1
+Table 7.5,SW-8,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.03,0.1
+Table 7.5,SW-9,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.01,0.1
+Table 7.5,SW-9,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.5,SW-10,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.5,SW-10,post_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.5,SW-8,post_monsoon,"Total Chromium, mg/L",Cr,-,2
+Table 7.5,SW-8,pre_monsoon,"Total Chromium, mg/L",Cr,0.94,2
+Table 7.5,SW-9,pre_monsoon,"Total Chromium, mg/L",Cr,0.15,2
+Table 7.5,SW-9,post_monsoon,"Total Chromium, mg/L",Cr,0.99,2
+Table 7.5,SW-10,pre_monsoon,"Total Chromium, mg/L",Cr,0.57,2
+Table 7.5,SW-10,post_monsoon,"Total Chromium, mg/L",Cr,1.54,2
+Table 7.5,SW-8,post_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.5,SW-9,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.5,SW-9,post_monsoon,"Arsenic, mg/L",As,0.7,0.2
+Table 7.5,SW-10,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.5,SW-10,post_monsoon,"Arsenic, mg/L",As,0.15,0.2
+Table 7.5,SW-8,pre_monsoon,"Nitrate-N, mg/L",NO3,4.0,10
+Table 7.5,SW-8,post_monsoon,"Nitrate-N, mg/L",NO3,-,10
+Table 7.5,SW-9,pre_monsoon,"Nitrate-N, mg/L",NO3,1.8,10
+Table 7.5,SW-9,post_monsoon,"Nitrate-N, mg/L",NO3,1.7,10
+Table 7.5,SW-10,pre_monsoon,"Nitrate-N, mg/L",NO3,3.4,10
+Table 7.5,SW-10,post_monsoon,"Nitrate-N, mg/L",NO3,1.24,10
+Table 7.5,SW-8,post_monsoon,"Phosphate-P, mg/L",PO4,-,5
+Table 7.5,SW-8,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.5,SW-9,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.5,SW-9,post_monsoon,"Phosphate-P, mg/L",PO4,11.5,5
+Table 7.5,SW-10,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.5,SW-10,post_monsoon,"Phosphate-P, mg/L",PO4,0.74,5
+Table 7.5,SW-8,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.5,SW-8,post_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.5,SW-9,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.5,SW-9,post_monsoon,"Fluoride, mg/L",F,1.2,2
+Table 7.5,SW-10,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.5,SW-10,post_monsoon,"Fluoride, mg/L",F,1.0,2
+Table 7.5,SW-8,pre_monsoon,"COD, mg/L",COD,670,250
+Table 7.5,SW-8,post_monsoon,"COD, mg/L",COD,-,250
+Table 7.5,SW-9,pre_monsoon,"COD, mg/L",COD,423,250
+Table 7.5,SW-9,post_monsoon,"COD, mg/L",COD,720,250
+Table 7.5,SW-10,pre_monsoon,"COD, mg/L",COD,570,250
+Table 7.5,SW-10,post_monsoon,"COD, mg/L",COD,1620,250
+Table 7.5,SW-8,pre_monsoon,"BOD, mg/L",BOD,95,30
+Table 7.5,SW-8,post_monsoon,"BOD, mg/L",BOD,-,30
+Table 7.5,SW-9,pre_monsoon,"BOD, mg/L",BOD,216,30
+Table 7.5,SW-9,post_monsoon,"BOD, mg/L",BOD,176,30
+Table 7.5,SW-10,pre_monsoon,"BOD, mg/L",BOD,160,30
+Table 7.5,SW-10,post_monsoon,"BOD, mg/L",BOD,607,30
+Table 7.6,SW-14,pre_monsoon,pH,pH,8.3,6.5-9.0
+Table 7.6,SW-14,post_monsoon,pH,pH,9.0,6.5-9.0
+Table 7.6,SW-15,pre_monsoon,pH,pH,7.6,6.5-9.0
+Table 7.6,SW-15,post_monsoon,pH,pH,7.8,6.5-9.0
+Table 7.6,SW-14,pre_monsoon,"TSS, mg/L",TSS,3130,100
+Table 7.6,SW-14,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.6,SW-15,pre_monsoon,"TSS, mg/L",TSS,200,100
+Table 7.6,SW-15,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.6,SW-14,pre_monsoon,"Total Chromium, mg/L",Cr,4.80,2
+Table 7.6,SW-14,post_monsoon,"Total Chromium, mg/L",Cr,1.72,2
+Table 7.6,SW-15,pre_monsoon,"Total Chromium, mg/L",Cr,0.70,2
+Table 7.6,SW-15,post_monsoon,"Total Chromium, mg/L",Cr,0.57,2
+Table 7.6,SW-14,pre_monsoon,"BOD, mg/L",BOD,1313,30
+Table 7.6,SW-14,post_monsoon,"BOD, mg/L",BOD,352,30
+Table 7.6,SW-15,pre_monsoon,"BOD, mg/L",BOD,45,30
+Table 7.6,SW-15,post_monsoon,"BOD, mg/L",BOD,314,30
+Table 7.7,SW-16,pre_monsoon,pH,pH,8.2,6.5-9.0
+Table 7.7,SW-16,post_monsoon,pH,pH,9.3,6.5-9.0
+Table 7.7,SW-17,pre_monsoon,pH,pH,8.0,6.5-9.0
+Table 7.7,SW-17,post_monsoon,pH,pH,9.3,6.5-9.0
+Table 7.7,SW-16,pre_monsoon,"TSS, mg/L",TSS,2200,100
+Table 7.7,SW-16,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.7,SW-17,pre_monsoon,"TSS, mg/L",TSS,310,100
+Table 7.7,SW-17,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.7,SW-16,pre_monsoon,"Total Chromium, mg/L",Cr,5.50,2
+Table 7.7,SW-16,post_monsoon,"Total Chromium, mg/L",Cr,1.75,2
+Table 7.7,SW-17,pre_monsoon,"Total Chromium, mg/L",Cr,4.15,2
+Table 7.7,SW-17,post_monsoon,"Total Chromium, mg/L",Cr,0.47,2
+Table 7.7,SW-16,pre_monsoon,"BOD, mg/L",BOD,1138,30
+Table 7.7,SW-16,post_monsoon,"BOD, mg/L",BOD,744,30
+Table 7.7,SW-17,pre_monsoon,"BOD, mg/L",BOD,71,30
+Table 7.7,SW-17,post_monsoon,"BOD, mg/L",BOD,588,30
+Table 7.8,SW-18,pre_monsoon,pH,pH,7.7,6.5-9.0
+Table 7.8,SW-18,post_monsoon,pH,pH,10.8,6.5-9.0
+Table 7.8,SW-19,pre_monsoon,pH,pH,6.7,6.5-9.0
+Table 7.8,SW-19,post_monsoon,pH,pH,7.6,6.5-9.0
+Table 7.8,SW-18,pre_monsoon,"TSS, mg/L",TSS,550,100
+Table 7.8,SW-18,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.8,SW-19,pre_monsoon,"TSS, mg/L",TSS,145,100
+Table 7.8,SW-19,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.8,SW-18,pre_monsoon,"Total Chromium, mg/L",Cr,0.84,2
+Table 7.8,SW-18,post_monsoon,"Total Chromium, mg/L",Cr,1.63,2
+Table 7.8,SW-19,pre_monsoon,"Total Chromium, mg/L",Cr,0.24,2
+Table 7.8,SW-19,post_monsoon,"Total Chromium, mg/L",Cr,1.06,2
+Table 7.8,SW-18,pre_monsoon,"BOD, mg/L",BOD,1313,30
+Table 7.8,SW-18,post_monsoon,"BOD, mg/L",BOD,824,30
+Table 7.8,SW-19,pre_monsoon,"BOD, mg/L",BOD,24,30
+Table 7.8,SW-19,post_monsoon,"BOD, mg/L",BOD,98,30
+Table 7.9,SW-20,pre_monsoon,pH,pH,8.4,6.5-9.0
+Table 7.9,SW-20,post_monsoon,pH,pH,8.5,6.5-9.0
+Table 7.9,SW-21,pre_monsoon,pH,pH,7.5,6.5-9.0
+Table 7.9,SW-21,post_monsoon,pH,pH,7.5,6.5-9.0
+Table 7.9,SW-20,pre_monsoon,"TSS, mg/L",TSS,2180,100
+Table 7.9,SW-20,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.9,SW-21,pre_monsoon,"TSS, mg/L",TSS,40,100
+Table 7.9,SW-21,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.9,SW-20,pre_monsoon,"Total Chromium, mg/L",Cr,1.15,2
+Table 7.9,SW-20,post_monsoon,"Total Chromium, mg/L",Cr,1.65,2
+Table 7.9,SW-21,pre_monsoon,"Total Chromium, mg/L",Cr,0.23,2
+Table 7.9,SW-21,post_monsoon,"Total Chromium, mg/L",Cr,0.58,2
+Table 7.9,SW-20,pre_monsoon,"BOD, mg/L",BOD,1074,30
+Table 7.9,SW-20,post_monsoon,"BOD, mg/L",BOD,784,30
+Table 7.9,SW-21,pre_monsoon,"BOD, mg/L",BOD,42,30
+Table 7.9,SW-21,post_monsoon,"BOD, mg/L",BOD,118,30
+Table 7.10,SW-23,pre_monsoon,"TSS, mg/L",TSS,1660,50
+Table 7.10,SW-23,post_monsoon,"TSS, mg/L",TSS,-,50
+Table 7.10,SW-24,pre_monsoon,"TSS, mg/L",TSS,125,50
+Table 7.10,SW-24,post_monsoon,"TSS, mg/L",TSS,-,50
+Table 7.10,SW-23,pre_monsoon,"BOD, mg/L",BOD,1401,30
+Table 7.10,SW-23,post_monsoon,"BOD, mg/L",BOD,1294,30
+Table 7.10,SW-24,pre_monsoon,"BOD, mg/L",BOD,25,30
+Table 7.10,SW-24,post_monsoon,"BOD, mg/L",BOD,79,30
+Table 7.11,SW-25,pre_monsoon,"TSS, mg/L",TSS,-,50
+Table 7.11,SW-25,post_monsoon,"TSS, mg/L",TSS,-,50
+Table 7.11,SW-26,pre_monsoon,"TSS, mg/L",TSS,275,50
+Table 7.11,SW-26,post_monsoon,"TSS, mg/L",TSS,-,50
+Table 7.11,SW-25,pre_monsoon,"BOD, mg/L",BOD,-,30
+Table 7.11,SW-25,post_monsoon,"BOD, mg/L",BOD,1058,30
+Table 7.11,SW-26,pre_monsoon,"BOD, mg/L",BOD,267,30
+Table 7.11,SW-26,post_monsoon,"BOD, mg/L",BOD,784,30
+Table 7.12,SW-22,pre_monsoon,pH,pH,7.8,5.5-9.0
+Table 7.12,SW-22,post_monsoon,pH,pH,7.7,5.5-9.0
+Table 7.12,SW-13,pre_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.12,SW-13,post_monsoon,pH,pH,8.1,5.5-9.0
+Table 7.12,SW-22,pre_monsoon,"TSS, mg/L",TSS,90,100
+Table 7.12,SW-22,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.12,SW-13,pre_monsoon,"TSS, mg/L",TSS,175,100
+Table 7.12,SW-13,post_monsoon,"TSS, mg/L",TSS,-,100
+Table 7.12,SW-22,pre_monsoon,"Iron, mg/L",Fe,2.52,3
+Table 7.12,SW-22,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.12,SW-13,pre_monsoon,"Iron, mg/L",Fe,21.6,3
+Table 7.12,SW-13,post_monsoon,"Iron, mg/L",Fe,-,3
+Table 7.12,SW-22,pre_monsoon,"Manganese, mg/L",Mn,0.23,2
+Table 7.12,SW-22,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.12,SW-13,pre_monsoon,"Manganese, mg/L",Mn,1.43,2
+Table 7.12,SW-13,post_monsoon,"Manganese, mg/L",Mn,-,2
+Table 7.12,SW-22,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.12,SW-22,post_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.12,SW-13,pre_monsoon,"Copper, mg/L",Cu,0.02,3
+Table 7.12,SW-13,post_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.12,SW-22,pre_monsoon,"Nickel, mg/L",Ni,0.01,3
+Table 7.12,SW-22,post_monsoon,"Nickel, mg/L",Ni,0.63,3
+Table 7.12,SW-13,pre_monsoon,"Nickel, mg/L",Ni,0.34,3
+Table 7.12,SW-13,post_monsoon,"Nickel, mg/L",Ni,0.05,3
+Table 7.12,SW-22,pre_monsoon,"Lead, mg/L",Pb,0.01,0.1
+Table 7.12,SW-22,post_monsoon,"Lead, mg/L",Pb,0.06,0.1
+Table 7.12,SW-13,pre_monsoon,"Lead, mg/L",Pb,0.01,0.1
+Table 7.12,SW-13,post_monsoon,"Lead, mg/L",Pb,0.04,0.1
+Table 7.12,SW-22,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.12,SW-22,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.12,SW-13,pre_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.12,SW-13,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.12,SW-22,pre_monsoon,"Zinc, mg/L",Zn,0.27,5
+Table 7.12,SW-22,post_monsoon,"Zinc, mg/L",Zn,0.06,5
+Table 7.12,SW-13,pre_monsoon,"Zinc, mg/L",Zn,0.15,5
+Table 7.12,SW-13,post_monsoon,"Zinc, mg/L",Zn,0.13,5
+Table 7.12,SW-22,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.01,0.1
+Table 7.12,SW-22,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.12,SW-13,pre_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.12,SW-13,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.12,SW-22,pre_monsoon,"Total Chromium, mg/L",Cr,0.22,2
+Table 7.12,SW-22,post_monsoon,"Total Chromium, mg/L",Cr,0.61,2
+Table 7.12,SW-13,pre_monsoon,"Total Chromium, mg/L",Cr,0.63,2
+Table 7.12,SW-13,post_monsoon,"Total Chromium, mg/L",Cr,1.54,2
+Table 7.12,SW-22,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.12,SW-22,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.12,SW-13,pre_monsoon,"Arsenic, mg/L",As,-,0.2
+Table 7.12,SW-13,post_monsoon,"Arsenic, mg/L",As,0.12,0.2
+Table 7.12,SW-22,pre_monsoon,"Nitrate-N, mg/L",NO3,4.1,10
+Table 7.12,SW-22,post_monsoon,"Nitrate-N, mg/L",NO3,1.41,10
+Table 7.12,SW-13,pre_monsoon,"Nitrate-N, mg/L",NO3,5.0,10
+Table 7.12,SW-13,post_monsoon,"Nitrate-N, mg/L",NO3,1.13,10
+Table 7.12,SW-22,pre_monsoon,"Phosphate-P, mg/L",PO4,4.0,5
+Table 7.12,SW-22,post_monsoon,"Phosphate-P, mg/L",PO4,0.84,5
+Table 7.12,SW-13,pre_monsoon,"Phosphate-P, mg/L",PO4,ND,5
+Table 7.12,SW-13,post_monsoon,"Phosphate-P, mg/L",PO4,4.31,5
+Table 7.12,SW-22,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.12,SW-22,post_monsoon,"Fluoride, mg/L",F,3.2,2
+Table 7.12,SW-13,pre_monsoon,"Fluoride, mg/L",F,-,2
+Table 7.12,SW-13,post_monsoon,"Fluoride, mg/L",F,1.2,2
+Table 7.12,SW-22,pre_monsoon,"COD, mg/L",COD,160,250
+Table 7.12,SW-22,post_monsoon,"COD, mg/L",COD,600,250
+Table 7.12,SW-13,pre_monsoon,"COD, mg/L",COD,256,250
+Table 7.12,SW-13,post_monsoon,"COD, mg/L",COD,640,250
+Table 7.12,SW-22,pre_monsoon,"BOD, mg/L",BOD,41,30
+Table 7.12,SW-22,post_monsoon,"BOD, mg/L",BOD,490,30
+Table 7.12,SW-13,pre_monsoon,"BOD, mg/L",BOD,69,30
+Table 7.12,SW-13,post_monsoon,"BOD, mg/L",BOD,215,30
+Table 7.13,SW-27,post_monsoon,pH,pH,8.5,6.5-9.0
+Table 7.13,SW-28,post_monsoon,pH,pH,7.2,6.5-9.0
+Table 7.13,SW-27,post_monsoon,"Total Chromium, mg/L",Cr,1.84,2
+Table 7.13,SW-28,post_monsoon,"Total Chromium, mg/L",Cr,1.79,2
+Table 7.13,SW-27,post_monsoon,"BOD, mg/L",BOD,392,30
+Table 7.13,SW-28,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.14,SW-29,post_monsoon,pH,pH,6.7,6.5-9.0
+Table 7.14,SW-30,post_monsoon,pH,pH,7.7,6.5-9.0
+Table 7.14,SW-29,post_monsoon,"Total Chromium, mg/L",Cr,35.60,2
+Table 7.14,SW-30,post_monsoon,"Total Chromium, mg/L",Cr,14.7,2
+Table 7.14,SW-29,post_monsoon,"BOD, mg/L",BOD,333,30
+Table 7.14,SW-30,post_monsoon,"BOD, mg/L",BOD,294,30
+Table 7.15,SW-31,post_monsoon,"BOD, mg/L",BOD,79,30
+Table 7.15,SW-32,post_monsoon,"BOD, mg/L",BOD,59,30
+Table 7.16,SW-33,post_monsoon,pH,pH,6.8,5.5-9.0
+Table 7.16,SW-34,post_monsoon,pH,pH,7.9,5.5-9.0
+Table 7.16,SW-33,post_monsoon,"Copper, mg/L",Cu,0.14,3
+Table 7.16,SW-34,post_monsoon,"Copper, mg/L",Cu,0.06,3
+Table 7.16,SW-33,post_monsoon,"Nickel, mg/L",Ni,0.03,3
+Table 7.16,SW-34,post_monsoon,"Nickel, mg/L",Ni,0.03,3
+Table 7.16,SW-33,post_monsoon,"Lead, mg/L",Pb,0.02,0.1
+Table 7.16,SW-34,post_monsoon,"Lead, mg/L",Pb,ND,0.1
+Table 7.16,SW-33,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.16,SW-34,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.16,SW-33,post_monsoon,"Zinc, mg/L",Zn,0.11,5
+Table 7.16,SW-34,post_monsoon,"Zinc, mg/L",Zn,0.06,5
+Table 7.16,SW-33,post_monsoon,"Chromium (VI), mg/L",Cr6,0.11,0.1
+Table 7.16,SW-34,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.16,SW-33,post_monsoon,"Total Chromium, mg/L",Cr,7.69,2
+Table 7.16,SW-34,post_monsoon,"Total Chromium, mg/L",Cr,0.99,2
+Table 7.16,SW-33,post_monsoon,"Arsenic, mg/L",As,0.19,0.2
+Table 7.16,SW-34,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.16,SW-33,post_monsoon,"Nitrate-N, mg/L",NO3,4.66,10
+Table 7.16,SW-34,post_monsoon,"Nitrate-N, mg/L",NO3,4.63,10
+Table 7.16,SW-33,post_monsoon,"Phosphate-P, mg/L",PO4,11.3,5
+Table 7.16,SW-34,post_monsoon,"Phosphate-P, mg/L",PO4,5.7,5
+Table 7.16,SW-33,post_monsoon,"Fluoride, mg/L",F,3.2,2
+Table 7.16,SW-34,post_monsoon,"Fluoride, mg/L",F,2.6,2
+Table 7.16,SW-33,post_monsoon,"COD, mg/L",COD,2700,250
+Table 7.16,SW-34,post_monsoon,"COD, mg/L",COD,450,250
+Table 7.16,SW-33,post_monsoon,"BOD, mg/L",BOD,862,30
+Table 7.16,SW-34,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.17,SW-35,post_monsoon,pH,pH,8.6,5.5-9.0
+Table 7.17,SW-36,post_monsoon,pH,pH,7.2,5.5-9.0
+Table 7.17,SW-35,post_monsoon,"Copper, mg/L",Cu,0.11,3
+Table 7.17,SW-36,post_monsoon,"Copper, mg/L",Cu,0.07,3
+Table 7.17,SW-35,post_monsoon,"Nickel, mg/L",Ni,0.04,3
+Table 7.17,SW-36,post_monsoon,"Nickel, mg/L",Ni,0.04,3
+Table 7.17,SW-35,post_monsoon,"Lead, mg/L",Pb,0.05,0.1
+Table 7.17,SW-36,post_monsoon,"Lead, mg/L",Pb,0.03,0.1
+Table 7.17,SW-35,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.17,SW-36,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.17,SW-35,post_monsoon,"Zinc, mg/L",Zn,0.08,5
+Table 7.17,SW-36,post_monsoon,"Zinc, mg/L",Zn,0.07,5
+Table 7.17,SW-35,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.17,SW-36,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.17,SW-35,post_monsoon,"Total Chromium, mg/L",Cr,1.49,2
+Table 7.17,SW-36,post_monsoon,"Total Chromium, mg/L",Cr,0.85,2
+Table 7.17,SW-35,post_monsoon,"Arsenic, mg/L",As,0.15,0.2
+Table 7.17,SW-36,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.17,SW-35,post_monsoon,"Nitrate-N, mg/L",NO3,7.9,10
+Table 7.17,SW-36,post_monsoon,"Nitrate-N, mg/L",NO3,3.73,10
+Table 7.17,SW-35,post_monsoon,"Phosphate-P, mg/L",PO4,0.84,5
+Table 7.17,SW-36,post_monsoon,"Phosphate-P, mg/L",PO4,0.74,5
+Table 7.17,SW-35,post_monsoon,"Fluoride, mg/L",F,5.0,2
+Table 7.17,SW-36,post_monsoon,"Fluoride, mg/L",F,3.6,2
+Table 7.17,SW-35,post_monsoon,"COD, mg/L",COD,2360,250
+Table 7.17,SW-36,post_monsoon,"COD, mg/L",COD,2200,250
+Table 7.17,SW-35,post_monsoon,"BOD, mg/L",BOD,706,30
+Table 7.17,SW-36,post_monsoon,"BOD, mg/L",BOD,626,30
+Table 7.18,SW-37,post_monsoon,pH,pH,8.7,5.5-9.0
+Table 7.18,SW-38,post_monsoon,pH,pH,7.0,5.5-9.0
+Table 7.18,SW-37,post_monsoon,"Total Chromium, mg/L",Cr,1.67,2
+Table 7.18,SW-38,post_monsoon,"Total Chromium, mg/L",Cr,1.33,2
+Table 7.18,SW-37,post_monsoon,"COD, mg/L",COD,1960,250
+Table 7.18,SW-38,post_monsoon,"COD, mg/L",COD,710,250
+Table 7.18,SW-37,post_monsoon,"BOD, mg/L",BOD,666,30
+Table 7.18,SW-38,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.19,SW-39,post_monsoon,pH,pH,11.2,6.0-9.0
+Table 7.19,SW-39,post_monsoon,"Copper, mg/L",Cu,0.22,3
+Table 7.19,SW-39,post_monsoon,"Nickel, mg/L",Ni,0.11,3
+Table 7.19,SW-39,post_monsoon,"Lead, mg/L",Pb,0.53,0.1
+Table 7.19,SW-39,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.19,SW-39,post_monsoon,"Zinc, mg/L",Zn,0.15,5
+Table 7.19,SW-39,post_monsoon,"Chromium (VI), mg/L",Cr6,0.02,0.1
+Table 7.19,SW-39,post_monsoon,"Total Chromium, mg/L",Cr,0.64,2
+Table 7.19,SW-39,post_monsoon,"Fluoride, mg/L * Although the fluoride is not prescribed in the standards, but the value of fluoride is alarmingly high and needs attention.",F,270,-
+Table 7.20,SW-40,post_monsoon,pH,pH,8.0,5.5-9.0
+Table 7.20,SW-41,post_monsoon,pH,pH,7.3,5.5-9.0
+Table 7.20,SW-40,post_monsoon,"Copper, mg/L",Cu,0.16,3
+Table 7.20,SW-41,post_monsoon,"Copper, mg/L",Cu,0.03,3
+Table 7.20,SW-40,post_monsoon,"Nickel, mg/L",Ni,0.02,3
+Table 7.20,SW-41,post_monsoon,"Nickel, mg/L",Ni,0.03,3
+Table 7.20,SW-40,post_monsoon,"Lead, mg/L",Pb,0.01,0.1
+Table 7.20,SW-41,post_monsoon,"Lead, mg/L",Pb,ND,0.1
+Table 7.20,SW-40,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.20,SW-41,post_monsoon,"Cadmium, mg/L",Cd,ND,2
+Table 7.20,SW-40,post_monsoon,"Zinc, mg/L",Zn,0.54,5
+Table 7.20,SW-41,post_monsoon,"Zinc, mg/L",Zn,0.12,5
+Table 7.20,SW-40,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.20,SW-41,post_monsoon,"Chromium (VI), mg/L",Cr6,ND,0.1
+Table 7.20,SW-40,post_monsoon,"Total Chromium, mg/L",Cr,0.77,2
+Table 7.20,SW-41,post_monsoon,"Total Chromium, mg/L",Cr,0.44,2
+Table 7.20,SW-40,post_monsoon,"Arsenic, mg/L",As,0.12,0.2
+Table 7.20,SW-41,post_monsoon,"Arsenic, mg/L",As,0.09,0.2
+Table 7.20,SW-40,post_monsoon,"Nitrate-N, mg/L",NO3,1.13,10
+Table 7.20,SW-41,post_monsoon,"Nitrate-N, mg/L",NO3,0.45,10
+Table 7.20,SW-40,post_monsoon,"Phosphate-P, mg/L",PO4,1.65,5
+Table 7.20,SW-41,post_monsoon,"Phosphate-P, mg/L",PO4,0.17,5
+Table 7.20,SW-40,post_monsoon,"Fluoride, mg/L",F,1.6,2
+Table 7.20,SW-41,post_monsoon,"Fluoride, mg/L",F,1.4,2
+Table 7.20,SW-40,post_monsoon,"COD, mg/L",COD,220,250
+Table 7.20,SW-41,post_monsoon,"COD, mg/L",COD,100,250
+Table 7.20,SW-40,post_monsoon,"BOD, mg/L",BOD,88,30
+Table 7.20,SW-41,post_monsoon,"BOD, mg/L",BOD,59,30
+Table 7.21,SW-42,post_monsoon,"BOD, mg/L",BOD,902,30
+Table 7.21,SW-43,post_monsoon,"BOD, mg/L",BOD,216,30
+Table 7.22,SW-44,post_monsoon,pH,pH,8.6,5.5-9.0
+Table 7.22,SW-45,post_monsoon,pH,pH,7.4,5.5-9.0
+Table 7.22,SW-44,post_monsoon,"Total Chromium, mg/L",Cr,0.71,2
+Table 7.22,SW-45,post_monsoon,"Total Chromium, mg/L",Cr,0.63,2
+Table 7.22,SW-44,post_monsoon,"COD, mg/L",COD,1960,250
+Table 7.22,SW-45,post_monsoon,"COD, mg/L",COD,830,250
+Table 7.22,SW-44,post_monsoon,"BOD, mg/L",BOD,1020,30
+Table 7.22,SW-45,post_monsoon,"BOD, mg/L",BOD,451,30
+Table 7.23,SW-46,post_monsoon,pH,pH,6.9,5.5-9.0
+Table 7.23,SW-46,post_monsoon,"Total Chromium, mg/L",Cr,0.68,2
+Table 7.23,SW-46,post_monsoon,"COD, mg/L",COD,1520,250
+Table 7.23,SW-46,post_monsoon,"BOD, mg/L",BOD,275,30
+Table 7.24,SW-47,post_monsoon,pH,pH,7.3,6.5-8.5
+Table 7.24,SW-48,post_monsoon,pH,pH,7.9,6.5-8.5
+Table 7.24,SW-47,post_monsoon,"COD, mg/L",COD,1740,200
+Table 7.24,SW-48,post_monsoon,"COD, mg/L",COD,760,200
+Table 7.24,SW-47,post_monsoon,"BOD, mg/L",BOD,314,100
+Table 7.24,SW-48,post_monsoon,"BOD, mg/L",BOD,157,100
+Table 7.25,SW-49,post_monsoon,pH,pH,7.1,5.5-9.0
+Table 7.25,SW-50,post_monsoon,pH,pH,7.1,5.5-9.0
+Table 7.25,SW-49,post_monsoon,"Total Chromium, mg/L",Cr,0.39,2
+Table 7.25,SW-50,post_monsoon,"Total Chromium, mg/L",Cr,0.33,2
+Table 7.25,SW-49,post_monsoon,"COD, mg/L",COD,1820,250
+Table 7.25,SW-50,post_monsoon,"COD, mg/L",COD,1100,250
+Table 7.25,SW-49,post_monsoon,"BOD, mg/L",BOD,392,30
+Table 7.25,SW-50,post_monsoon,"BOD, mg/L",BOD,274,30
+Table 7.26,SW-51,post_monsoon,pH,pH,7.3,5.5-9.0
+Table 7.26,SW-52,post_monsoon,pH,pH,7.3,5.5-9.0
+Table 7.26,SW-51,post_monsoon,"Total Chromium, mg/L",Cr,0.59,2
+Table 7.26,SW-52,post_monsoon,"Total Chromium, mg/L",Cr,0.38,2
+Table 7.26,SW-51,post_monsoon,"COD, mg/L",COD,1780,250
+Table 7.26,SW-52,post_monsoon,"COD, mg/L",COD,1000,250
+Table 7.26,SW-51,post_monsoon,"BOD, mg/L",BOD,353,30
+Table 7.26,SW-52,post_monsoon,"BOD, mg/L",BOD,352,30
+Table 7.27,SW-53,post_monsoon,pH,pH,9.3,5.5-9.0
+Table 7.27,SW-54,post_monsoon,pH,pH,8.9,5.5-9.0
+Table 7.27,SW-53,post_monsoon,"Total Chromium, mg/L",Cr,0.63,2
+Table 7.27,SW-54,post_monsoon,"Total Chromium, mg/L",Cr,0.28,2
+Table 7.27,SW-53,post_monsoon,"COD, mg/L",COD,1250,250
+Table 7.27,SW-54,post_monsoon,"COD, mg/L",COD,1080,250
+Table 7.27,SW-53,post_monsoon,"BOD, mg/L",BOD,274,30
+Table 7.27,SW-54,post_monsoon,"BOD, mg/L",BOD,235,30

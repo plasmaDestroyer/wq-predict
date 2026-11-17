@@ -1,0 +1,61 @@
+source_id,industrial_area,industry_type,station_id,role,name,locality,drain,discharge_flow_mld,ref
+site2-S1,site2,cetp,SW-1,inlet,CETP Unnao inlet at plant,Ind. Area Site-2,Loni,,paper Table 1
+site2-S1,site2,cetp,SW-2,outlet,CETP Unnao outlet at plant,Ind. Area Site-2,Loni,1.66,paper Table 1; flow = sum of 14 member tanneries (report Table 3.1); paper Table 2 says 1.6
+site2-S1,site2,cetp,SW-3,upstream,Loni drain before CETP Unnao outlet joins,Ind. Area Site-2,Loni,,derived from report Table 7.3 (U/S of CETP)
+site2-S1,site2,cetp,SW-4,downstream,Loni drain after CETP Unnao outlet joins,Ind. Area Site-2,Loni,,derived from report Table 7.3 (D/S of CETP)
+site2-S2,site2,drain,SW-3,outlet,U/S of Loni drain at railway bridge before joining of CETP Unnao outlet,Ind. Area Site-2,Loni,,paper Table 1
+site2-S3,site2,drain,SW-4,outlet,Loni drain after joining of CETP Unnao outlet,Ind. Area Site-2,Loni,,paper Table 1
+site2-S4,site2,drain,SW-5,outlet,UPSIDC drain at bridge near CETP Unnao,Ind. Area Site-2,Loni,,paper Table 1
+site2-S4,site2,drain,SW-4,upstream,Loni drain before UPSIDC + sewage drains join,Ind. Area Site-2,Loni,,derived; downstream shared with S5
+site2-S4,site2,drain,SW-7,downstream,Loni drain after UPSIDC + sewage drains join,Ind. Area Site-2,Loni,,derived; shared with S5
+site2-S5,site2,sewage_drain,SW-6,outlet,Unlined sewage drain at bridge near CETP,Ind. Area Site-2,Loni,5.0,paper Table 1; flow = untreated city sewage into Loni drain (report sec. 3)
+site2-S5,site2,sewage_drain,SW-4,upstream,Loni drain before UPSIDC + sewage drains join,Ind. Area Site-2,Loni,,derived; downstream shared with S4
+site2-S5,site2,sewage_drain,SW-7,downstream,Loni drain after UPSIDC + sewage drains join,Ind. Area Site-2,Loni,,derived; shared with S4
+site2-S6,site2,drain,SW-7,outlet,Loni drain D/S of the bridge after joining of UPSIDC drain and sewage drain,Ind. Area Site-2,Loni,10.12,paper Table 1; flow = Loni drain total (report Table 3.3)
+site2-S7,site2,meat,SW-23,inlet,ETP inlet of M/s Indagro Foods Ltd.,Ind. Area Site-2,Loni,,paper Table 1
+site2-S7,site2,meat,SW-24,outlet,ETP outlet of M/s Indagro Foods Ltd.,Ind. Area Site-2,Loni,0.85,paper Table 1; report Table 3.1 (280 t frozen meat/day)
+site2-S8,site2,tannery,SW-27,inlet,ETP inlet of M/s Omega International,Ind. Area Site-2,Loni,,paper Table 1
+site2-S8,site2,tannery,SW-28,outlet,ETP outlet of M/s Omega International,Ind. Area Site-2,Loni,0.009,paper Table 1; report Table 3.1 (30 hides/day)
+site2-S9,site2,tannery,SW-29,inlet,ETP inlet of M/s Allied Leather Finisher Pvt. Ltd.,Ind. Area Site-2,Loni,,paper Table 1
+site2-S9,site2,tannery,SW-30,outlet,ETP outlet of M/s Allied Leather Finisher Pvt. Ltd.,Ind. Area Site-2,Loni,0.03,paper Table 1; report Table 3.1 (30 hides/day)
+site1_banthar-S1,site1_banthar,drain,SW-8,outlet,CETP Banthar drain before mixing,Banthar,City Jail,,paper Table 1
+site1_banthar-S2,site1_banthar,drain,SW-9,outlet,UPSIDC drain,Banthar,City Jail,,paper Table 1
+site1_banthar-S3,site1_banthar,drain,SW-10,outlet,UPSIDC drain,Banthar,City Jail,,paper Table 1 (paper text says >100 MLD; report gives no drain flow)
+site1_banthar-S4,site1_banthar,cetp,SW-11,inlet,CETP Banthar inlet at plant,Banthar,City Jail,,paper Table 1
+site1_banthar-S4,site1_banthar,cetp,SW-12,outlet,CETP Banthar outlet at plant,Banthar,City Jail,3.8,paper Table 1; report sec. 3 (receiving 3.8 MLD; capacity 4.5)
+site1_banthar-S5,site1_banthar,meat,SW-25,inlet,ETP inlet of M/s AOV Exports Pvt. Ltd.,Ind. Area Site-1,Loni,,paper Table 1
+site1_banthar-S5,site1_banthar,meat,SW-26,outlet,ETP outlet of M/s AOV Exports Pvt. Ltd.,Ind. Area Site-1,Loni,0.35,paper Table 1; report Table 3.1 (84 t frozen meat/day)
+site1_banthar-S6,site1_banthar,meat,SW-31,inlet,ETP inlet of M/s Rustom Food Pvt. Ltd.,Ind. Area Site-1,Loni,,paper Table 1
+site1_banthar-S6,site1_banthar,meat,SW-32,outlet,ETP outlet of M/s Rustom Food Pvt. Ltd.,Ind. Area Site-1,Loni,0.02,paper Table 1; report Table 3.1 (25 t frozen meat/day)
+site1_banthar-S7,site1_banthar,animal_byproduct,SW-33,inlet,ETP inlet of M/s Falak Enterprizes & Asharfi Agri Bioproduct,Ind. Area Site-1,Loni,,paper Table 1
+site1_banthar-S7,site1_banthar,animal_byproduct,SW-34,outlet,ETP outlet of M/s Falak Enterprises & Asharfi Agro Byoproducts,Ind. Area Site-1,Loni,,paper Table 1; report Table 3.1 (bone tallow; no flow given)
+site1_banthar-S8,site1_banthar,paper_pulp,SW-40,inlet,ETP inlet of M/s Bajaj Kagaj Udyog Ltd.,Jamuka,,,paper Table 1
+site1_banthar-S8,site1_banthar,paper_pulp,SW-41,outlet,ETP outlet of M/s Bajaj Kagaj Udyog Ltd.,Jamuka,,0.25,paper Table 1; report Table 3.1 (60 t paper/day)
+site1_banthar-S9,site1_banthar,meat,SW-42,inlet,ETP inlet of M/s J S International,Banthar,City Jail,,paper Table 1
+site1_banthar-S9,site1_banthar,meat,SW-43,outlet,ETP outlet of M/s J S International,Banthar,City Jail,0.35,paper Table 1; report Table 3.1 (60 t frozen meat/day)
+magarwara1-S1,magarwara1,drain,SW-13,outlet,City Jail Drain (near Gokul Baba Temple),Magarwara,City Jail,22.3,CONFIRMED by paper text values; flow = City Jail drain total (report Table 3.3)
+magarwara1-S2,magarwara1,tannery,SW-14,inlet,ETP inlet of M/s Mirza International Pvt. Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara1-S2,magarwara1,tannery,SW-15,outlet,ETP outlet of M/s Mirza International Pvt. Ltd.,Magarwara,City Jail,0.7,INFERRED from station order; report Table 3.1 (1500 hides/day)
+magarwara1-S3,magarwara1,tannery,SW-16,inlet,ETP inlet of M/s Mustang Leather Pvt. Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara1-S3,magarwara1,tannery,SW-17,outlet,ETP outlet of M/s Mustang Leather Pvt. Ltd.,Magarwara,City Jail,0.072,INFERRED from station order; report Table 3.1 (120 hides/day)
+magarwara1-S4,magarwara1,tannery,SW-18,inlet,ETP inlet of M/s Sadaf Enterprises Pvt. Ltd.,Magarwara,City Jail,,CONFIRMED by paper text values
+magarwara1-S4,magarwara1,tannery,SW-19,outlet,ETP outlet of M/s Sadaf Enterprises Pvt. Ltd.,Magarwara,City Jail,0.35,CONFIRMED by paper text values; report Table 3.1 (500 hides/day)
+magarwara1-S5,magarwara1,tannery,SW-20,inlet,ETP inlet of M/s Rehman Industries Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara1-S5,magarwara1,tannery,SW-21,outlet,ETP outlet of M/s Rehman Industries Ltd.,Magarwara,City Jail,0.48,INFERRED from station order; report Table 3.1 (1000 hides/day)
+magarwara1-S6,magarwara1,sewage_drain,SW-22,outlet,Sewage drain (Model Vihar Colony),Unnao,,,INFERRED from station order
+magarwara1-S7,magarwara1,chemical,SW-35,inlet,ETP inlet of M/s Resinova Chemicals Pvt. Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara1-S7,magarwara1,chemical,SW-36,outlet,ETP outlet of M/s Resinova Chemicals Pvt. Ltd.,Magarwara,City Jail,0.005,INFERRED from station order; report Table 3.1 (25 t resin/day)
+magarwara1-S8,magarwara1,textile,SW-37,inlet,ETP inlet of M/s Handloom Bhandar,Magarwara,City Jail,,INFERRED from station order
+magarwara1-S8,magarwara1,textile,SW-38,outlet,ETP outlet of M/s Handloom Bhandar,Magarwara,City Jail,0.1,INFERRED from station order; report Table 3.1
+magarwara2-S1,magarwara2,steel,SW-39,outlet,ETP outlet of M/s Rimjhim Stainless Ltd. (formerly Global Smelters),Akrampur,City Jail,0.05,CONFIRMED by paper text values; report Table 3.1 (no inlet sampled)
+magarwara2-S2,magarwara2,textile,SW-44,inlet,ETP inlet of M/s Mahavir Spin Fabrics Pvt. Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara2-S2,magarwara2,textile,SW-45,outlet,ETP outlet of M/s Mahavir Spin Fabrics Pvt. Ltd.,Magarwara,City Jail,0.15,INFERRED from station order; report Table 3.1
+magarwara2-S3,magarwara2,textile,SW-46,outlet,Outlet of M/s Balaji Industries Ltd.,Akrampur,City Jail,0.005,INFERRED from station order; report Table 3.1 (fabric; ETP under construction)
+magarwara2-S4,magarwara2,oil,SW-47,inlet,ETP inlet of M/s ACI Oils Pvt. Ltd.,Akrampur,City Jail,,CONFIRMED by paper text values
+magarwara2-S4,magarwara2,oil,SW-48,outlet,ETP outlet of M/s ACI Oils Pvt. Ltd.,Akrampur,City Jail,0.05,CONFIRMED by paper text values; report Table 3.1
+magarwara2-S5,magarwara2,textile,SW-49,inlet,ETP inlet of M/s Jeet Dyeing Industries,Magarwara,City Jail,,INFERRED from station order
+magarwara2-S5,magarwara2,textile,SW-50,outlet,ETP outlet of M/s Jeet Dyeing Industries,Magarwara,City Jail,0.005,INFERRED from station order; report Table 3.1
+magarwara2-S6,magarwara2,textile,SW-51,inlet,ETP inlet of M/s Sadaf Dyeing & Proofing,Magarwara,City Jail,,INFERRED from station order
+magarwara2-S6,magarwara2,textile,SW-52,outlet,ETP outlet of M/s Sadaf Dyeing & Proofing,Magarwara,City Jail,0.005,INFERRED from station order; report Table 3.1
+magarwara2-S7,magarwara2,textile,SW-53,inlet,ETP inlet of M/s Universal Yarn & Textile Pvt. Ltd.,Magarwara,City Jail,,INFERRED from station order
+magarwara2-S7,magarwara2,textile,SW-54,outlet,ETP outlet of M/s Universal Yarn & Textile Pvt. Ltd.,Magarwara,City Jail,0.03,INFERRED from station order; report Table 3.1
