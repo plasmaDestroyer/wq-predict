@@ -4,431 +4,235 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unnao Wastewater Ranking</title>
-<meta name="description" content="Can the 2012 lab data rank 33 industrial polluters in Unnao (Ganges basin) as well as the three experts of Srinivas & Singh (2018)? Data found, three methods, honest results.">
+<meta name="description" content="Can the 2012 lab data rank 33 industrial wastewater sources in Unnao (Ganges basin) as well as the three experts of Srinivas & Singh (2018)? Data, methods and results.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f3eee3; --surface: #fbf8f1; --sunk: #ebe4d4;
-  --ink: #1b211f; --ink-2: #4a514c; --muted: #6f746c; --rule: #d6cdb9;
-  --river: #0b6c9a; --ochre: #b0632a; --band: rgba(11,108,154,.10);
-  --warn-bg: #f6e6d4; --warn-ink: #7a3e12;
-  --serif: "Instrument Serif", Georgia, serif;
-  --sans: "Hanken Grotesk", "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --r: 10px; --max: 1120px;
+  --bg: #fdfcf9; --ink: #1a1a1a; --ink-2: #444; --muted: #6b6b6b; --rule: #cfcac0; --faint: #ece8df;
+  --link: #1d4e89; --band: rgba(0,0,0,.06);
+  --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #111513; --surface: #181e1b; --sunk: #202723;
-    --ink: #ece6d8; --ink-2: #c3c0b2; --muted: #9a9c90; --rule: #2f3833;
-    --river: #3b9dcf; --ochre: #c27a38; --band: rgba(59,157,207,.14);
-    --warn-bg: #2b2117; --warn-ink: #e7b98d; color-scheme: dark;
+    --bg: #141414; --ink: #e8e6e1; --ink-2: #c4c1ba; --muted: #9a978f; --rule: #3a3833; --faint: #23221f;
+    --link: #8db4e6; --band: rgba(255,255,255,.07); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #111513; --surface: #181e1b; --sunk: #202723;
-  --ink: #ece6d8; --ink-2: #c3c0b2; --muted: #9a9c90; --rule: #2f3833;
-  --river: #3b9dcf; --ochre: #c27a38; --band: rgba(59,157,207,.14);
-  --warn-bg: #2b2117; --warn-ink: #e7b98d; color-scheme: dark;
+  --bg: #141414; --ink: #e8e6e1; --ink-2: #c4c1ba; --muted: #9a978f; --rule: #3a3833; --faint: #23221f;
+  --link: #8db4e6; --band: rgba(255,255,255,.07); color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0; background: var(--paper); color: var(--ink);
-  font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased;
-  background-image: repeating-linear-gradient(0deg, transparent 0 31px, color-mix(in srgb, var(--rule) 35%, transparent) 31px 32px);
-}
-a { color: var(--river); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible, .row:focus-visible { outline: 3px solid var(--river); outline-offset: 3px; border-radius: 4px; }
-.wrap { width: min(var(--max), 100%); margin: 0 auto; padding: 0 24px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.62 var(--serif);
+  font-variant-numeric: oldstyle-nums proportional-nums; -webkit-font-smoothing: antialiased; }
+main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, .row:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.meta { font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.meta button { font: inherit; color: var(--muted); background: none; border: 0; border-bottom: 1px dotted var(--muted); padding: 0; cursor: pointer; }
+h1 { font-size: clamp(28px, 4.4vw, 38px); line-height: 1.18; font-weight: 600; margin: 0 0 12px; letter-spacing: -.2px; }
+.byline { font-size: 15px; color: var(--ink-2); margin: 0 0 32px; }
+.abstract { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 18px 0; margin: 0 0 40px; font-size: 16.5px; }
+.abstract b:first-child { font-variant: small-caps; letter-spacing: .04em; margin-right: 6px; }
+h2 { font-size: 22px; font-weight: 600; margin: 48px 0 12px; }
+h2 span { color: var(--muted); font-weight: 400; margin-right: 10px; }
+h3 { font-size: 18px; font-weight: 600; font-style: italic; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+.num { font-variant-numeric: lining-nums tabular-nums; }
+sup a { text-decoration: none; font-size: .75em; }
 
-.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; }
-.mark { font: 400 22px/1 var(--serif); letter-spacing: .2px; white-space: nowrap; }
-.mark i { color: var(--river); }
-.top nav { display: flex; gap: 18px; align-items: center; font-size: 14px; font-weight: 500; }
-.top nav a { color: var(--ink-2); text-decoration: none; }
-.top nav a:hover { color: var(--ink); }
-.theme { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px;
-  font: 500 13px var(--sans); padding: 6px 12px; cursor: pointer; }
+/* booktabs-style tables */
+.tbl { overflow-x: auto; margin: 18px 0 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 15.5px; font-variant-numeric: lining-nums tabular-nums; }
+thead tr { border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--ink); }
+tbody tr:last-child { border-bottom: 1.5px solid var(--ink); }
+th { font-weight: 600; text-align: left; padding: 7px 8px; }
+td { padding: 5px 8px; vertical-align: top; }
+td.n, th.n { text-align: right; }
+caption, figcaption { caption-side: top; text-align: left; font-size: 15px; color: var(--ink-2); padding-bottom: 8px; }
+caption b, figcaption b { color: var(--ink); }
+figcaption.below { margin-top: 10px; }
 
-.hero { padding: 72px 0 40px; display: grid; grid-template-columns: 1.35fr .9fr; gap: 48px; align-items: end; }
-.kicker { font: 500 12px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
-h1 { font: 400 clamp(42px, 6.2vw, 76px)/1.02 var(--serif); margin: 0 0 22px; letter-spacing: -.5px; }
-h1 em { color: var(--river); }
-.lede { font-size: 19px; color: var(--ink-2); max-width: 58ch; margin: 0; }
-.verdict { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 26px 26px 22px; position: relative; }
-.verdict::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; border-radius: var(--r) var(--r) 0 0;
-  background: linear-gradient(90deg, var(--river), var(--ochre)); }
-.num { font: 400 88px/1 var(--serif); letter-spacing: -2px; }
-.num small { font-size: 26px; color: var(--muted); letter-spacing: 0; }
-.verdict p { margin: 8px 0 0; color: var(--ink-2); font-size: 15px; }
-.verdict .alert { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--rule); display: flex; gap: 14px; align-items: baseline; }
-.verdict .alert b { font: 400 40px/1 var(--serif); color: var(--ochre); }
-
-section { padding: 56px 0 8px; }
-.sec-head { display: grid; grid-template-columns: 90px 1fr; gap: 20px; align-items: baseline; margin-bottom: 26px; }
-.sec-no { font: 400 54px/1 var(--serif); color: var(--rule); }
-h2 { font: 400 clamp(30px, 3.6vw, 42px)/1.1 var(--serif); margin: 0 0 8px; }
-.sec-head p { margin: 0; color: var(--ink-2); max-width: 70ch; }
-h3 { font: 600 17px/1.3 var(--sans); margin: 0 0 6px; }
-.mono { font-family: var(--mono); font-size: .92em; }
-.card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 20px 22px; }
-.grid { display: grid; gap: 14px; }
-.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-.pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; background: var(--surface); }
-.pipe div { padding: 18px 18px 20px; border-right: 1px solid var(--rule); }
-.pipe div:last-child { border-right: 0; }
-.pipe b { display: block; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-.pipe span { font-size: 15px; color: var(--ink-2); }
-.pipe .hit { background: color-mix(in srgb, var(--ochre) 12%, var(--surface)); }
-.pipe .hit b { color: var(--ochre); }
-.note { font-size: 14px; color: var(--muted); margin-top: 12px; }
-
-.inv { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.inv .card { display: flex; flex-direction: column; gap: 6px; }
-.inv .big { font: 400 46px/1 var(--serif); }
-.inv .big.r { color: var(--river); }
-.inv .big small { font-size: 22px; color: var(--muted); }
-.inv .sub { font-size: 14px; color: var(--ink-2); }
-.inv .src { font: 400 12px/1.4 var(--mono); color: var(--muted); margin-top: auto; padding-top: 10px; }
-.errata { margin: 18px 0 0; padding: 0; list-style: none; display: grid; }
-.errata li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; font-size: 15px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
-.errata li span:first-child { font: 500 12px/1.6 var(--mono); color: var(--ochre); text-transform: uppercase; letter-spacing: .06em; }
-
-.method { display: flex; flex-direction: column; gap: 10px; }
-.method .tag { align-self: flex-start; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; }
-.tag.no { background: color-mix(in srgb, var(--river) 14%, transparent); color: var(--river); }
-.tag.yes { background: color-mix(in srgb, var(--ochre) 16%, transparent); color: var(--ochre); }
-.method .letter { font: 400 64px/.9 var(--serif); }
-.method p { margin: 0; font-size: 15px; color: var(--ink-2); }
-.method .res { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--rule); font: 500 14px var(--mono); }
-
-.chart { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 22px 22px 18px; margin: 0; }
-.chart-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
-.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
-.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
-.legend .bandkey { width: 22px; background: var(--band); border-left: 2px dashed var(--river); border-radius: 0; }
-.toggle { border: 1px solid var(--rule); background: transparent; color: var(--ink); border-radius: 999px; font: 500 13px var(--sans); padding: 6px 12px; cursor: pointer; }
-.row { display: grid; grid-template-columns: 230px 1fr 64px; gap: 14px; align-items: center; padding: 7px 4px; border-radius: 6px; }
-.row .lab { font-size: 14px; line-height: 1.25; }
-.row .lab small { display: block; color: var(--muted); font-size: 12px; }
-.track { position: relative; height: 26px; }
-.track .grid-l { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
-.track .bandz { position: absolute; top: 0; bottom: 0; background: var(--band); border-left: 1px dashed var(--river); border-right: 1px dashed var(--river); }
-.bar { position: absolute; left: 0; top: 8px; height: 10px; border-radius: 0 4px 4px 0; transition: width .9s cubic-bezier(.2,.7,.2,1); }
-.bar.no { background: var(--river); }
-.bar.yes { background: var(--ochre); }
-.row .val { font: 500 14px var(--mono); text-align: right; }
-.row.key .lab { font-weight: 700; }
-.row:hover { background: color-mix(in srgb, var(--sunk) 55%, transparent); }
-.axis { display: grid; grid-template-columns: 230px 1fr 64px; gap: 14px; margin-top: 4px; padding: 0 4px; }
-.axis div { position: relative; height: 18px; font: 400 11px var(--mono); color: var(--muted); }
-.axis span { position: absolute; transform: translateX(-50%); }
-.tip { position: fixed; pointer-events: none; z-index: 9; background: var(--ink); color: var(--paper); font-size: 13px; line-height: 1.4;
-  padding: 8px 10px; border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .12s; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); }
-th { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-td.n { font-family: var(--mono); text-align: right; }
-th.n { text-align: right; }
-.scroll { overflow-x: auto; }
+/* figure 1 */
+figure { margin: 26px 0 8px; }
+.fig-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); margin-bottom: 8px; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; }
+.key i { display: inline-block; width: 18px; height: 9px; vertical-align: 0; margin-right: 6px; border: 1.5px solid var(--ink); }
+.key i.f { background: var(--ink); }
+.key i.b { background: var(--band); border: 0; border-left: 1px dashed var(--muted); border-right: 1px dashed var(--muted); }
+.fig-head button { font: inherit; color: var(--link); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.row { display: grid; grid-template-columns: 200px 1fr 44px; gap: 12px; align-items: center; padding: 3px 0; font-size: 15px; }
+.row .val { text-align: right; font-variant-numeric: lining-nums tabular-nums; }
+.row:hover { background: var(--faint); }
+.track { position: relative; height: 18px; }
+.track .g { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--faint); }
+.track .bd { position: absolute; top: 0; bottom: 0; background: var(--band); border-left: 1px dashed var(--muted); border-right: 1px dashed var(--muted); }
+.bar { position: absolute; left: 0; top: 4px; height: 10px; border: 1.5px solid var(--ink); border-left: 0; }
+.bar.f { background: var(--ink); }
+.bar.h { background: var(--bg); }
+.axis { display: grid; grid-template-columns: 200px 1fr 44px; gap: 12px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--ink); margin-top: 4px; padding-top: 2px; }
+.axis div { position: relative; height: 16px; }
+.axis span { position: absolute; transform: translateX(-50%); font-variant-numeric: lining-nums; }
+.tip { position: fixed; z-index: 9; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.4; padding: 6px 9px; max-width: 260px; opacity: 0; }
 [hidden] { display: none !important; }
 
-.cav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.cav .card { border-left: 4px solid var(--ochre); }
-.cav .card.big { grid-column: 1 / -1; background: var(--warn-bg); border-color: transparent; border-left-color: var(--ochre); }
-.cav .card.big h3 { color: var(--warn-ink); font-size: 19px; }
-.cav p { margin: 0; font-size: 15px; color: var(--ink-2); }
+ol.refs { padding-left: 22px; font-size: 15px; color: var(--ink-2); }
+ol.refs li { margin-bottom: 6px; }
+ul.tight { padding-left: 20px; margin: 0 0 14px; }
+ul.tight li { margin-bottom: 4px; }
+footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
 
-.next { counter-reset: n; list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
-.next li { counter-increment: n; display: grid; grid-template-columns: 60px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
-.next li::before { content: counter(n, decimal-leading-zero); font: 400 30px/1 var(--serif); color: var(--river); }
-.next p { margin: 4px 0 0; font-size: 15px; color: var(--ink-2); }
-
-footer { margin-top: 70px; padding: 30px 0 60px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
-footer .grid { gap: 24px; }
-footer h3 { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-2); }
-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-
-.reveal { opacity: 0; transform: translateY(14px); animation: up .7s cubic-bezier(.2,.7,.2,1) forwards; }
-.d1 { animation-delay: .08s; } .d2 { animation-delay: .18s; } .d3 { animation-delay: .3s; }
-@keyframes up { to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; transform: none; } .bar { transition: none; } html { scroll-behavior: auto; } }
-
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding-top: 48px; }
-  .g3, .inv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pipe { grid-template-columns: 1fr; }
-  .pipe div { border-right: 0; border-bottom: 1px solid var(--rule); }
-  .pipe div:last-child { border-bottom: 0; }
-  .row, .axis { grid-template-columns: 150px 1fr 52px; }
-  .top nav a.hide-s { display: none; }
-}
 @media (max-width: 600px) {
-  .wrap { padding: 0 16px; }
-  .g3, .cav { grid-template-columns: 1fr; }
-  .inv { gap: 10px; }
-  .inv .card { padding: 14px; }
-  .inv .big { font-size: 36px; }
-  .inv .sub { font-size: 13px; }
-  .sec-head { grid-template-columns: 1fr; gap: 4px; }
-  .sec-no { font-size: 36px; }
-  .row, .axis { grid-template-columns: 112px 1fr 44px; gap: 8px; }
-  .num { font-size: 70px; }
-  .top nav a { display: none; }
-  .errata li { grid-template-columns: 1fr; gap: 2px; }
+  main { padding: 36px 16px 60px; }
+  body { font-size: 17px; }
+  .row, .axis { grid-template-columns: 112px 1fr 38px; gap: 8px; font-size: 13.5px; }
 }
-@media print { .top, .toggle, .theme { display: none; } body { background: #fff; } }
+@media print { .meta button, .fig-head button { display: none; } main { max-width: none; } }
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <div class="mark">Unnao <i>wastewater</i> ranking</div>
-    <nav aria-label="Sections">
-      <a href="#paper" class="hide-s">Paper</a>
-      <a href="#data" class="hide-s">Data</a>
-      <a href="#methods">Methods</a>
-      <a href="#results">Results</a>
-      <a href="#limits">Limits</a>
-      <button class="theme" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
-    </nav>
+<main>
+  <div class="meta"><span>Research note · draft · November 2026</span><button id="theme" type="button">Dark / light</button></div>
+
+  <h1>Replacing expert judgment with lab data: a re-analysis of the Unnao industrial wastewater ranking</h1>
+  <p class="byline">Re-analysis of Srinivas &amp; Singh (2018)<sup><a href="#r1">1</a></sup> · code and data: <a href="https://github.com/plasmaDestroyer/wq-predict">github.com/plasmaDestroyer/wq-predict</a></p>
+
+  <div class="abstract">
+    <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, Ganges basin, with the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2">2</a></sup> and tested whether measurements alone reproduce the expert ranking. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>; a regression model trained on the expert scores reaches <span class="num">0.74</span>; standard pollution indices reach <span class="num">0.28–0.69</span>. The agreement falls to <span class="num">0.26</span> when failures are counted per tested parameter, which suggests that the number of parameters tested at each source, rather than pollution alone, drives much of the expert ranking.</p>
   </div>
-</header>
 
-<main class="wrap">
-  <section class="hero" aria-labelledby="title">
-    <div>
-      <p class="kicker reveal">Field report · Ganges basin, Unnao · 2012 survey</p>
-      <h1 id="title" class="reveal d1">Can lab data rank <em>33 polluters</em> as well as three experts?</h1>
-      <p class="lede reveal d2">Srinivas &amp; Singh (2018) ranked 33 tanneries, treatment plants and drains with expert ratings and fuzzy AHP. We found the survey's raw lab data in the paper's own sources and tried to reproduce the ranking from measurements alone.</p>
-    </div>
-    <aside class="verdict reveal d3" aria-label="Headline result">
-      <div class="num">0.75<small> ρ</small></div>
-      <p>Rank agreement with the experts, within each industrial area, using only measurements and equal weights (method B). 1 = same order.</p>
-      <div class="alert">
-        <b>0.26</b>
-        <p>…when failures are counted <em>per tested parameter</em>. Sources were tested for 1 to 17 parameters, so much of the agreement may come from panel size, not pollution.</p>
-      </div>
-    </aside>
-  </section>
+  <h2 id="paper"><span>1</span>The original method</h2>
+  <p>The paper scores each source from 0 to 1 within its industrial area (four areas, low = more polluting). Three experts, from a pollution control board, an impact-assessment practice and a research institute, rated each source on ten criteria: effluent discharge (C1), treatment efficiency (C2), number of critical parameters before and after the monsoon (C3, C4), effluent type (C5), impact on the river (C6, C7) and on groundwater (C8, C9) in both seasons, and public health (C10). Pairwise matrices built from the ratings (a rating gap of <i>k</i> levels becomes 2<i>k</i>+1), interval fuzzy numbers and defuzzification give a local weight per source and criterion; the final score is the sum of criterion weight × local weight.</p>
+  <p>We reproduced the paper's arithmetic: all 33 final scores in its Table 10 follow from the printed weights to within 0.001, and its Table 8 follows from Table 7. The step this work replaces is the expert rating of each source.</p>
 
-  <section id="paper" aria-labelledby="paper-h">
-    <div class="sec-head">
-      <div class="sec-no">01</div>
-      <div><h2 id="paper-h">What the paper does</h2>
-      <p>Each source gets a score from 0 to 1 within its area (low = more polluting). Experts judged how badly each source performs on each criterion; fuzzy AHP turned the judgments into weights. We replace the highlighted step.</p></div>
-    </div>
-    <div class="pipe">
-      <div><b>Inputs</b><span>2012 lab tables read by 3 experts (pollution board, impact assessment, research institute).</span></div>
-      <div class="hit"><b>Replaced</b><span>Ratings of 33 sources on 10 criteria: discharge, ETP efficiency, failures pre/post monsoon, effluent type, river and groundwater impact, public health.</span></div>
-      <div><b>Fuzzy AHP</b><span>Pairwise matrices (rating gap k → 2k+1), interval fuzzy numbers, defuzzified local weights.</span></div>
-      <div><b>Weights</b><span>Criterion weights from expert importance ratings; public health highest (0.235).</span></div>
-      <div><b>Rank</b><span>Score = Σ criterion weight × local weight, ranked within each of 4 areas.</span></div>
-    </div>
-    <p class="note">We reproduced the paper's own arithmetic: all 33 final scores of Table 10 recompute from its weights within 0.001, and Table 8 follows from Table 7.</p>
-  </section>
+  <h2 id="data"><span>2</span>Data</h2>
+  <p>The paper's reference "UPPCB (2013)" is the Ministry of Water Resources committee report prepared by NIH Roorkee<sup><a href="#r2">2</a></sup>. Its CETP Unnao table equals the paper's Table 2 value for value. We extracted all tables and checked them against the PDF pages (Table 1).</p>
+  <div class="tbl"><table>
+    <caption><b>Table 1.</b> Data recovered from the cited sources.</caption>
+    <thead><tr><th>Data</th><th class="n">Amount</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Wastewater stations, mapped to the 33 sources</td><td class="n">54</td><td>Report Tables 5.1, 7.1–7.27</td></tr>
+      <tr><td>Effluent values (538 measured, 55 not detected), 18 parameters, May and November 2012</td><td class="n">593</td><td>same</td></tr>
+      <tr><td>Well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</td><td class="n">60</td><td>Tables 5.2, 7.28</td></tr>
+      <tr><td>Sources with discharge flow and production</td><td class="n">25 / 33</td><td>Table 3.1</td></tr>
+      <tr><td>Further groundwater and effluent samples, 2010–2012 (127 from wells)</td><td class="n">162</td><td>Annexes III–V (CGWB)</td></tr>
+      <tr><td>Monthly river Ganga records, Kanpur and Bhitaura, 2001–2011</td><td class="n">240</td><td>Annexes VI–VII (CWC)</td></tr>
+      <tr><td>Drain records, Loni and City Jail drains, 2012 and 2018–2023</td><td class="n">16</td><td>CPCB<sup><a href="#r3">3</a></sup></td></tr>
+      <tr><td>Village coordinates near the industrial area (locating 17 of 55 wells)</td><td class="n">14</td><td>Report §3.6</td></tr>
+    </tbody>
+  </table></div>
+  <p>The comparison also exposed errors in the paper: the "TDS 145" of Sadaf Enterprises is TSS 145 in the report, and the ACI Oils outlet BOD is 157, not 150. The paper omits the station register for two of its four areas; for 11 of those 15 sources the assignment to the paper's labels follows the report's station order and is not confirmed by values.</p>
 
-  <section id="data" aria-labelledby="data-h">
-    <div class="sec-head">
-      <div class="sec-no">02</div>
-      <div><h2 id="data-h">The data was in the references</h2>
-      <p>The paper cites "UPPCB (2013)". It is the Ministry of Water Resources committee report by NIH Roorkee, openly available. Its CETP table matches the paper's Table 2 value for value. Extracted and checked against the PDF pages.</p></div>
-    </div>
-    <div class="inv">
-      <div class="card"><div class="big r">54</div><div class="sub">wastewater stations, all mapped to the 33 sources</div><div class="src">Tables 5.1, 7.1–7.27</div></div>
-      <div class="card"><div class="big">593</div><div class="sub">effluent values (538 measured + 55 not detected), 18 parameters, May and Nov 2012</div><div class="src">681 cells, 88 not tested</div></div>
-      <div class="card"><div class="big">60</div><div class="sub">well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</div><div class="src">Tables 5.2, 7.28</div></div>
-      <div class="card"><div class="big">25<small>/33</small></div><div class="sub">sources with a discharge flow (KLD) and a production figure</div><div class="src">Table 3.1</div></div>
-      <div class="card"><div class="big r">240</div><div class="sub">months of river Ganga data, Kanpur (upstream) and Bhitaura (downstream), 2001–2011</div><div class="src">Annexes VI–VII (CWC)</div></div>
-      <div class="card"><div class="big">162</div><div class="sub">more samples, 127 from wells: CGWB April 2010, Dec 2011 (arsenic), March 2012</div><div class="src">Annexes III–V</div></div>
-      <div class="card"><div class="big">16</div><div class="sub">drain records for Loni and City Jail drains, 2012 and 2018–2023</div><div class="src">CPCB drain monitoring</div></div>
-      <div class="card"><div class="big">14</div><div class="sub">village GPS points around the industrial area; wells and outfalls still lack their own</div><div class="src">Report §3.6</div></div>
-    </div>
-    <ul class="errata" aria-label="Corrections to the paper">
-      <li><span>Paper typo</span><span>Sadaf Enterprises "TDS 145" is <b>TSS</b> 145 (report Table 7.8).</span></li>
-      <li><span>Paper typo</span><span>ACI Oils outlet BOD is <b>157</b>, not 150 (report Table 7.24).</span></li>
-      <li><span>Confirmed</span><span>Omega International BOD 353 is real (SW-28), not a copy of CETP Unnao's value.</span></li>
-      <li><span>Not proven</span><span>11 of the 15 Magarwara sources are matched to the paper's S-numbers by station order only; S1 and S4 of both areas are confirmed by values.</span></li>
-    </ul>
-  </section>
+  <h2 id="methods"><span>3</span>Methods</h2>
+  <p>All methods start from one row per source with the criteria computed from the lab data: failures against the CPCB discharge limits (pH outside 5.5–9.0; a non-detect counts as a pass), treatment efficiency (inlet versus outlet), flow, and the toxicity-weighted excess over the limits. Because the paper ranks only within areas, agreement is measured within each area (Spearman ρ, averaged over the four areas) and by whether the most-polluting source matches.</p>
+  <h3>A. Learning the expert scores</h3>
+  <p>Twelve scikit-learn regressors were compared by leave-one-out cross-validation, with the target normalised by the training labels only. Partial least squares with two components gave the lowest error; in a nested test (model choice inside each fold) it was selected in 29 of 33 folds.</p>
+  <h3>B. Computing the criteria</h3>
+  <p>Sources are ranked within their area on each criterion, the ranks are scaled to the shape of the paper's local weights, and the criteria are combined with equal weights. Missing values are neutral. No expert input is used, and each rank can be traced to measurements.</p>
+  <h3>C. Adding river and groundwater</h3>
+  <p>As B, plus limit-weighted river load (C6, C7) and a groundwater model per locality (C8, C9). The groundwater model did not beat the mean in a leave-one-locality-out test, so C8 and C9 remain neutral.</p>
 
-  <section id="methods" aria-labelledby="methods-h">
-    <div class="sec-head">
-      <div class="sec-no">03</div>
-      <div><h2 id="methods-h">Three ways to replace the experts</h2>
-      <p>All three start from one row per source with the criteria computed from the lab data: failures against CPCB limits (pH outside 5.5–9.0; not detected = pass), treatment efficiency, flow, toxic excess. Agreement is measured within each area, because the paper ranks only within areas.</p></div>
+  <h2 id="results"><span>4</span>Results</h2>
+  <figure>
+    <figcaption><b>Figure 1.</b> Agreement with the expert ranking (mean within-area Spearman ρ, 1 = same order). Filled bars use no expert input; hollow bars use the expert scores or weights. The shaded band is the 5–95% range over 2,000 random weightings of method B.</figcaption>
+    <div class="fig-head">
+      <div class="key" aria-hidden="true"><span><i class="f"></i>no expert input</span><span><i></i>uses expert input</span><span><i class="b"></i>random weights</span></div>
+      <button id="viewToggle" type="button" aria-pressed="false">table view</button>
     </div>
-    <div class="grid g3">
-      <article class="card method">
-        <span class="tag yes">uses expert scores</span>
-        <div class="letter">A</div>
-        <h3>Learn the experts</h3>
-        <p>A regression model learns the paper's scores from the criteria. 12 scikit-learn models compared; PLS (2 components) wins and was chosen in 29 of 33 nested rounds. The target is normalised with training labels only.</p>
-        <div class="res">ρ 0.74 · nested test</div>
-      </article>
-      <article class="card method">
-        <span class="tag no">no expert input</span>
-        <div class="letter">B</div>
-        <h3>Compute the criteria</h3>
-        <p>Rank sources within their area on each criterion, scale like the paper's local weights, add with equal weights. Missing values are neutral. Every rank can be explained measurement by measurement.</p>
-        <div class="res">ρ 0.75 · equal weights</div>
-      </article>
-      <article class="card method">
-        <span class="tag no">no expert input</span>
-        <div class="letter">C</div>
-        <h3>B plus river and groundwater</h3>
-        <p>Adds river load (C6/C7) and a groundwater model (C8/C9). The groundwater model found no signal (no model beat the average), so C8/C9 stay neutral.</p>
-        <div class="res">ρ 0.75 · equal weights</div>
-      </article>
+    <div id="chartView">
+      <div id="rows" role="img" aria-label="Bar chart of agreement by method; the same values are in the table view"></div>
+      <div class="axis" aria-hidden="true"><div></div><div id="ticks"></div><div></div></div>
     </div>
-  </section>
+    <div id="tableView" class="tbl" hidden></div>
+  </figure>
 
-  <section id="results" aria-labelledby="results-h">
-    <div class="sec-head">
-      <div class="sec-no">04</div>
-      <div><h2 id="results-h">How close to the experts?</h2>
-      <p>Mean Spearman rank correlation with the paper's Table 10 inside each of the 4 areas. Closer to the experts is not the same as a better assessment: it shows only how similar the ranking is.</p></div>
-    </div>
-    <figure class="chart">
-      <div class="chart-top">
-        <div class="legend" aria-hidden="true">
-          <span><i style="background:var(--river)"></i>no expert input</span>
-          <span><i style="background:var(--ochre)"></i>uses expert scores or weights</span>
-          <span><i class="bandkey"></i>2,000 random weight sets (5–95%)</span>
-        </div>
-        <button class="toggle" id="viewToggle" type="button" aria-pressed="false">Show table</button>
-      </div>
-      <div id="chartView">
-        <div id="rows" role="img" aria-label="Bar chart of within-area rank agreement by method; the same values are in the table view"></div>
-        <div class="axis" aria-hidden="true"><div></div><div id="ticks"></div><div></div></div>
-      </div>
-      <div id="tableView" class="scroll" hidden></div>
-      <figcaption class="note">Within-area Spearman ρ; "same worst" = share of areas where the most-polluting source agrees (ties count as a set). Indices use the worst season per parameter against CPCB limits. Code: <a href="https://github.com/plasmaDestroyer/wq-predict">notebooks in the repository</a>.</figcaption>
-    </figure>
+  <p>The computed ranking (B) agrees with the experts as closely as the model trained on their scores (A), and more closely than the standard indices. Agreement is high in three areas and lower in Site-2 (Table 2).</p>
+  <div class="tbl"><table>
+    <caption><b>Table 2.</b> Within-area Spearman ρ with the expert ranking.</caption>
+    <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B</th><th class="n">A</th><th class="n">C</th></tr></thead>
+    <tbody>
+      <tr><td>Site-1 and Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
+      <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
+      <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
+      <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
+    </tbody>
+  </table></div>
 
-    <div class="card scroll" style="margin-top:14px">
-      <h3>Per area</h3>
-      <table>
-        <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B, equal</th><th class="n">A, PLS</th><th class="n">C, equal</th></tr></thead>
-        <tbody>
-          <tr><td>Site-1 &amp; Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
-          <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
-          <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
-          <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <h2 id="limits"><span>5</span>Limitations</h2>
+  <p><b>Panel size.</b> Sources were tested for between 1 and 17 parameters; drains and treatment plants received the widest panels. Counting failures per tested parameter lowers the agreement of method B from 0.75 to 0.26. Because the experts read the same tables, the expert ranking itself may carry this effect.</p>
+  <ul class="tight">
+    <li>Agreement with the experts is not evidence of a better assessment.</li>
+    <li>The data cover two sampling rounds in 2012; nothing here describes the present or forecasts.</li>
+    <li>One third of the labels depend on source assignments not confirmed by values.</li>
+    <li>Wells and sources have no coordinates of their own. Report village points place 17 of 55 wells at village level; none of the 25 plants, the CETPs or the industrial estates are mapped in OpenStreetMap. Groundwater therefore cannot yet be linked to single sources.</li>
+    <li>The effluent-type classes, toxicity factors and the pH range are placeholders for expert sign-off.</li>
+  </ul>
+  <p>An independent review (GPT Sol) re-ran all computations; the defects it found were corrected before these results were produced.</p>
 
-  <section id="limits" aria-labelledby="limits-h">
-    <div class="sec-head">
-      <div class="sec-no">05</div>
-      <div><h2 id="limits-h">What not to trust yet</h2>
-      <p>An independent review (GPT Sol) re-ran every number; the defects it found are fixed. What remains are limits of the data.</p></div>
-    </div>
-    <div class="cav">
-      <div class="card big">
-        <h3>Panel size may drive the ranking</h3>
-        <p>Drains and treatment plants were tested for up to 17 parameters, most plants for 1 to 4. Counting failures per tested parameter drops agreement from 0.75 to 0.26. The experts saw the same tables, so their ranking may carry the same effect.</p>
-      </div>
-      <div class="card"><h3>One survey, one year</h3><p>Two sampling rounds in 2012. The rankings describe 2012, not today, and nothing here forecasts.</p></div>
-      <div class="card"><h3>11 sources mapped by order</h3><p>One third of the labels depend on Magarwara assignments not confirmed by values.</p></div>
-      <div class="card"><h3>Groundwater: no signal</h3><p>Wells have village names, not coordinates. Industrial load per locality did not predict well contamination.</p></div>
-      <div class="card"><h3>Placeholders</h3><p>Effluent-type classes (C5), toxicity factors and the pH range need sign-off from domain experts.</p></div>
-    </div>
-  </section>
+  <h2><span>6</span>Further data</h2>
+  <ul class="tight">
+    <li>Well and outfall coordinates, to link groundwater to individual sources: village points (report §3.6) and ten bore wells with GPS<sup><a href="#r4">4</a></sup>.</li>
+    <li>The 2016 joint drain survey with per-drain coordinates, flow, chemistry and metals<sup><a href="#r5">5</a></sup>.</li>
+    <li>A common parameter panel at every outlet, to remove the panel-size effect.</li>
+    <li>Monthly monitoring for at least one year before any forecast.</li>
+  </ul>
 
-  <section aria-labelledby="next-h">
-    <div class="sec-head">
-      <div class="sec-no">06</div>
-      <div><h2 id="next-h">Data to get next</h2><p>In order of value for this project.</p></div>
-    </div>
-    <ol class="next">
-      <li><div><h3>Well and outfall coordinates</h3><p>To link groundwater to single sources. Village points exist (report §3.6); <a href="https://www.academia.edu/28733157/Source_identification_study_of_heavy_metal_contamination_in_the_industrial_hub_of_Unnao_India">Dwivedi &amp; Vankar (2014)</a> give 10 bore wells with GPS.</p></div></li>
-      <li><div><h3>2016 joint drain survey</h3><p><a href="https://cpcb.nic.in/ngrba/Final_Approved_Drain_Report_27.03.2017.pdf">UPJN/UPPCB/CPCB report</a>: per-drain sheets with coordinates, flow, chemistry and metals.</p></div></li>
-      <li><div><h3>A common parameter panel</h3><p>The same parameters at every outlet, to remove the panel-size effect.</p></div></li>
-      <li><div><h3>Repeated monitoring</h3><p>Monthly samples for at least a year, before any forecast.</p></div></li>
-    </ol>
-  </section>
+  <h2><span></span>References</h2>
+  <ol class="refs">
+    <li id="r1">Srinivas, R., Singh, A. P. (2018). Impact assessment of industrial wastewater discharge in a river basin using interval-valued fuzzy group decision-making and spatial approach. <i>Environment, Development and Sustainability</i> 20, 2373–2397. <a href="https://doi.org/10.1007/s10668-017-9994-9">doi:10.1007/s10668-017-9994-9</a></li>
+    <li id="r2">Ministry of Water Resources / National Institute of Hydrology (2013). Report of the committee on pollution caused by leather tanning industry to the water bodies / groundwater in Unnao district of Uttar Pradesh. <a href="http://117.252.14.250:8080/jspui/handle/123456789/5036">NIH repository</a></li>
+    <li id="r3">Central Pollution Control Board. Pollution assessment: River Ganga (2013), <a href="https://cpcb.gov.in/wqm/pollution-assessment-ganga-2013.pdf">pdf</a>; identified-drains monitoring reports, 2018–2023.</li>
+    <li id="r4">Dwivedi, A. K., Vankar, P. S. (2014). Source identification study of heavy metal contamination in the industrial hub of Unnao, India. <i>Environmental Monitoring and Assessment</i> 186, 3531–3539. <a href="https://www.academia.edu/28733157/Source_identification_study_of_heavy_metal_contamination_in_the_industrial_hub_of_Unnao_India">full text</a></li>
+    <li id="r5">UPJN, UPPCB, CPCB (2017). Assessment of pollution of drains carrying sewage / industrial effluent joining River Ganga and its tributaries. <a href="https://cpcb.nic.in/ngrba/Final_Approved_Drain_Report_27.03.2017.pdf">pdf</a></li>
+  </ol>
+
+  <footer>Notebooks <code>method_a_learn_experts</code>, <code>method_b_compute</code>, <code>method_c_measured_criteria</code> reproduce every number on this page.</footer>
 </main>
-
-<footer>
-  <div class="wrap grid g3">
-    <div><h3>Paper</h3><ul>
-      <li><a href="https://doi.org/10.1007/s10668-017-9994-9">Srinivas &amp; Singh (2018), Environ Dev Sustain 20:2373–2397</a></li></ul></div>
-    <div><h3>Sources used</h3><ul>
-      <li><a href="http://117.252.14.250:8080/jspui/handle/123456789/5036">NIH Roorkee / MoWR committee report (2013)</a></li>
-      <li><a href="https://cpcb.gov.in/wqm/pollution-assessment-ganga-2013.pdf">CPCB: Pollution assessment, River Ganga (2013)</a></li>
-      <li><a href="https://cwc.gov.in/sites/default/files/trace-toxic-report-25-june-2014.pdf">CWC: Trace and toxic metals (2014)</a></li></ul></div>
-    <div><h3>Code</h3><ul>
-      <li><a href="https://github.com/plasmaDestroyer/wq-predict">Repository</a>: <span class="mono">method_a/b/c</span> notebooks, <span class="mono">wqml.py</span>, <span class="mono">data/</span></li></ul></div>
-  </div>
-</footer>
-
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script>
-// within-area Spearman vs paper Table 10 (notebooks method_a/b/c, re-run after the audit fixes)
+// mean within-area Spearman vs paper Table 10 (notebooks method_a/b/c)
 const DATA = [
-  { m: "B · equal weights", s: "measurements only", rho: .751, worst: "2/4", n: 33, e: false, key: true },
-  { m: "C · equal weights", s: "+ river load", rho: .749, worst: "3/4", n: 33, e: false },
-  { m: "B · paper's weights", s: "reference", rho: .738, worst: "2/4", n: 33, e: true },
-  { m: "A · PLS model", s: "nested test", rho: .736, worst: "2/4", n: 33, e: true },
-  { m: "B · CRITIC weights", s: "weights from data", rho: .723, worst: "3/4", n: 33, e: false },
-  { m: "Excess × flow", s: "index, sources with flow", rho: .687, worst: "3/4", n: 25, e: false },
-  { m: "Nemerow index", s: "standard index", rho: .556, worst: "1/4", n: 33, e: false },
-  { m: "TOPSIS-CRITIC", s: "standard MCDA", rho: .540, worst: "3/4", n: 33, e: false },
-  { m: "HPI (metals)", s: "standard index", rho: .277, worst: "1/4", n: 28, e: false },
-  { m: "B · per tested parameter", s: "panel-size check", rho: .256, worst: "2/4", n: 33, e: false },
+  { m: "B, equal weights", rho: .751, worst: "2/4", n: 33, e: false },
+  { m: "C, equal weights", rho: .749, worst: "3/4", n: 33, e: false },
+  { m: "B, paper's weights", rho: .738, worst: "2/4", n: 33, e: true },
+  { m: "A, PLS (nested)", rho: .736, worst: "2/4", n: 33, e: true },
+  { m: "B, CRITIC weights", rho: .723, worst: "3/4", n: 33, e: false },
+  { m: "Excess × flow", rho: .687, worst: "3/4", n: 25, e: false },
+  { m: "Nemerow index", rho: .556, worst: "1/4", n: 33, e: false },
+  { m: "TOPSIS-CRITIC", rho: .540, worst: "3/4", n: 33, e: false },
+  { m: "HPI (metals)", rho: .277, worst: "1/4", n: 28, e: false },
+  { m: "B, per tested parameter", rho: .256, worst: "2/4", n: 33, e: false },
 ];
 const BAND = { lo: .376, hi: .808, med: .691 };
 const pct = v => (v * 100) + "%";
 const rows = document.getElementById("rows"), tip = document.getElementById("tip");
-rows.innerHTML = DATA.map((d, i) => `
-  <div class="row${d.key ? " key" : ""}" data-i="${i}" tabindex="0">
-    <div class="lab">${d.m}<small>${d.s}</small></div>
-    <div class="track">
-      ${[.25, .5, .75, 1].map(g => `<span class="grid-l" style="left:${pct(g)}"></span>`).join("")}
-      <span class="bandz" style="left:${pct(BAND.lo)};width:${pct(BAND.hi - BAND.lo)}"></span>
-      <span class="bar ${d.e ? "yes" : "no"}" style="width:0" data-w="${pct(d.rho)}"></span>
-    </div>
-    <div class="val">${d.rho.toFixed(2)}</div>
-  </div>`).join("");
+rows.innerHTML = DATA.map((d, i) => `<div class="row" data-i="${i}" tabindex="0"><div>${d.m}</div><div class="track">${
+  [.25, .5, .75].map(g => `<span class="g" style="left:${pct(g)}"></span>`).join("")}<span class="bd" style="left:${pct(BAND.lo)};width:${pct(BAND.hi - BAND.lo)}"></span><span class="bar ${d.e ? "h" : "f"}" style="width:${pct(d.rho)}"></span></div><div class="val">${d.rho.toFixed(2)}</div></div>`).join("");
 document.getElementById("ticks").innerHTML = [0, .25, .5, .75, 1].map(g => `<span style="left:${pct(g)}">${g}</span>`).join("");
-setTimeout(() => rows.querySelectorAll(".bar").forEach(b => b.style.width = b.dataset.w), 80);
-
 function show(el, x, y) {
   const d = DATA[el.dataset.i];
-  tip.innerHTML = `<b>${d.m}</b><br>ρ ${d.rho.toFixed(3)} · same worst ${d.worst} · ${d.n} sources<br>${d.e ? "uses expert input" : "no expert input"}`;
-  tip.style.left = Math.max(8, Math.min(x + 14, innerWidth - 290)) + "px";
-  tip.style.top = (y + 14) + "px";
-  tip.style.opacity = 1;
+  tip.innerHTML = `${d.m}<br>ρ ${d.rho.toFixed(3)} · same worst ${d.worst} · ${d.n} sources`;
+  tip.style.left = Math.max(8, Math.min(x + 12, innerWidth - 270)) + "px"; tip.style.top = (y + 12) + "px"; tip.style.opacity = 1;
 }
 rows.addEventListener("mousemove", e => { const r = e.target.closest(".row"); r ? show(r, e.clientX, e.clientY) : (tip.style.opacity = 0); });
 rows.addEventListener("mouseleave", () => tip.style.opacity = 0);
-rows.addEventListener("focusin", e => { const b = e.target.getBoundingClientRect(); show(e.target, b.left + 100, b.bottom); });
+rows.addEventListener("focusin", e => { const b = e.target.getBoundingClientRect(); show(e.target, b.left + 80, b.bottom); });
 rows.addEventListener("focusout", () => tip.style.opacity = 0);
-
-document.getElementById("tableView").innerHTML = `<table><thead><tr><th>Method</th><th>Expert input</th><th class="n">ρ within area</th><th class="n">Same worst</th><th class="n">Sources</th></tr></thead><tbody>${
+document.getElementById("tableView").innerHTML = `<table><thead><tr><th>Method</th><th>Expert input</th><th class="n">ρ</th><th class="n">Same worst</th><th class="n">Sources</th></tr></thead><tbody>${
   DATA.map(d => `<tr><td>${d.m}</td><td>${d.e ? "yes" : "no"}</td><td class="n">${d.rho.toFixed(3)}</td><td class="n">${d.worst}</td><td class="n">${d.n}</td></tr>`).join("")
-}<tr><td>Random weights (median of 2,000)</td><td>no</td><td class="n">${BAND.med}</td><td class="n">–</td><td class="n">33</td></tr></tbody></table>`;
+}<tr><td>Random weights, median</td><td>no</td><td class="n">${BAND.med}</td><td class="n">–</td><td class="n">33</td></tr></tbody></table>`;
 const tg = document.getElementById("viewToggle");
 tg.addEventListener("click", () => {
   const showTable = document.getElementById("tableView").hidden;
   document.getElementById("tableView").hidden = !showTable;
   document.getElementById("chartView").hidden = showTable;
-  tg.textContent = showTable ? "Show chart" : "Show table";
+  tg.textContent = showTable ? "chart view" : "table view";
   tg.setAttribute("aria-pressed", String(showTable));
 });
-
-// theme: remembered per viewer when storage works; the page works without it
 const root = document.documentElement;
 try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
 document.getElementById("theme").addEventListener("click", () => {
