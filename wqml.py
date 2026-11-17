@@ -35,10 +35,13 @@ COLUMNS = [
 # ponytail: pH left out, it is a range (6.5-8) not a ceiling; add a range rule if needed.
 # ponytail: duplicates data/paper/standards.csv; read it instead if limits start changing.
 LIMITS = {"TDS": 2100, "TSS": 100, "Cu": 3, "Ni": 3, "Pb": 0.1, "Cd": 1, "Zn": 5,
-          "Cr": 2, "As": 0.2, "F": 2, "COD": 250, "BOD": 30}
+          "Cr": 2, "As": 0.2, "F": 2, "COD": 250, "BOD": 30,
+          # General standards printed in the source report (UPPCB 2013, Tables 7.2-7.5)
+          "Fe": 3, "Mn": 2, "Cr6": 0.1, "NO3": 10, "PO4": 5}
 
 # PLACEHOLDERS. Value judgments, not learnable from chemistry. Must be set by
 # domain/regulatory experts before any ranking is published.
+PH_RANGE = (5.5, 9.0)  # general standard, inland surface water (source report Tables 7.x; paper prints 6.5-8)
 TOXICITY = {"Cr": 3, "As": 3, "Pb": 3, "Cd": 3, "F": 2, "Ni": 2}  # default 1
 POLICY = {"exceedance": 0.4, "river": 0.25, "groundwater": 0.25, "violation": 0.1}
 
@@ -68,7 +71,7 @@ def audit(df):
     checks = {
         "negative concentration": (df[conc] < 0).any(axis=1),
         "negative flow": df["discharge_flow_mld"] < 0,
-        "unknown pollutant": ~df["pollutant"].isin([*LIMITS, "pH", "Fe", "DO", "EC", "Color"]),
+        "unknown pollutant": ~df["pollutant"].isin([*LIMITS, "pH"]),
         "duplicate source/event/pollutant": df.duplicated(
             ["source_id", "campaign" if "campaign" in df else "sample_date", "pollutant"], keep=False),
         "outlet > inlet (treatment adds pollutant?)": df["outlet"] > df["inlet"],
@@ -130,92 +133,14 @@ def reshape(samples, stations):
     out["detection_limit"] = g["dl"].max()
     out["sample_date"] = g["sample_date"].min()
     out["season"] = g["season"].first()
+    if "discharge_flow_mld" in reg:  # flow as a station property (e.g. from a plant register)
+        m["discharge_flow_mld"] = m["discharge_flow_mld"].fillna(
+            m.set_index(["source_id", "station_id"]).index.map(
+                reg.dropna(subset=["discharge_flow_mld"]).set_index(["source_id", "station_id"])["discharge_flow_mld"]).to_series(index=m.index))
     out["discharge_flow_mld"] = m[m["role"] == "outlet"].groupby(key)["discharge_flow_mld"].mean()
     meta = reg.drop_duplicates("source_id")[["source_id", "industrial_area", "industry_type"]]
     out = out.reset_index().merge(meta, on="source_id", how="left")
     return out.reindex(columns=COLUMNS + ["season", "campaign"])
-
-
-ECHO = Path(__file__).parent / "data" / "echo"
-ECHO_URL = ("https://echodata.epa.gov/echo/eff_rest_services.download_effluent_chart"
-            "?p_id={}&start_date=01/01/2019&end_date=12/31/2024")
-ECHO_PARAMS = {  # DMR parameter_desc regex -> our pollutant code
-    "BOD": r"^BOD, (?:5-day|carbonaceous)", "COD": r"^Oxygen demand, chem", "TSS": r"^Solids, total suspended",
-    "TDS": r"^Solids, total dissolved", "Cr": r"^Chromium, (?:total|trivalent)", "Cu": r"^Copper, total",
-    "Ni": r"^Nickel, total", "Pb": r"^Lead, total", "Cd": r"^Cadmium, total", "Zn": r"^Zinc, total",
-    "As": r"^Arsenic, total", "F": r"^Fluoride, total", "Fe": r"^Iron, total",
-    # Instream indicators ECHO permits monitor up/downstream (not in the paper's panel).
-    "DO": r"^Oxygen, dissolved", "EC": r"^(?:Conductivity|Specific conductance)", "Color": r"^Color",
-}
-ECHO_UNITS = ["mg/L", "umho/cm", "col unit"]
-ECHO_ROLES = {"Effluent Gross": "outlet", "Raw Sewage Influent": "inlet",
-              "Upstream Monitoring": "upstream", "Downstream Monitoring": "downstream"}
-ECHO_STATS = ["MO AVG", "30DA AVG", "DAILY AV", "MO MAX", "DAILY MX"]  # first available wins
-
-
-def fetch_echo():
-    """Download 2019-2024 DMRs for data/echo/facilities.csv into data/echo/raw/ (cached, ~80 MB)."""
-    import urllib.request
-    from concurrent.futures import ThreadPoolExecutor
-    (ECHO / "raw").mkdir(exist_ok=True)
-
-    def get(i):
-        p = ECHO / "raw" / f"{i}.csv"
-        if not p.exists():
-            p.write_bytes(urllib.request.urlopen(ECHO_URL.format(i), timeout=180).read())
-    list(ThreadPoolExecutor(6).map(get, pd.read_csv(ECHO / "facilities.csv")["npdes_id"]))
-
-
-def load_echo():
-    """US EPA ECHO discharge monitoring reports -> model rows. TEMPORARY stand-in for Unnao data:
-    real repeated monthly effluent data from US tanneries, textile, paper and meat plants.
-    Maps: facility -> source, month -> event, effluent/influent/upstream/downstream -> roles,
-    each facility's own permit limit -> limit. No groundwater, rainfall or river flow."""
-    fac = pd.read_csv(ECHO / "facilities.csv")
-    d = pd.concat([pd.read_csv(f, dtype=str) for f in sorted((ECHO / "raw").glob("*.csv"))], ignore_index=True)
-    d["role"] = d["monitoring_location_desc"].map(ECHO_ROLES)
-    d["pollutant"] = pd.Series(pd.NA, index=d.index, dtype="object")
-    for code, pat in ECHO_PARAMS.items():
-        d.loc[d["parameter_desc"].fillna("").str.contains(pat), "pollutant"] = code
-    d["value"] = pd.to_numeric(d["dmr_value_standard_units"], errors="coerce")
-    d["limit"] = pd.to_numeric(d["limit_value_standard_units"], errors="coerce")
-    d["date"] = pd.to_datetime(d["monitoring_period_end_date"], format="%m/%d/%Y")
-    # '<x' = nondetect with DL x -> 0 + DL (our convention); 'No Detection' without value -> 0.
-    nd = d["dmr_value_qualifier_code"].isin(["<", "<="])
-    d["dl"] = d["value"].where(nd)
-    d.loc[nd, "value"] = 0.0
-    d.loc[d["nodi_desc"].eq("Below Detection Limit/No Detection") & d["value"].isna(), "value"] = 0.0
-
-    # Flow: effluent 'Flow, in conduit' in MGD -> MLD.
-    fl = d[d["parameter_desc"].eq("Flow, in conduit or thru treatment plant") & d["role"].eq("outlet")
-           & d["standard_unit_desc"].eq("MGD")]
-    fl = fl[fl["statistical_base_short_desc"].isin(ECHO_STATS)]
-    flow = (fl.groupby(["npdes_id", "date"])["value"].mean() * 3.78541).rename("discharge_flow_mld")
-
-    c = d[d["pollutant"].notna() & d["role"].notna() & d["standard_unit_desc"].isin(ECHO_UNITS) & d["value"].notna()
-          & d["statistical_base_short_desc"].isin(ECHO_STATS)].copy()
-    # One outfall per facility (most effluent records) and one statistic per facility/pollutant/role,
-    # so outlet and limit refer to the same statistic.
-    # Upstream/downstream kept from any permit feature (often filed under a separate 'STR' feature).
-    # ponytail: other outfalls dropped; add outfall to source_id if more sources are needed.
-    top = c[c["role"] == "outlet"].groupby(["npdes_id", "perm_feature_nmbr"]).size().reset_index()
-    top = top.sort_values(0).drop_duplicates("npdes_id", keep="last")[["npdes_id", "perm_feature_nmbr"]]
-    at_top = c.merge(top.assign(keep=True), on=["npdes_id", "perm_feature_nmbr"], how="left")["keep"].fillna(False)
-    c = c[at_top.to_numpy() | c["role"].isin(["upstream", "downstream"]).to_numpy()]
-    c["rank"] = c["statistical_base_short_desc"].map(ECHO_STATS.index)
-    best = c.groupby(["npdes_id", "pollutant", "role"])["rank"].transform("min")
-    c = c[c["rank"] == best]
-
-    key = ["npdes_id", "date", "pollutant"]
-    out = c.pivot_table(index=key, columns="role", values="value", aggfunc="mean")
-    lim = c[c["role"] == "outlet"].groupby(key)
-    out["limit"] = lim["limit"].min()  # ponytail: seasonal/tiered limits -> strictest
-    out["detection_limit"] = c.groupby(key)["dl"].max()
-    out = out.reset_index().merge(flow.reset_index(), on=["npdes_id", "date"], how="left")
-    out = out.merge(fac.rename(columns={"state": "industrial_area", "sector": "industry_type"}), on="npdes_id")
-    out = out.rename(columns={"npdes_id": "source_id", "date": "sample_date"})
-    out["campaign"] = out["sample_date"].dt.strftime("%Y-%m")
-    return out.reindex(columns=COLUMNS + ["limit", "campaign", "name"])
 
 
 def season(month):
@@ -233,19 +158,20 @@ def prepare(df):
     df["season"] = season(df["month"]).where(df["month"].notna(), given)
     conc = ["inlet", "outlet", "upstream", "downstream", "near_well", "control_well"]
     df[conc] = df[conc].mask(df[conc] < 0)  # impossible -> missing
-    # Convention: nondetect entered as 0, not-measured left blank. Nondetect -> DL/2.
+    # Convention: nondetect entered as 0, not-measured left blank. Nondetect -> DL/2 when the detection
+    # limit is known, else stays 0 (below any limit; still counts as a pass, not as missing).
     # ponytail: DL/2 substitution; upgrade to censored regression (Tobit) if nondetects are common.
     for c in conc:
-        df[c] = df[c].mask(df[c] == 0, df["detection_limit"] / 2)
-    if "limit" not in df:  # a source's own permit limit wins (e.g. ECHO); else CPCB
+        df[c] = df[c].mask((df[c] == 0) & df["detection_limit"].notna(), df["detection_limit"] / 2)
+    if "limit" not in df:  # a limit column in the data wins; else CPCB
         df["limit"] = df["pollutant"].map(LIMITS)
     df["outlet_load_kg_day"] = df["outlet"] * df["discharge_flow_mld"]  # mg/L x ML/day = kg/day
     df["river_change"] = df["downstream"] - df["upstream"]
-    # Dissolved oxygen: a drop is the impact -> flip so positive = worse, like every other pollutant.
-    df.loc[df["pollutant"] == "DO", "river_change"] *= -1
     df["gw_change"] = df["near_well"] - df["control_well"]
     df["exceedance_ratio"] = df["outlet"] / df["limit"]
     df["violation"] = (df["outlet"] > df["limit"]).astype(float).where(df["outlet"].notna() & df["limit"].notna())
+    ph = df["pollutant"].eq("pH") & df["outlet"].notna()  # pH has a range, not a ceiling
+    df.loc[ph, "violation"] = (~df.loc[ph, "outlet"].between(*PH_RANGE)).astype(float)
     return df
 
 
@@ -417,6 +343,123 @@ def synthetic(months=24, seed=0):
     return df
 
 
+# --- Replacing the expert ranking (method_a / method_b notebooks) ------------------------------
+
+CRITERIA = [f"C{i}" for i in range(1, 11)]
+WORSE_IF_HIGH = {c: c not in ("C2", "C5") for c in CRITERIA}
+# Paper Table 4 C5 scale (9 = less organic ... 1 = hazardous). PLACEHOLDER mapping: confirm with domain experts.
+C5_CLASS = {"tannery": 1, "steel": 1, "chemical": 1, "cetp": 3, "drain": 3, "textile": 3,
+            "sewage_drain": 5, "food": 5, "meat": 5, "animal_byproduct": 5, "oil": 5, "paper_pulp": 5}
+
+
+def summarise(df):
+    """Prepared rows -> one row per industry, one column per paper criterion C1-C10."""
+    d = df.copy()
+    # event = one sampling round: date, else season (paper rows are undated), else one 'undated' round
+    d["event"] = d["sample_date"].dt.strftime("%Y-%m-%d").fillna(d["season"]).fillna("undated")
+    undated = d["season"].isna()  # paper text rows: no season -> count in both seasons
+    pre, post = undated | d["season"].eq("pre_monsoon"), undated | d["season"].eq("post_monsoon")
+    every = pd.Series(True, index=d.index)
+    d["excess"] = (d["exceedance_ratio"] - 1).clip(lower=0) * d["pollutant"].map(TOXICITY).fillna(1)
+    for c in ["river_change", "gw_change"]:  # units differ by pollutant -> percentile within pollutant
+        d[c] = d.groupby("pollutant")[c].rank(pct=True)
+    eff = ((d["inlet"] - d["outlet"]) / d["inlet"]).where(d["inlet"].gt(0) & d["pollutant"].ne("pH"))
+
+    def per_event(mask, col):  # sum over pollutants within one sampling event, then mean over events
+        return d[mask].groupby(["source_id", "event"])[col].sum(min_count=1).groupby(level=0).mean()
+
+    s = pd.DataFrame({
+        "C1": d.groupby("source_id")["discharge_flow_mld"].mean(),
+        "C2": eff.groupby(d["source_id"]).mean(),
+        "C3": per_event(pre, "violation"),
+        "C4": per_event(post, "violation"),
+        "C6": d[pre].groupby("source_id")["river_change"].mean(),
+        "C7": d[post].groupby("source_id")["river_change"].mean(),
+        "C8": d[pre].groupby("source_id")["gw_change"].mean(),
+        "C9": d[post].groupby("source_id")["gw_change"].mean(),
+        "C10": per_event(every, "excess"),
+    })
+    s = d.groupby("source_id")[["industrial_area", "industry_type"]].first().join(s)
+    s["C5"] = s["industry_type"].map(C5_CLASS)
+    # how many parameters were tested at the outlet: C3/C4/C10 grow with a wider panel (report sensitivity)
+    s["n_tested"] = d[d["violation"].notna()].groupby("source_id")["pollutant"].nunique().reindex(s.index).fillna(0).astype(int)
+    return s[["industrial_area", "industry_type", "n_tested"] + CRITERIA]
+
+
+def local_weights(s, min_measured=2):
+    """Paper-shaped local weights from measured criteria (method B / C).
+    Per criterion and area: rank (worse = lower); measured ranks are stretched onto 1..n so their mean is
+    the neutral middle (n+1)/2; missing = neutral; criteria measured for fewer than `min_measured`
+    industries in an area are neutral for the whole area. Then scale each area to sum to 1."""
+    area = s["industrial_area"]
+    n = area.map(area.value_counts())
+    out = pd.DataFrame(index=s.index)
+    for c in CRITERIA:
+        good = -s[c] if WORSE_IF_HIGH[c] else s[c]
+        r = good.groupby(area).rank()
+        k = good.notna().groupby(area).transform("sum")
+        r = (1 + (r - 1) * (n - 1) / (k - 1).clip(lower=1)).where(k >= min_measured)
+        r = r.fillna((n + 1) / 2)
+        out[c] = r / r.groupby(area).transform("sum")
+    return out
+
+
+def paper_labels():
+    """Table 10 scores; target = score / area mean (scores are only relative within an area).
+    The target uses every label of an area: fine for display, but a model test must normalise with
+    training labels only (method A does this per fold)."""
+    p = paper_ranking().reset_index()
+    p["target"] = p["fuzzy_weight"] / p.groupby("industrial_area")["fuzzy_weight"].transform("mean")
+    return p.set_index("source_id")[["fuzzy_weight", "target"]]
+
+
+def agreement(t, col, ref="fuzzy_weight"):
+    """How closely `col` reproduces the `ref` ranking (low = more polluting). The paper ranks only
+    within each industrial area, so agreement is measured within areas: Spearman per area and their
+    mean, and the share of areas whose most-polluting industry agrees (ties count as sets: agree if
+    the two sets of tied-worst industries overlap)."""
+    from scipy.stats import spearmanr
+    by_area = t.groupby("industrial_area")
+    rho = {a: spearmanr(g[col], g[ref]).statistic for a, g in by_area if len(g) > 2}
+    worst = lambda x: set(x.index[x == x.min()])
+    out = {"spearman_within_area": float(np.mean(list(rho.values())))} | {f"spearman_{a}": v for a, v in rho.items()}
+    out["same_worst_industry"] = by_area.apply(lambda g: bool(worst(g[col]) & worst(g[ref]))).mean()
+    return pd.Series(out).round(3)
+
+
+def dummy(seed=0):
+    """Schema-identical FAKE data. Each industry's pollution is scaled by how bad the paper's
+    experts scored it (area mean / fuzzy score), plus noise. Agreement with the paper on it is
+    EXPECTED by construction; it proves the code works, not the method."""
+    rng = np.random.default_rng(seed)
+    raw = synthetic(seed=seed)
+    p = paper_ranking().reset_index()
+    sev = p.groupby("industrial_area")["fuzzy_weight"].transform("mean") / p["fuzzy_weight"]
+    k = raw["source_id"].map(pd.Series(sev.to_numpy() * rng.lognormal(0, 0.3, len(p)), index=p["source_id"]))
+    raw["outlet"] *= k
+    raw["downstream"] = raw["upstream"] + (raw["downstream"] - raw["upstream"]) * k
+    raw["near_well"] = raw["control_well"] + (raw["near_well"] - raw["control_well"]) * k
+    raw["discharge_flow_mld"] *= k ** 0.5
+    return raw
+
+
+UPPCB = Path(__file__).parent / "data" / "uppcb"
+
+
+def load(paths=("data/measurements.csv", "data/samples.csv", "data/stations.csv")):
+    """Returns (raw, source). Order: your model rows, your lab sheet + register, the paper's source
+    report (UPPCB 2013, data/uppcb/), dummy."""
+    meas, samples, stations = map(Path, paths)
+    if meas.exists():
+        return pd.read_csv(meas), "user"
+    if samples.exists():
+        reg = pd.read_csv(stations if stations.exists() else UPPCB / "stations.csv")
+        return reshape(pd.read_csv(samples), reg), "user"
+    if (UPPCB / "samples.csv").exists():
+        return reshape(pd.read_csv(UPPCB / "samples.csv"), pd.read_csv(UPPCB / "stations.csv")), "uppcb"
+    return dummy(), "dummy"
+
+
 if __name__ == "__main__":
     # Formula checks against hand-computed values.
     t = prepare(pd.DataFrame([{
@@ -441,6 +484,32 @@ if __name__ == "__main__":
     assert r.loc[("site2-S1", "BOD"), "river_change"] == 40 and r.loc[("site2-S3", "BOD"), "outlet"] == 50
     assert r.loc[("site2-S1", "Pb"), "outlet"] == 0.005  # '<0.01' -> DL/2
     assert r.loc[("site2-S1", "BOD"), "sample_date"] == pd.Timestamp("2012-04-02")
+    # Per-industry summary on the paper's real rows: CETP Unnao pre-monsoon has 4 over the limit.
+    s = summarise(prepare(pd.read_csv(PAPER / "measurements.csv")))
+    assert s.loc["site2-S1", "C3"] == 4 and s.loc["site2-S8", "C3"] == 1 and len(s) == 8
+    assert paper_labels().groupby(paper_ranking().reset_index()["industrial_area"].to_numpy())["target"].mean().round(6).eq(1).all()
+    # Paper's source report (data/uppcb/): all 33 industries, CETP Unnao identical to paper Table 2.
+    u = reshape(pd.read_csv(UPPCB / "samples.csv"), pd.read_csv(UPPCB / "stations.csv"))
+    assert u["source_id"].nunique() == 33 and audit(u).loc["unknown pollutant", "rows"] == 0
+    cetp = u[u["source_id"].eq("site2-S1")].set_index(["campaign", "pollutant"])
+    assert cetp.loc[("2012-post", "BOD"), ["inlet", "outlet"]].tolist() == [902, 353]
+    assert cetp.loc[("2012-pre", "BOD"), ["upstream", "downstream"]].tolist() == [280, 126]
+    # Table 10: every final score = sum(criterion weight x local weight), as printed (to rounding).
+    t10 = pd.read_csv(PAPER / "table10_weights.csv")
+    w = pd.read_csv(PAPER / "criteria.csv").set_index("criterion")["weight"]
+    assert (t10[w.index].mul(w).sum(axis=1) - t10["final"]).abs().max() < 0.001
+    # Nondetect without a detection limit = 0 (a pass), not missing; pH uses a range.
+    nd = prepare(pd.DataFrame([{**{c: np.nan for c in COLUMNS}, "pollutant": "Cd", "outlet": 0.0, "sample_date": "2012-11-05"},
+                               {**{c: np.nan for c in COLUMNS}, "pollutant": "pH", "outlet": 11.2, "sample_date": "2012-11-05"}]))
+    assert nd["outlet"].tolist() == [0.0, 11.2] and nd["violation"].tolist() == [0.0, 1.0]
+    # Local weights: measured ranks average to neutral, so a criterion measured for few industries
+    # cannot push them all below the unmeasured ones; too few measured -> whole area neutral.
+    lw = local_weights(pd.DataFrame({"industrial_area": ["a"] * 5, **{c: np.nan for c in CRITERIA}}
+                                    ).assign(C6=[3.0, 1.0, 2.0, np.nan, np.nan], C7=[1.0] + [np.nan] * 4))
+    assert abs(lw["C6"].iloc[:3].mean() - 0.2) < 1e-9 and lw["C6"].iloc[3] == 0.2 and (lw["C7"] == 0.2).all()
+    # Agreement: within areas only; tied worst industries count as a set.
+    ag = agreement(pd.DataFrame({"industrial_area": ["a"] * 3, "x": [1, 1, 2], "fuzzy_weight": [2, 1, 3]}, index=list("pqr")), "x")
+    assert ag["same_worst_industry"] == 1.0 and "spearman_all" not in ag
     # Pipeline smoke test on synthetic data.
     df = prepare(synthetic(months=6))
     assert audit(df)["rows"].loc["unknown pollutant"] == 0

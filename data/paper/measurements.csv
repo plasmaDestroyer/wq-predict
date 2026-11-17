@@ -26,8 +26,8 @@ site1_banthar-S6,site1_banthar,food,,BOD,0.02,,,,,,59,,,,,,,text p.2388,Rustom F
 site1_banthar-S3,site1_banthar,drain,,TSS,100,,,,,,455,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
 site1_banthar-S3,site1_banthar,drain,,COD,100,,,,,,570,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
 site1_banthar-S3,site1_banthar,drain,,BOD,100,,,,,,160,,,,,,,text p.2388,UPSIDC drain; flow printed as >100 MLD
-site2-S8,site2,,,BOD,0.009,,,,,,353,,,,,,,text p.2388,Omega International; 9 KLD; BOD equals CETP Unnao value (possible copy error in paper)
-magarwara1-S4,magarwara1,tannery,,TDS,,,,,,,145,,,,,,,text p.2388,Sadaf Enterprises Pvt. Ltd.; text compares to a 100 mg/L limit which is the TSS standard (TDS may be a typo for TSS)
+site2-S8,site2,,,BOD,0.009,,,,,,353,,,,,,,text p.2388,Omega International; 9 KLD; confirmed by source report (SW-28 post-monsoon BOD 353)
+magarwara1-S4,magarwara1,tannery,,TDS,,,,,,,145,,,,,,,text p.2388,Sadaf Enterprises Pvt. Ltd.; paper typo: source report Table 7.8 gives TSS 145 (limit 100); no TDS
 magarwara1-S4,magarwara1,tannery,,BOD,,,,,,,98,,,,,,,text p.2388,Sadaf Enterprises Pvt. Ltd.; leather industry
 magarwara1-S1,magarwara1,drain,,TSS,15,,,,,,175,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
 magarwara1-S1,magarwara1,drain,,Fe,15,,,,,,21.6,,,,,,,text p.2388,City Jail Drain; flow printed as >15 MLD
@@ -37,4 +37,4 @@ magarwara2-S1,magarwara2,steel,,pH,0.05,,,,,,11.2,,,,,,,text p.2388,Global Rimjh
 magarwara2-S1,magarwara2,steel,,Pb,0.05,,,,,,0.53,,,,,,,text p.2388,Global Rimjhim Stainless Steel; 50 KLD
 magarwara2-S1,magarwara2,steel,,F,0.05,,,,,,270,,,,,,,text p.2388,Global Rimjhim Stainless Steel; 50 KLD
 magarwara2-S4,magarwara2,oil,,COD,0.05,,,,,,760,,,,,,,text p.2392,ACI Oils; 50 KLD
-magarwara2-S4,magarwara2,oil,,BOD,0.05,,,,,,150,,,,,,,text p.2392,ACI Oils; 50 KLD
+magarwara2-S4,magarwara2,oil,,BOD,0.05,,,,,,150,,,,,,,text p.2392,ACI Oils; 50 KLD; source report Table 7.24 gives 157
