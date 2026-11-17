@@ -422,7 +422,8 @@ def agreement(t, col, ref="fuzzy_weight"):
     by_area = t.groupby("industrial_area")
     rho = {a: spearmanr(g[col], g[ref]).statistic for a, g in by_area if len(g) > 2}
     worst = lambda x: set(x.index[x == x.min()])
-    out = {"spearman_within_area": float(np.mean(list(rho.values())))} | {f"spearman_{a}": v for a, v in rho.items()}
+    # an area whose scores are all equal has no order (rho undefined): left out of the mean
+    out = {"spearman_within_area": float(np.nanmean(list(rho.values())))} | {f"spearman_{a}": v for a, v in rho.items()}
     out["same_worst_industry"] = by_area.apply(lambda g: bool(worst(g[col]) & worst(g[ref]))).mean()
     return pd.Series(out).round(3)
 

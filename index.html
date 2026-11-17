@@ -128,13 +128,14 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
 
   <section id="summary" role="tabpanel" aria-labelledby="t-summary" tabindex="0">
     <div class="abstract">
-      <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, Ganges basin, with the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2" data-goto="refs">2</a></sup> and tested whether measurements alone reproduce the expert ranking. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>; a regression model trained on the expert scores reaches <span class="num">0.74</span>; standard pollution indices reach <span class="num">0.28–0.69</span>. The agreement falls to <span class="num">0.26</span> when failures are counted per tested parameter, which suggests that the number of parameters tested at each source, rather than pollution alone, drives much of the expert ranking.</p>
+      <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, Ganges basin, with the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2" data-goto="refs">2</a></sup> and tested whether measurements alone reproduce the expert ranking. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>; a regression model trained on the expert scores reaches <span class="num">0.74</span>; standard pollution indices reach <span class="num">0.28–0.69</span>. The agreement falls to <span class="num">0.50</span> when only the parameters tested almost everywhere are used, and the experts' own scores follow the number of parameters tested at each source (mean ρ <span class="num">−0.56</span>): much of the expert ranking reflects how much was measured, not only how much was polluted. In 2012 the sampled plants account for about half of the chromium carried by their drains.</p>
     </div>
     <h2>Main findings</h2>
     <ul class="tight">
       <li>The paper's raw data is public: the cited "UPPCB (2013)" report contains every lab table the experts used. Its CETP table matches the paper value for value.</li>
       <li>Without any expert input, a ranking computed from the measurements comes close to the experts' ranking (ρ 0.75), as close as a model trained on their scores (ρ 0.74).</li>
-      <li>Much of this agreement may come from how many parameters were tested at each source. This is the main open question (see <a href="#open" data-goto="open">Open work</a>).</li>
+      <li>Much of this agreement comes from how many parameters were tested at each source. Sources tested more often were scored as more polluting by the experts themselves (ρ −0.41 to −0.80 in every area); the number of tests alone reproduces their ranking at ρ 0.56. On a common panel (BOD, pH, chromium) the computed ranking agrees at ρ 0.50.</li>
+      <li>The sampled plants explain only about 53% (Loni) and 39% (City Jail) of the chromium in their drains in 2012, so part of the load comes from sources not in the data.</li>
       <li>The groundwater criteria cannot be computed per source: no open source locates the individual plants, and well pollution shows no gradient with distance from the industrial areas.</li>
       <li>Agreement with the experts is not proof of a better assessment. There is no measured "true impact" to test against.</li>
     </ul>
@@ -276,6 +277,35 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       <li>Panel size: counting failures and excess per tested parameter lowers ρ from 0.75 to 0.26.</li>
     </ul>
 
+    <h3>Panel size</h3>
+    <p>Sources were tested for 1 to 17 parameters. Two checks (<code>method_b_compute.ipynb</code>, section 5b):</p>
+    <div class="tbl"><table>
+      <caption><b>Table R2.</b> Agreement when the panel is controlled.</caption>
+      <thead><tr><th>Ranking</th><th class="n">ρ within area</th></tr></thead>
+      <tbody>
+        <tr><td>B, all parameters (main result)</td><td class="n">0.75</td></tr>
+        <tr><td>B, common panel: BOD, pH, chromium</td><td class="n">0.50</td></tr>
+        <tr><td>B, common panel: BOD, chromium</td><td class="n">0.44</td></tr>
+        <tr><td>B, BOD only</td><td class="n">0.41</td></tr>
+        <tr><td>Number of parameters tested, alone</td><td class="n">0.56</td></tr>
+      </tbody>
+    </table></div>
+    <p>The experts' own scores follow the panel size: within each area, sources with more tested parameters received worse scores (Spearman ρ −0.41, −0.80, −0.50 and −0.52 for Magarwara-I, Magarwara-II, Site-1 and Banthar, and Site-2). Drains and treatment plants, which got the full panel, were scored as the most polluting. Whether they were also the most polluting cannot be separated from how much was measured.</p>
+
+    <h3>Mass balance of the drains</h3>
+    <p>Plant loads (concentration × flow) summed per receiving drain, against the drain's own load (<code>method_c_measured_criteria.ipynb</code>, section 7). Chromium marks tannery effluent; BOD and COD also carry town sewage.</p>
+    <div class="tbl"><table>
+      <caption><b>Table R3.</b> Plants versus drains, kg/day.</caption>
+      <thead><tr><th>Drain</th><th>Parameter</th><th class="n">Plants 2012</th><th class="n">Drain 2012</th><th class="n">Explained</th><th class="n">Drain 2016</th></tr></thead>
+      <tbody>
+        <tr><td>Loni</td><td>Chromium</td><td class="n">4.6</td><td class="n">8.7</td><td class="n">53%</td><td class="n">4.3</td></tr>
+        <tr><td>Loni</td><td>BOD</td><td class="n">616</td><td class="n">4,306</td><td class="n">14%</td><td class="n">15,949</td></tr>
+        <tr><td>City Jail</td><td>Chromium</td><td class="n">9.5</td><td class="n">24.2</td><td class="n">39%</td><td class="n">192</td></tr>
+        <tr><td>City Jail</td><td>BOD</td><td class="n">2,096</td><td class="n">3,167</td><td class="n">66%</td><td class="n">9,354</td></tr>
+      </tbody>
+    </table></div>
+    <p>In 2012 the sampled plants account for about half of the drain chromium; the rest comes from sources not in the data (unsampled units, untreated discharge, dumping noted in the report). In 2016 the City Jail drain carried four times the 2012 flow and eight times the chromium, so the 2016 survey shows changed conditions rather than a test of the 2012 loads. The river criteria (C6, C7) therefore rank the sampled plants relative to each other but do not cover the whole load.</p>
+
     <h3>Groundwater</h3>
     <p>No model predicted well contamination better than the mean in a leave-one-locality-out test, so C8 and C9 stay neutral. With coordinates for 27 wells, TDS, fluoride, Cr(VI) and conductivity show no decrease with distance to the nearest industrial area (Spearman ρ between −0.18 and 0.51; the only significant value, for TDS, has the wrong sign).</p>
   </section>
@@ -285,11 +315,12 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     <p>Ordered by how much each item could change the conclusions.</p>
 
     <div class="open">
-      <h3><span>1</span>Panel size versus pollution</h3>
+      <h3><span>1</span>Panel size versus pollution · <i>analysed</i></h3>
       <dl>
         <dt>What</dt><dd>Sources were tested for different numbers of parameters (1 to 17). Drains and treatment plants got the full panel; most plants 1 to 4. Criteria that count failures (C3, C4) or add up excess (C10) grow with the panel.</dd>
         <dt>Why it matters</dt><dd>A source can look worse simply because more was measured. When the counts are taken per tested parameter, agreement falls from 0.75 to 0.26. The experts read the same tables, so their ranking may carry the same effect. Any ranking used for regulation must compare like with like.</dd>
-        <dt>Next step</dt><dd>Re-run B on the parameters tested almost everywhere (BOD 32 of 33, pH 29, chromium 28). Long term: the same panel at every outlet.</dd>
+        <dt>Done</dt><dd>On a common panel (BOD, pH, chromium) agreement is 0.50, and the experts' own scores follow the panel size in every area (ρ −0.41 to −0.80). The effect is real and sits in the expert ranking too (<a href="#results" data-goto="results">Results</a>, Table R2).</dd>
+        <dt>Still needed</dt><dd>The same parameter panel at every outlet in new sampling; only then can pollution and testing effort be separated.</dd>
       </dl>
     </div>
     <div class="open">
@@ -317,11 +348,12 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       </dl>
     </div>
     <div class="open">
-      <h3><span>5</span>Drain survey not yet used</h3>
+      <h3><span>5</span>Drain mass balance · <i>analysed</i></h3>
       <dl>
         <dt>What</dt><dd>The 2016 joint survey gives flow, chemistry and metals at the Loni and City Jail drains.</dd>
         <dt>Why it matters</dt><dd>It allows a mass-balance check: does the sum of the plant loads computed for C6/C7 match what the drains carry to the Ganga?</dd>
-        <dt>Next step</dt><dd>Compare drain loads with the summed plant loads per drain, keeping in mind the four-year gap.</dd>
+        <dt>Done</dt><dd>In 2012 the sampled plants explain 53% (Loni) and 39% (City Jail) of the drain chromium. The 2016 survey shows much larger City Jail loads, so conditions changed (Table R3).</dd>
+        <dt>Still needed</dt><dd>Flow and chemistry for the unsampled units discharging to each drain.</dd>
       </dl>
     </div>
     <div class="open">
