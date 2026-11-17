@@ -1,1189 +1,441 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Step-by-step dashboard explaining the interval-valued fuzzy AHP method used to assess industrial wastewater impacts in the Ganges River basin.">
-  <title>Ganges Industrial Wastewater Assessment</title>
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg: #f3f5f1;
-      --surface: #fbfcf9;
-      --surface-2: #e8ede7;
-      --text: #162019;
-      --muted: #526158;
-      --line: #cad3cc;
-      --accent: #176647;
-      --accent-soft: #d9eee4;
-      --danger: #8b3d31;
-      --radius: 14px;
-      --shadow: 0 16px 44px rgba(40, 61, 48, .10);
-      --mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      --sans: "Aptos", "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-
-    [data-theme="dark"] {
-      --bg: #101512;
-      --surface: #171e1a;
-      --surface-2: #202a24;
-      --text: #edf3ee;
-      --muted: #a7b5ac;
-      --line: #36443b;
-      --accent: #70c99d;
-      --accent-soft: #18382a;
-      --danger: #e39a8d;
-      --shadow: 0 16px 44px rgba(0, 0, 0, .24);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme]) {
-        --bg: #101512;
-        --surface: #171e1a;
-        --surface-2: #202a24;
-        --text: #edf3ee;
-        --muted: #a7b5ac;
-        --line: #36443b;
-        --accent: #70c99d;
-        --accent-soft: #18382a;
-        --danger: #e39a8d;
-        --shadow: 0 16px 44px rgba(0, 0, 0, .24);
-      }
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      line-height: 1.55;
-    }
-
-    button, a { -webkit-tap-highlight-color: transparent; }
-
-    a { color: inherit; }
-
-    a:focus-visible,
-    button:focus-visible,
-    summary:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 64px;
-      padding: 10px 24px;
-      border-bottom: 1px solid var(--line);
-      background: color-mix(in srgb, var(--bg) 90%, transparent);
-      backdrop-filter: blur(12px);
-    }
-
-    .brand {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand strong { font-size: 15px; }
-    .brand span { color: var(--muted); font-size: 13px; }
-
-    .top-actions { display: flex; gap: 8px; }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 8px 13px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--text);
-      font: 650 13px var(--sans);
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .button:hover { border-color: var(--accent); }
-    .button:active { transform: translateY(1px); }
-
-    .shell {
-      display: grid;
-      grid-template-columns: 245px minmax(0, 1fr);
-      width: min(1500px, 100%);
-      margin: 0 auto;
-    }
-
-    aside {
-      position: sticky;
-      top: 65px;
-      align-self: start;
-      height: calc(100dvh - 65px);
-      padding: 28px 20px;
-      border-right: 1px solid var(--line);
-      overflow: auto;
-    }
-
-    nav { display: grid; gap: 4px; }
-
-    nav a {
-      padding: 9px 11px;
-      border-radius: var(--radius);
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      background: var(--surface-2);
-      color: var(--text);
-    }
-
-    .side-note {
-      margin-top: 28px;
-      padding: 14px;
-      border-radius: var(--radius);
-      background: var(--accent-soft);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    main {
-      min-width: 0;
-      padding: 42px clamp(20px, 4vw, 64px) 80px;
-    }
-
-    section {
-      max-width: 1120px;
-      margin-bottom: 72px;
-      scroll-margin-top: 90px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .75fr);
-      gap: 34px;
-      align-items: end;
-      min-height: min(620px, calc(100dvh - 110px));
-    }
-
-    .kicker {
-      margin: 0 0 14px;
-      color: var(--accent);
-      font: 700 12px var(--mono);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 850px;
-      margin-bottom: 20px;
-      font-size: clamp(42px, 6vw, 82px);
-      line-height: .98;
-      letter-spacing: -.055em;
-    }
-
-    h2 {
-      max-width: 760px;
-      margin-bottom: 14px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.06;
-      letter-spacing: -.035em;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 17px;
-      line-height: 1.3;
-    }
-
-    .lead {
-      max-width: 65ch;
-      margin-bottom: 26px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
-    .button.primary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .hero-fact {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-fact strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--accent);
-      font-size: clamp(52px, 7vw, 92px);
-      line-height: .9;
-      letter-spacing: -.06em;
-    }
-
-    .hero-fact p { margin: 0; color: var(--muted); }
-
-    .section-intro {
-      max-width: 65ch;
-      margin-bottom: 28px;
-      color: var(--muted);
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface);
-    }
-
-    .metric {
-      padding: 22px;
-      border-right: 1px solid var(--line);
-    }
-
-    .metric:last-child { border-right: 0; }
-
-    .metric b {
-      display: block;
-      font: 700 clamp(28px, 4vw, 46px)/1 var(--mono);
-      letter-spacing: -.04em;
-    }
-
-    .metric span { color: var(--muted); font-size: 13px; }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .flow-item {
-      position: relative;
-      min-height: 150px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .flow-item::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -11px;
-      width: 11px;
-      border-top: 1px solid var(--accent);
-    }
-
-    .flow-item:nth-child(4n)::after,
-    .flow-item:last-child::after { display: none; }
-
-    .flow-item b {
-      display: block;
-      margin-bottom: 9px;
-      color: var(--accent);
-      font: 700 13px var(--mono);
-    }
-
-    .flow-item p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    .split {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .panel {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .panel p:last-child { margin-bottom: 0; }
-
-    .group-list { display: grid; gap: 10px; }
-
-    .group {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 13px 15px;
-      border-radius: var(--radius);
-      background: var(--surface-2);
-    }
-
-    .group span { color: var(--muted); font-size: 13px; }
-    .group b { font: 700 18px var(--mono); }
-
-    .criteria {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .criterion {
-      display: grid;
-      grid-template-columns: 48px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .criterion code {
-      color: var(--accent);
-      font: 700 14px var(--mono);
-    }
-
-    .criterion span { color: var(--muted); font-size: 13px; }
-    .criterion b { font: 700 13px var(--mono); }
-
-    .method { display: grid; gap: 10px; }
-
-    details {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    summary {
-      display: grid;
-      grid-template-columns: 42px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 17px 19px;
-      cursor: pointer;
-      font-weight: 750;
-      list-style: none;
-    }
-
-    summary::-webkit-details-marker { display: none; }
-
-    summary .number {
-      color: var(--accent);
-      font: 700 13px var(--mono);
-    }
-
-    summary .open-label { color: var(--muted); font-size: 12px; }
-
-    details[open] summary { border-bottom: 1px solid var(--line); }
-
-    .detail-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(240px, .72fr);
-      gap: 24px;
-      padding: 20px;
-    }
-
-    .detail-body p, .detail-body li { color: var(--muted); }
-
-    .detail-body ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    .formula {
-      overflow-x: auto;
-      padding: 16px;
-      border-radius: var(--radius);
-      background: var(--surface-2);
-      color: var(--text);
-      font: 600 13px/1.7 var(--mono);
-      white-space: pre-wrap;
-    }
-
-    .scale {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
-    }
-
-    .scale div {
-      padding: 14px 8px;
-      border-radius: var(--radius);
-      background: var(--surface-2);
-      text-align: center;
-    }
-
-    .scale b { display: block; font: 700 18px var(--mono); }
-    .scale span { color: var(--muted); font-size: 11px; }
-
-    .worked {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .worked .panel:first-child { background: var(--accent-soft); }
-
-    .equation-result {
-      margin: 16px 0 0;
-      color: var(--accent);
-      font: 750 clamp(18px, 3vw, 28px)/1.3 var(--mono);
-    }
-
-    .weights { display: grid; gap: 9px; }
-
-    .weight {
-      display: grid;
-      grid-template-columns: 44px minmax(100px, 1fr) 52px;
-      gap: 12px;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    .weight code { color: var(--accent); font-weight: 750; }
-
-    .bar {
-      display: block;
-      height: 8px;
-      width: var(--w);
-      min-width: 4px;
-      border-radius: var(--radius);
-      background: var(--accent);
-    }
-
-    .weight b { text-align: right; font: 700 12px var(--mono); }
-
-    .table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    th, td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    tr:last-child td { border-bottom: 0; }
-    th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
-    td strong { color: var(--danger); }
-    td.good { color: var(--accent); font-weight: 750; }
-
-    .callout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
-      gap: 28px;
-      padding: clamp(22px, 4vw, 38px);
-      border-radius: var(--radius);
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .callout p { max-width: 60ch; margin-bottom: 0; opacity: .9; }
-
-    .callout .formula {
-      align-self: center;
-      background: color-mix(in srgb, var(--bg) 12%, transparent);
-      color: var(--bg);
-    }
-
-    .issues {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .issue {
-      padding: 18px;
-      border-left: 4px solid var(--danger);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .issue p { margin: 0; color: var(--muted); font-size: 13px; }
-
-    .priority-list { display: grid; gap: 10px; }
-
-    .priority-item {
-      display: grid;
-      grid-template-columns: 110px minmax(0, 1fr);
-      gap: 18px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .priority-item > b {
-      color: var(--accent);
-      font: 700 12px/1.5 var(--mono);
-    }
-
-    .priority-item p { margin-bottom: 8px; color: var(--muted); }
-    .priority-item p:last-child { margin-bottom: 0; }
-
-    .decision {
-      padding: 20px;
-      border-left: 4px solid var(--accent);
-      border-radius: var(--radius);
-      background: var(--accent-soft);
-    }
-
-    .decision p:last-child { margin-bottom: 0; }
-
-    footer {
-      max-width: 1120px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .shell { grid-template-columns: 1fr; }
-      aside {
-        position: static;
-        width: 100%;
-        height: auto;
-        padding: 12px 18px;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-      nav { display: flex; overflow-x: auto; }
-      nav a { flex: 0 0 auto; }
-      .side-note { display: none; }
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .metrics, .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .metric:nth-child(2) { border-right: 0; }
-      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .flow-item:nth-child(2n)::after { display: none; }
-      .split, .detail-body, .callout { grid-template-columns: 1fr; }
-      .priority-item { grid-template-columns: 1fr; gap: 6px; }
-    }
-
-    @media (max-width: 620px) {
-      .topbar { padding: 10px 14px; }
-      .brand span { display: none; }
-      main { padding: 30px 16px 60px; }
-      section { margin-bottom: 54px; }
-      h1 { font-size: 42px; }
-      .metrics, .flow, .criteria, .worked, .issues { grid-template-columns: 1fr; }
-      .metric { border-right: 0; border-bottom: 1px solid var(--line); }
-      .metric:last-child { border-bottom: 0; }
-      .flow-item::after { display: none; }
-      summary { grid-template-columns: 34px 1fr; }
-      summary .open-label { display: none; }
-      .scale { grid-template-columns: 1fr; }
-      .scale div { display: flex; align-items: baseline; justify-content: space-between; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; }
-    }
-
-    @media print {
-      .topbar, aside { display: none; }
-      .shell { display: block; }
-      main { padding: 0; }
-      section { break-inside: avoid; margin-bottom: 36px; }
-      details > * { display: block; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unnao Wastewater Ranking</title>
+<meta name="description" content="Can the 2012 lab data rank 33 industrial polluters in Unnao (Ganges basin) as well as the three experts of Srinivas & Singh (2018)? Data found, three methods, honest results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3eee3; --surface: #fbf8f1; --sunk: #ebe4d4;
+  --ink: #1b211f; --ink-2: #4a514c; --muted: #6f746c; --rule: #d6cdb9;
+  --river: #0b6c9a; --ochre: #b0632a; --band: rgba(11,108,154,.10);
+  --warn-bg: #f6e6d4; --warn-ink: #7a3e12;
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Hanken Grotesk", "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --r: 10px; --max: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111513; --surface: #181e1b; --sunk: #202723;
+    --ink: #ece6d8; --ink-2: #c3c0b2; --muted: #9a9c90; --rule: #2f3833;
+    --river: #3b9dcf; --ochre: #c27a38; --band: rgba(59,157,207,.14);
+    --warn-bg: #2b2117; --warn-ink: #e7b98d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111513; --surface: #181e1b; --sunk: #202723;
+  --ink: #ece6d8; --ink-2: #c3c0b2; --muted: #9a9c90; --rule: #2f3833;
+  --river: #3b9dcf; --ochre: #c27a38; --band: rgba(59,157,207,.14);
+  --warn-bg: #2b2117; --warn-ink: #e7b98d; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased;
+  background-image: repeating-linear-gradient(0deg, transparent 0 31px, color-mix(in srgb, var(--rule) 35%, transparent) 31px 32px);
+}
+a { color: var(--river); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, .row:focus-visible { outline: 3px solid var(--river); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(var(--max), 100%); margin: 0 auto; padding: 0 24px; }
+
+.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; }
+.mark { font: 400 22px/1 var(--serif); letter-spacing: .2px; white-space: nowrap; }
+.mark i { color: var(--river); }
+.top nav { display: flex; gap: 18px; align-items: center; font-size: 14px; font-weight: 500; }
+.top nav a { color: var(--ink-2); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+.theme { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px;
+  font: 500 13px var(--sans); padding: 6px 12px; cursor: pointer; }
+
+.hero { padding: 72px 0 40px; display: grid; grid-template-columns: 1.35fr .9fr; gap: 48px; align-items: end; }
+.kicker { font: 500 12px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+h1 { font: 400 clamp(42px, 6.2vw, 76px)/1.02 var(--serif); margin: 0 0 22px; letter-spacing: -.5px; }
+h1 em { color: var(--river); }
+.lede { font-size: 19px; color: var(--ink-2); max-width: 58ch; margin: 0; }
+.verdict { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 26px 26px 22px; position: relative; }
+.verdict::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; border-radius: var(--r) var(--r) 0 0;
+  background: linear-gradient(90deg, var(--river), var(--ochre)); }
+.num { font: 400 88px/1 var(--serif); letter-spacing: -2px; }
+.num small { font-size: 26px; color: var(--muted); letter-spacing: 0; }
+.verdict p { margin: 8px 0 0; color: var(--ink-2); font-size: 15px; }
+.verdict .alert { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--rule); display: flex; gap: 14px; align-items: baseline; }
+.verdict .alert b { font: 400 40px/1 var(--serif); color: var(--ochre); }
+
+section { padding: 56px 0 8px; }
+.sec-head { display: grid; grid-template-columns: 90px 1fr; gap: 20px; align-items: baseline; margin-bottom: 26px; }
+.sec-no { font: 400 54px/1 var(--serif); color: var(--rule); }
+h2 { font: 400 clamp(30px, 3.6vw, 42px)/1.1 var(--serif); margin: 0 0 8px; }
+.sec-head p { margin: 0; color: var(--ink-2); max-width: 70ch; }
+h3 { font: 600 17px/1.3 var(--sans); margin: 0 0 6px; }
+.mono { font-family: var(--mono); font-size: .92em; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 20px 22px; }
+.grid { display: grid; gap: 14px; }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; background: var(--surface); }
+.pipe div { padding: 18px 18px 20px; border-right: 1px solid var(--rule); }
+.pipe div:last-child { border-right: 0; }
+.pipe b { display: block; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.pipe span { font-size: 15px; color: var(--ink-2); }
+.pipe .hit { background: color-mix(in srgb, var(--ochre) 12%, var(--surface)); }
+.pipe .hit b { color: var(--ochre); }
+.note { font-size: 14px; color: var(--muted); margin-top: 12px; }
+
+.inv { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.inv .card { display: flex; flex-direction: column; gap: 6px; }
+.inv .big { font: 400 46px/1 var(--serif); }
+.inv .big.r { color: var(--river); }
+.inv .big small { font-size: 22px; color: var(--muted); }
+.inv .sub { font-size: 14px; color: var(--ink-2); }
+.inv .src { font: 400 12px/1.4 var(--mono); color: var(--muted); margin-top: auto; padding-top: 10px; }
+.errata { margin: 18px 0 0; padding: 0; list-style: none; display: grid; }
+.errata li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; font-size: 15px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.errata li span:first-child { font: 500 12px/1.6 var(--mono); color: var(--ochre); text-transform: uppercase; letter-spacing: .06em; }
+
+.method { display: flex; flex-direction: column; gap: 10px; }
+.method .tag { align-self: flex-start; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; }
+.tag.no { background: color-mix(in srgb, var(--river) 14%, transparent); color: var(--river); }
+.tag.yes { background: color-mix(in srgb, var(--ochre) 16%, transparent); color: var(--ochre); }
+.method .letter { font: 400 64px/.9 var(--serif); }
+.method p { margin: 0; font-size: 15px; color: var(--ink-2); }
+.method .res { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--rule); font: 500 14px var(--mono); }
+
+.chart { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); padding: 22px 22px 18px; margin: 0; }
+.chart-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+.legend .bandkey { width: 22px; background: var(--band); border-left: 2px dashed var(--river); border-radius: 0; }
+.toggle { border: 1px solid var(--rule); background: transparent; color: var(--ink); border-radius: 999px; font: 500 13px var(--sans); padding: 6px 12px; cursor: pointer; }
+.row { display: grid; grid-template-columns: 230px 1fr 64px; gap: 14px; align-items: center; padding: 7px 4px; border-radius: 6px; }
+.row .lab { font-size: 14px; line-height: 1.25; }
+.row .lab small { display: block; color: var(--muted); font-size: 12px; }
+.track { position: relative; height: 26px; }
+.track .grid-l { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+.track .bandz { position: absolute; top: 0; bottom: 0; background: var(--band); border-left: 1px dashed var(--river); border-right: 1px dashed var(--river); }
+.bar { position: absolute; left: 0; top: 8px; height: 10px; border-radius: 0 4px 4px 0; transition: width .9s cubic-bezier(.2,.7,.2,1); }
+.bar.no { background: var(--river); }
+.bar.yes { background: var(--ochre); }
+.row .val { font: 500 14px var(--mono); text-align: right; }
+.row.key .lab { font-weight: 700; }
+.row:hover { background: color-mix(in srgb, var(--sunk) 55%, transparent); }
+.axis { display: grid; grid-template-columns: 230px 1fr 64px; gap: 14px; margin-top: 4px; padding: 0 4px; }
+.axis div { position: relative; height: 18px; font: 400 11px var(--mono); color: var(--muted); }
+.axis span { position: absolute; transform: translateX(-50%); }
+.tip { position: fixed; pointer-events: none; z-index: 9; background: var(--ink); color: var(--paper); font-size: 13px; line-height: 1.4;
+  padding: 8px 10px; border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .12s; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); }
+th { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+td.n { font-family: var(--mono); text-align: right; }
+th.n { text-align: right; }
+.scroll { overflow-x: auto; }
+[hidden] { display: none !important; }
+
+.cav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.cav .card { border-left: 4px solid var(--ochre); }
+.cav .card.big { grid-column: 1 / -1; background: var(--warn-bg); border-color: transparent; border-left-color: var(--ochre); }
+.cav .card.big h3 { color: var(--warn-ink); font-size: 19px; }
+.cav p { margin: 0; font-size: 15px; color: var(--ink-2); }
+
+.next { counter-reset: n; list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+.next li { counter-increment: n; display: grid; grid-template-columns: 60px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.next li::before { content: counter(n, decimal-leading-zero); font: 400 30px/1 var(--serif); color: var(--river); }
+.next p { margin: 4px 0 0; font-size: 15px; color: var(--ink-2); }
+
+footer { margin-top: 70px; padding: 30px 0 60px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
+footer .grid { gap: 24px; }
+footer h3 { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-2); }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+
+.reveal { opacity: 0; transform: translateY(14px); animation: up .7s cubic-bezier(.2,.7,.2,1) forwards; }
+.d1 { animation-delay: .08s; } .d2 { animation-delay: .18s; } .d3 { animation-delay: .3s; }
+@keyframes up { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; transform: none; } .bar { transition: none; } html { scroll-behavior: auto; } }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-top: 48px; }
+  .g3, .inv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pipe { grid-template-columns: 1fr; }
+  .pipe div { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .pipe div:last-child { border-bottom: 0; }
+  .row, .axis { grid-template-columns: 150px 1fr 52px; }
+  .top nav a.hide-s { display: none; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 0 16px; }
+  .g3, .cav { grid-template-columns: 1fr; }
+  .inv { gap: 10px; }
+  .inv .card { padding: 14px; }
+  .inv .big { font-size: 36px; }
+  .inv .sub { font-size: 13px; }
+  .sec-head { grid-template-columns: 1fr; gap: 4px; }
+  .sec-no { font-size: 36px; }
+  .row, .axis { grid-template-columns: 112px 1fr 44px; gap: 8px; }
+  .num { font-size: 70px; }
+  .top nav a { display: none; }
+  .errata li { grid-template-columns: 1fr; gap: 2px; }
+}
+@media print { .top, .toggle, .theme { display: none; } body { background: #fff; } }
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <strong>WQ Research Notes</strong>
-      <span>Fuzzy assessment method</span>
-    </div>
-    <div class="top-actions">
-      <a class="button" href="https://doi.org/10.1007/s10668-017-9994-9">Open paper</a>
-      <button class="button" id="theme-toggle" type="button" aria-label="Switch color theme">Theme</button>
-    </div>
-  </header>
+<header class="top">
+  <div class="wrap">
+    <div class="mark">Unnao <i>wastewater</i> ranking</div>
+    <nav aria-label="Sections">
+      <a href="#paper" class="hide-s">Paper</a>
+      <a href="#data" class="hide-s">Data</a>
+      <a href="#methods">Methods</a>
+      <a href="#results">Results</a>
+      <a href="#limits">Limits</a>
+      <button class="theme" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
 
-  <div class="shell">
-    <aside>
-      <nav aria-label="Dashboard sections">
-        <a href="#overview">Overview</a>
-        <a href="#evidence">Evidence</a>
-        <a href="#criteria">Criteria</a>
-        <a href="#method">Method</a>
-        <a href="#example">Worked example</a>
-        <a href="#results">Results</a>
-        <a href="#ml">ML replacement</a>
-        <a href="#missing-data">Missing paper data</a>
-        <a href="#data">Data needed</a>
-        <a href="#limits">Limitations</a>
-      </nav>
-      <div class="side-note">
-        Core idea: experts supply judgments. Fuzzy AHP preserves disagreement, produces weights, and ranks pollution sources.
+<main class="wrap">
+  <section class="hero" aria-labelledby="title">
+    <div>
+      <p class="kicker reveal">Field report · Ganges basin, Unnao · 2012 survey</p>
+      <h1 id="title" class="reveal d1">Can lab data rank <em>33 polluters</em> as well as three experts?</h1>
+      <p class="lede reveal d2">Srinivas &amp; Singh (2018) ranked 33 tanneries, treatment plants and drains with expert ratings and fuzzy AHP. We found the survey's raw lab data in the paper's own sources and tried to reproduce the ranking from measurements alone.</p>
+    </div>
+    <aside class="verdict reveal d3" aria-label="Headline result">
+      <div class="num">0.75<small> ρ</small></div>
+      <p>Rank agreement with the experts, within each industrial area, using only measurements and equal weights (method B). 1 = same order.</p>
+      <div class="alert">
+        <b>0.26</b>
+        <p>…when failures are counted <em>per tested parameter</em>. Sources were tested for 1 to 17 parameters, so much of the agreement may come from panel size, not pollution.</p>
       </div>
     </aside>
+  </section>
 
-    <main>
-      <section class="hero" id="overview">
-        <div>
-          <p class="kicker">Research method explained</p>
-          <h1>How fuzzy logic ranked industrial pollution</h1>
-          <p class="lead">A complete walkthrough of Srinivas and Singh's Ganges River basin assessment, from field evidence to final ranking.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#method">See method</a>
-            <a class="button" href="#example">Check calculation</a>
-          </div>
+  <section id="paper" aria-labelledby="paper-h">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <div><h2 id="paper-h">What the paper does</h2>
+      <p>Each source gets a score from 0 to 1 within its area (low = more polluting). Experts judged how badly each source performs on each criterion; fuzzy AHP turned the judgments into weights. We replace the highlighted step.</p></div>
+    </div>
+    <div class="pipe">
+      <div><b>Inputs</b><span>2012 lab tables read by 3 experts (pollution board, impact assessment, research institute).</span></div>
+      <div class="hit"><b>Replaced</b><span>Ratings of 33 sources on 10 criteria: discharge, ETP efficiency, failures pre/post monsoon, effluent type, river and groundwater impact, public health.</span></div>
+      <div><b>Fuzzy AHP</b><span>Pairwise matrices (rating gap k → 2k+1), interval fuzzy numbers, defuzzified local weights.</span></div>
+      <div><b>Weights</b><span>Criterion weights from expert importance ratings; public health highest (0.235).</span></div>
+      <div><b>Rank</b><span>Score = Σ criterion weight × local weight, ranked within each of 4 areas.</span></div>
+    </div>
+    <p class="note">We reproduced the paper's own arithmetic: all 33 final scores of Table 10 recompute from its weights within 0.001, and Table 8 follows from Table 7.</p>
+  </section>
+
+  <section id="data" aria-labelledby="data-h">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div><h2 id="data-h">The data was in the references</h2>
+      <p>The paper cites "UPPCB (2013)". It is the Ministry of Water Resources committee report by NIH Roorkee, openly available. Its CETP table matches the paper's Table 2 value for value. Extracted and checked against the PDF pages.</p></div>
+    </div>
+    <div class="inv">
+      <div class="card"><div class="big r">54</div><div class="sub">wastewater stations, all mapped to the 33 sources</div><div class="src">Tables 5.1, 7.1–7.27</div></div>
+      <div class="card"><div class="big">593</div><div class="sub">effluent values (538 measured + 55 not detected), 18 parameters, May and Nov 2012</div><div class="src">681 cells, 88 not tested</div></div>
+      <div class="card"><div class="big">60</div><div class="sub">well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</div><div class="src">Tables 5.2, 7.28</div></div>
+      <div class="card"><div class="big">25<small>/33</small></div><div class="sub">sources with a discharge flow (KLD) and a production figure</div><div class="src">Table 3.1</div></div>
+      <div class="card"><div class="big r">240</div><div class="sub">months of river Ganga data, Kanpur (upstream) and Bhitaura (downstream), 2001–2011</div><div class="src">Annexes VI–VII (CWC)</div></div>
+      <div class="card"><div class="big">162</div><div class="sub">more samples, 127 from wells: CGWB April 2010, Dec 2011 (arsenic), March 2012</div><div class="src">Annexes III–V</div></div>
+      <div class="card"><div class="big">16</div><div class="sub">drain records for Loni and City Jail drains, 2012 and 2018–2023</div><div class="src">CPCB drain monitoring</div></div>
+      <div class="card"><div class="big">14</div><div class="sub">village GPS points around the industrial area; wells and outfalls still lack their own</div><div class="src">Report §3.6</div></div>
+    </div>
+    <ul class="errata" aria-label="Corrections to the paper">
+      <li><span>Paper typo</span><span>Sadaf Enterprises "TDS 145" is <b>TSS</b> 145 (report Table 7.8).</span></li>
+      <li><span>Paper typo</span><span>ACI Oils outlet BOD is <b>157</b>, not 150 (report Table 7.24).</span></li>
+      <li><span>Confirmed</span><span>Omega International BOD 353 is real (SW-28), not a copy of CETP Unnao's value.</span></li>
+      <li><span>Not proven</span><span>11 of the 15 Magarwara sources are matched to the paper's S-numbers by station order only; S1 and S4 of both areas are confirmed by values.</span></li>
+    </ul>
+  </section>
+
+  <section id="methods" aria-labelledby="methods-h">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div><h2 id="methods-h">Three ways to replace the experts</h2>
+      <p>All three start from one row per source with the criteria computed from the lab data: failures against CPCB limits (pH outside 5.5–9.0; not detected = pass), treatment efficiency, flow, toxic excess. Agreement is measured within each area, because the paper ranks only within areas.</p></div>
+    </div>
+    <div class="grid g3">
+      <article class="card method">
+        <span class="tag yes">uses expert scores</span>
+        <div class="letter">A</div>
+        <h3>Learn the experts</h3>
+        <p>A regression model learns the paper's scores from the criteria. 12 scikit-learn models compared; PLS (2 components) wins and was chosen in 29 of 33 nested rounds. The target is normalised with training labels only.</p>
+        <div class="res">ρ 0.74 · nested test</div>
+      </article>
+      <article class="card method">
+        <span class="tag no">no expert input</span>
+        <div class="letter">B</div>
+        <h3>Compute the criteria</h3>
+        <p>Rank sources within their area on each criterion, scale like the paper's local weights, add with equal weights. Missing values are neutral. Every rank can be explained measurement by measurement.</p>
+        <div class="res">ρ 0.75 · equal weights</div>
+      </article>
+      <article class="card method">
+        <span class="tag no">no expert input</span>
+        <div class="letter">C</div>
+        <h3>B plus river and groundwater</h3>
+        <p>Adds river load (C6/C7) and a groundwater model (C8/C9). The groundwater model found no signal (no model beat the average), so C8/C9 stay neutral.</p>
+        <div class="res">ρ 0.75 · equal weights</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="results" aria-labelledby="results-h">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <div><h2 id="results-h">How close to the experts?</h2>
+      <p>Mean Spearman rank correlation with the paper's Table 10 inside each of the 4 areas. Closer to the experts is not the same as a better assessment: it shows only how similar the ranking is.</p></div>
+    </div>
+    <figure class="chart">
+      <div class="chart-top">
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--river)"></i>no expert input</span>
+          <span><i style="background:var(--ochre)"></i>uses expert scores or weights</span>
+          <span><i class="bandkey"></i>2,000 random weight sets (5–95%)</span>
         </div>
-        <div class="hero-fact">
-          <strong>0.066</strong>
-          <p>Final score for CETP Unnao at Industrial site-2. Lower score means greater pollution priority.</p>
-        </div>
-      </section>
+        <button class="toggle" id="viewToggle" type="button" aria-pressed="false">Show table</button>
+      </div>
+      <div id="chartView">
+        <div id="rows" role="img" aria-label="Bar chart of within-area rank agreement by method; the same values are in the table view"></div>
+        <div class="axis" aria-hidden="true"><div></div><div id="ticks"></div><div></div></div>
+      </div>
+      <div id="tableView" class="scroll" hidden></div>
+      <figcaption class="note">Within-area Spearman ρ; "same worst" = share of areas where the most-polluting source agrees (ties count as a set). Indices use the worst season per parameter against CPCB limits. Code: <a href="https://github.com/plasmaDestroyer/wq-predict">notebooks in the repository</a>.</figcaption>
+    </figure>
 
-      <section aria-labelledby="study-title">
-        <h2 id="study-title">Study at a glance</h2>
-        <p class="section-intro">The model combines monitored evidence with judgments from three institutions. It assesses impact; it does not forecast future water quality.</p>
-        <div class="metrics">
-          <div class="metric"><b>33</b><span>industrial sources</span></div>
-          <div class="metric"><b>10</b><span>decision criteria</span></div>
-          <div class="metric"><b>3</b><span>expert decision makers</span></div>
-          <div class="metric"><b>109</b><span>water and effluent samples</span></div>
-        </div>
-      </section>
+    <div class="card scroll" style="margin-top:14px">
+      <h3>Per area</h3>
+      <table>
+        <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B, equal</th><th class="n">A, PLS</th><th class="n">C, equal</th></tr></thead>
+        <tbody>
+          <tr><td>Site-1 &amp; Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
+          <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
+          <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
+          <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-      <section aria-labelledby="pipeline-title">
-        <h2 id="pipeline-title">Entire research pipeline</h2>
-        <p class="section-intro">Each block produces the input required by the next block.</p>
-        <div class="flow">
-          <div class="flow-item"><b>Evidence</b><p>Collect effluent and groundwater observations in pre-monsoon and post-monsoon periods.</p></div>
-          <div class="flow-item"><b>Structure</b><p>Define 33 alternatives, ten impact criteria, and one ranking objective.</p></div>
-          <div class="flow-item"><b>Judgment</b><p>Three experts rate criteria and industries with five linguistic levels.</p></div>
-          <div class="flow-item"><b>AHP</b><p>Convert ratings into reciprocal pairwise comparison matrices.</p></div>
-          <div class="flow-item"><b>Fuzzify</b><p>Combine expert comparisons into interval-valued triangular fuzzy numbers.</p></div>
-          <div class="flow-item"><b>Weight</b><p>Use fuzzy geometric means and normalization to calculate relative weights.</p></div>
-          <div class="flow-item"><b>Rank</b><p>Defuzzify, multiply local weights by criterion weights, and order industries.</p></div>
-          <div class="flow-item"><b>Map</b><p>Display critical pollutants in ArcGIS and propose management actions.</p></div>
-        </div>
-      </section>
+  <section id="limits" aria-labelledby="limits-h">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <div><h2 id="limits-h">What not to trust yet</h2>
+      <p>An independent review (GPT Sol) re-ran every number; the defects it found are fixed. What remains are limits of the data.</p></div>
+    </div>
+    <div class="cav">
+      <div class="card big">
+        <h3>Panel size may drive the ranking</h3>
+        <p>Drains and treatment plants were tested for up to 17 parameters, most plants for 1 to 4. Counting failures per tested parameter drops agreement from 0.75 to 0.26. The experts saw the same tables, so their ranking may carry the same effect.</p>
+      </div>
+      <div class="card"><h3>One survey, one year</h3><p>Two sampling rounds in 2012. The rankings describe 2012, not today, and nothing here forecasts.</p></div>
+      <div class="card"><h3>11 sources mapped by order</h3><p>One third of the labels depend on Magarwara assignments not confirmed by values.</p></div>
+      <div class="card"><h3>Groundwater: no signal</h3><p>Wells have village names, not coordinates. Industrial load per locality did not predict well contamination.</p></div>
+      <div class="card"><h3>Placeholders</h3><p>Effluent-type classes (C5), toxicity factors and the pH range need sign-off from domain experts.</p></div>
+    </div>
+  </section>
 
-      <section id="evidence" aria-labelledby="evidence-title">
-        <div class="split">
-          <div>
-            <h2 id="evidence-title">Evidence and study design</h2>
-            <p class="section-intro">UPPCB monitoring data guided expert ratings and later supported qualitative comparison with model rankings.</p>
-          </div>
-          <div class="group-list">
-            <div class="group"><div><strong>Industrial site-1 and Banthar</strong><br><span>Industries, CETP, and drains</span></div><b>9</b></div>
-            <div class="group"><div><strong>Industrial site-2</strong><br><span>Industries, CETP, and drains</span></div><b>9</b></div>
-            <div class="group"><div><strong>Magarwara-I</strong><br><span>Industrial sources and drains</span></div><b>8</b></div>
-            <div class="group"><div><strong>Magarwara-II</strong><br><span>Industrial sources</span></div><b>7</b></div>
-            <div class="panel"><h3>Sampling</h3><p>54 wastewater or effluent samples and 55 groundwater samples. Deep and shallow aquifers. Pre-monsoon and post-monsoon observations from 2012.</p></div>
-            <div class="panel"><h3>Measured pollutants</h3><p>pH, BOD, COD, TSS, TDS, chromium, fluoride, lead, nickel, cadmium, arsenic, iron, copper, and zinc.</p></div>
-          </div>
-        </div>
-      </section>
+  <section aria-labelledby="next-h">
+    <div class="sec-head">
+      <div class="sec-no">06</div>
+      <div><h2 id="next-h">Data to get next</h2><p>In order of value for this project.</p></div>
+    </div>
+    <ol class="next">
+      <li><div><h3>Well and outfall coordinates</h3><p>To link groundwater to single sources. Village points exist (report §3.6); <a href="https://www.academia.edu/28733157/Source_identification_study_of_heavy_metal_contamination_in_the_industrial_hub_of_Unnao_India">Dwivedi &amp; Vankar (2014)</a> give 10 bore wells with GPS.</p></div></li>
+      <li><div><h3>2016 joint drain survey</h3><p><a href="https://cpcb.nic.in/ngrba/Final_Approved_Drain_Report_27.03.2017.pdf">UPJN/UPPCB/CPCB report</a>: per-drain sheets with coordinates, flow, chemistry and metals.</p></div></li>
+      <li><div><h3>A common parameter panel</h3><p>The same parameters at every outlet, to remove the panel-size effect.</p></div></li>
+      <li><div><h3>Repeated monitoring</h3><p>Monthly samples for at least a year, before any forecast.</p></div></li>
+    </ol>
+  </section>
+</main>
 
-      <section id="criteria" aria-labelledby="criteria-title">
-        <h2 id="criteria-title">Ten criteria</h2>
-        <p class="section-intro">C10 receives greatest final weight. Ratings for C1, C3, and C4 require reverse interpretation because high values mean worse pollution.</p>
-        <div class="criteria">
-          <div class="criterion"><code>C1</code><span>Effluent discharge quantity</span><b>0.139</b></div>
-          <div class="criterion"><code>C2</code><span>ETP or CETP efficiency</span><b>0.072</b></div>
-          <div class="criterion"><code>C3</code><span>Critical parameters, pre-monsoon</span><b>0.148</b></div>
-          <div class="criterion"><code>C4</code><span>Critical parameters, post-monsoon</span><b>0.096</b></div>
-          <div class="criterion"><code>C5</code><span>Effluent or waste type</span><b>0.096</b></div>
-          <div class="criterion"><code>C6</code><span>River impact, pre-monsoon</span><b>0.139</b></div>
-          <div class="criterion"><code>C7</code><span>River impact, post-monsoon</span><b>0.030</b></div>
-          <div class="criterion"><code>C8</code><span>Groundwater impact, pre-monsoon</span><b>0.096</b></div>
-          <div class="criterion"><code>C9</code><span>Groundwater impact, post-monsoon</span><b>0.029</b></div>
-          <div class="criterion"><code>C10</code><span>Public-health impact</span><b>0.235</b></div>
-        </div>
-      </section>
-
-      <section id="method" aria-labelledby="method-title">
-        <h2 id="method-title">Fuzzy method, step by step</h2>
-        <p class="section-intro">Open each step for inputs, operation, and output.</p>
-        <div class="method">
-          <details open>
-            <summary><span class="number">01</span><span>Collect expert ratings</span><span class="open-label">Questionnaire</span></summary>
-            <div class="detail-body">
-              <div><h3>Three experts, five levels</h3><p>Experts rate criterion importance and every industry under every criterion. Linguistic answers become crisp values.</p></div>
-              <div class="scale"><div><b>1</b><span>Very low</span></div><div><b>3</b><span>Low</span></div><div><b>5</b><span>Medium</span></div><div><b>7</b><span>High</span></div><div><b>9</b><span>Very high</span></div></div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">02</span><span>Build pairwise AHP matrices</span><span class="open-label">Relative preference</span></summary>
-            <div class="detail-body">
-              <div><h3>Compare every pair</h3><p>Equal alternatives receive 1. One to four linguistic-level gaps receive 3, 5, 7, or 9. Worse direction receives the reciprocal.</p></div>
-              <div class="formula">equal = 1
-one level = 3
-two levels = 5
-reverse = 1/3 or 1/5</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">03</span><span>Check consistency</span><span class="open-label">IR below 0.1</span></summary>
-            <div class="detail-body">
-              <div><h3>Reject inconsistent judgments</h3><p>They calculate matrix inconsistency from the largest eigenvalue. Experts should revise ratings when the ratio reaches 0.1.</p></div>
-              <div class="formula">II = (lambda_max - n) / (n - 1)
-IR = II / RII
-accept when IR &lt; 0.1</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">04</span><span>Combine experts into one fuzzy number</span><span class="open-label">IVTFN</span></summary>
-            <div class="detail-body">
-              <div><h3>Preserve disagreement</h3><p>Minimum and maximum retain the expert range. Geometric mean gives the center. Two midpoints form inner bounds.</p></div>
-              <div class="formula">q = geometric_mean(Z1, Z2, Z3)
-p' = min(Z)
-p  = (min(Z) + q) / 2
-r  = (q + max(Z)) / 2
-r' = max(Z)
-
-Z_fuzzy = [(p', p); q; (r, r')]</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">05</span><span>Build group fuzzy comparison matrix</span><span class="open-label">Reciprocal matrix</span></summary>
-            <div class="detail-body">
-              <div><h3>One matrix represents all experts</h3><p>Every pair contains five fuzzy components. The opposite comparison uses reciprocal values in reverse order.</p></div>
-              <div class="formula">if Zij = [(p',p); q; (r,r')]
-
-Zji = [(1/r',1/r); 1/q; (1/p,1/p')]</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">06</span><span>Calculate fuzzy relative weights</span><span class="open-label">Geometric mean</span></summary>
-            <div class="detail-body">
-              <div><h3>Aggregate each matrix row</h3><p>Multiply every fuzzy comparison in one row, take the nth root, then normalize against the sum of all rows.</p></div>
-              <div class="formula">Xi = (Zi1 x Zi2 x ... x Zin)^(1/n)
-
-Wi = Xi x (X1 + X2 + ... + Xn)^(-1)</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">07</span><span>Defuzzify</span><span class="open-label">One crisp weight</span></summary>
-            <div class="detail-body">
-              <div><h3>Collapse five values into one</h3><p>The central component receives double weight. Result becomes one local performance value.</p></div>
-              <div class="formula">W* = (w1' + w1 + 2w2 + w3 + w3') / 6</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">08</span><span>Calculate final score and ranking</span><span class="open-label">Weighted sum</span></summary>
-            <div class="detail-body">
-              <div><h3>Combine criteria</h3><p>Each industry local weight is multiplied by corresponding criterion importance. The ten products are added.</p></div>
-              <div class="formula">Final(i) = sum[ CriterionWeight(j) x LocalWeight(i,j) ]
-
-lower score = more critical source
-higher score = less critical source</div>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <section id="example" aria-labelledby="example-title">
-        <h2 id="example-title">Worked example</h2>
-        <p class="section-intro">S1 compared with S2 under C3 at Industrial site-2.</p>
-        <div class="worked">
-          <div class="panel">
-            <h3>Expert judgments</h3>
-            <p>E1: 1/3<br>E2: 1/3<br>E3: 1</p>
-            <div class="formula">q = (1/3 x 1/3 x 1)^(1/3)
-q = 0.481
-
-fuzzy comparison:
-[(0.333, 0.407); 0.481; (0.740, 1.000)]</div>
-          </div>
-          <div class="panel">
-            <h3>After row weighting</h3>
-            <div class="formula">S1 fuzzy weight:
-[(0.031, 0.037); 0.044; (0.057, 0.070)]
-
-crisp weight:
-(0.031 + 0.037 + 2x0.044 + 0.057 + 0.070) / 6</div>
-            <p class="equation-result">S1 under C3 = 0.047</p>
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="weights-title">
-        <div class="split">
-          <div>
-            <h2 id="weights-title">What drove the ranking</h2>
-            <p class="section-intro">Public health received greatest expert weight. Post-monsoon river and groundwater criteria received least.</p>
-          </div>
-          <div class="panel weights" aria-label="Criterion weights">
-            <div class="weight"><code>C10</code><span class="bar" style="--w:100%"></span><b>0.235</b></div>
-            <div class="weight"><code>C3</code><span class="bar" style="--w:63%"></span><b>0.148</b></div>
-            <div class="weight"><code>C1</code><span class="bar" style="--w:59%"></span><b>0.139</b></div>
-            <div class="weight"><code>C6</code><span class="bar" style="--w:59%"></span><b>0.139</b></div>
-            <div class="weight"><code>C4</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
-            <div class="weight"><code>C5</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
-            <div class="weight"><code>C8</code><span class="bar" style="--w:41%"></span><b>0.096</b></div>
-            <div class="weight"><code>C2</code><span class="bar" style="--w:31%"></span><b>0.072</b></div>
-            <div class="weight"><code>C7</code><span class="bar" style="--w:13%"></span><b>0.030</b></div>
-            <div class="weight"><code>C9</code><span class="bar" style="--w:12%"></span><b>0.029</b></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="results" aria-labelledby="results-title">
-        <h2 id="results-title">Reported area results</h2>
-        <p class="section-intro">Each area is normalized and ranked separately. Low score means high intervention priority.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Industrial area</th><th>Most critical</th><th>Score</th><th>Least critical</th><th>Score</th></tr></thead>
-            <tbody>
-              <tr><td>Site-1 and Banthar</td><td><strong>S4 in Table 10</strong></td><td>0.046</td><td class="good">S6 and S8</td><td>0.233</td></tr>
-              <tr><td>Industrial site-2</td><td><strong>S1, CETP Unnao</strong></td><td>0.066</td><td class="good">S8, Omega International</td><td>0.258</td></tr>
-              <tr><td>Magarwara-I</td><td><strong>S1, City Jail Drain</strong></td><td>0.073</td><td class="good">S4, Sadaf Enterprises</td><td>0.267</td></tr>
-              <tr><td>Magarwara-II</td><td><strong>S1, Global Rimjhim</strong></td><td>0.087</td><td class="good">S4, ACI Oils</td><td>0.193</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section aria-labelledby="gis-title">
-        <div class="callout">
-          <div>
-            <h2 id="gis-title">GIS came after fuzzy ranking</h2>
-            <p>ArcGIS mapped BOD, COD, pH, TSS, fluoride, and chromium. Spatial maps supported interpretation but did not enter fuzzy equations.</p>
-          </div>
-          <div class="formula">monitoring data -> expert ratings
-expert ratings -> fuzzy ranking
-pollutant values -> GIS maps</div>
-        </div>
-      </section>
-
-      <section id="ml" aria-labelledby="ml-title">
-        <h2 id="ml-title">Complete ML replacement</h2>
-        <p class="section-intro">Replace expert estimates of environmental impact with predictions learned from repeated measurements. Keep legal limits and public-health priorities as explicit policy rules.</p>
-
-        <div class="callout">
-          <div>
-            <h3>The current data are not enough</h3>
-            <p>The paper reports 33 sources and 109 samples, but not a reusable source-by-date dataset with paired outcomes. We can choose candidate algorithms now. We can choose the final model only after collecting and auditing the data.</p>
-          </div>
-          <div class="formula">fuzzy model:
-expert opinion -> rank
-
-ML replacement:
-measurements -> predicted impact -> rank</div>
-        </div>
-
-        <h3 style="margin-top: 30px">Four ways to replace the fuzzy step</h3>
-        <p class="section-intro">Fuzzy AHP is not a predictor. It turns expert opinion into a ranking and is never checked against a true answer. The real choice is what the ML learns from. Repeated observations are needed only for option 4.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Option</th><th>Learns from</th><th>Repeated data?</th><th>Main caution</th></tr></thead>
-            <tbody>
-              <tr><td><strong>1. Imitate the fuzzy model</strong></td><td>Table 10 scores, predicted from measured values per source</td><td class="good">No</td><td>Learns the experts' judgment and cannot beat it. Only 33 rows, so use a simple model</td></tr>
-              <tr><td><strong>2. Snapshot outcome model</strong></td><td>Violation or exceedance per source, pollutant and season</td><td class="good">No</td><td>Cannot forecast. Cannot separate the facility from its conditions</td></tr>
-              <tr><td><strong>3. Data-driven weights</strong></td><td>Measurements only: entropy weights or PCA, then TOPSIS</td><td class="good">No</td><td>Not learning. Weights reflect how much each measurement varies, not how harmful it is</td></tr>
-              <tr><td><strong>4. Physical impact and forecasting</strong></td><td>River and groundwater change over time</td><td>Yes</td><td>Strongest scientifically. Needs paired, repeated sampling</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="decision" style="margin-top: 12px">
-          <p><strong>Recommended order:</strong> build option 1 as a direct swap that can be compared with the paper, and option 3 as a baseline that needs no labels. Keep option 4 for when repeated monitoring exists.</p>
-          <p><strong>Stand-in test:</strong> real US EPA discharge reports (ECHO, 2019–2024; 38 textile, paper, meat and tannery plants; median 57 monthly reports each) were run through options 2 and 4. Every model did worse than predicting the average for plants it had not seen. More months per plant did not help, because plants differ in production, treatment and receiving water, which the inputs did not capture. Collect those facility details as well as more samples.</p>
-        </div>
-
-        <h3 style="margin-top: 30px">What replaces each fuzzy component</h3>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Paper component</th><th>What it did</th><th>ML replacement</th></tr></thead>
-            <tbody>
-              <tr><td>Expert linguistic ratings</td><td>Estimated severity and importance</td><td>Measured features and measured outcomes</td></tr>
-              <tr><td>Pairwise AHP matrix</td><td>Converted opinions into relative preferences</td><td>Training examples linking conditions to outcomes</td></tr>
-              <tr><td>Interval fuzzy number</td><td>Preserved disagreement among three experts</td><td>Prediction intervals from bootstrap or quantile models</td></tr>
-              <tr><td>Defuzzified local weight</td><td>Gave each source one score under each criterion</td><td>Predicted load, environmental change, or violation probability</td></tr>
-              <tr><td>Weighted final score</td><td>Combined ten criteria into a ranking</td><td>Transparent risk rule applied to model outputs</td></tr>
-              <tr><td>GIS maps</td><td>Displayed measured spatial patterns</td><td>Map predictions and uncertainty at monitored locations</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 style="margin-top: 30px">The targets the model must learn</h3>
-        <div class="worked">
-          <div class="panel">
-            <p>Train one model per pollutant and outcome first. This is easier to validate and explain than one large model that hides different pollutant behaviour.</p>
-            <div class="formula">outlet_load = outlet_concentration x discharge_flow
-
-river_change = downstream_concentration - upstream_concentration
-
-groundwater_change = near_well_concentration - control_well_concentration
-
-exceedance_ratio = observed_concentration / permitted_limit
-
-violation = 1 when observed_concentration > permitted_limit</div>
-          </div>
-          <div class="panel">
-            <h3>Final intervention score</h3>
-            <p>The model predicts physical outcomes. A separate documented rule combines exceedance, pollutant toxicity, predicted river change, predicted groundwater change, exposed population, and prediction uncertainty.</p>
-            <p>This policy layer replaces the paper's weighted sum. It must be approved by domain and regulatory experts; ML cannot learn what society should value from chemistry alone.</p>
-          </div>
-        </div>
-
-        <h3 style="margin-top: 30px">Models to compare</h3>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Model</th><th>Role</th><th>Use when</th><th>Main caution</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Elastic Net</strong></td><td>Required baseline</td><td>Small data; approximately linear effects</td><td>Misses complex interactions</td></tr>
-              <tr><td><strong>XGBoost</strong></td><td>Primary candidate</td><td>Structured nonlinear data with enough repeated records</td><td>Can overfit small site counts</td></tr>
-              <tr><td><strong>Random Forest</strong></td><td>Tree comparison</td><td>Nonlinear effects and robust tabular baseline</td><td>Poor extrapolation outside training range</td></tr>
-              <tr><td><strong>SVR</strong></td><td>Small-data comparison</td><td>Clean, scaled data with moderate feature count</td><td>Sensitive to scaling and tuning</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="decision" style="margin-top: 12px">
-          <p><strong>Do not choose the winner now.</strong> Start with Elastic Net. Compare XGBoost, Random Forest, and SVR on identical held-out sites and future dates. Select the simplest model with stable error and useful uncertainty.</p>
-          <p>Do not use deep learning with this expected sample size. Do not use reinforcement learning: no repeated control action, reward, or safe simulator exists in the present study.</p>
-        </div>
-
-        <h3 style="margin-top: 30px">How to build and test it</h3>
-        <div class="flow">
-          <div class="flow-item"><b>Define outcomes</b><p>Choose the pollutant, location, prediction horizon, and physical target before sampling.</p></div>
-          <div class="flow-item"><b>Sample repeatedly</b><p>Measure sources and paired environmental locations on matching dates across seasons.</p></div>
-          <div class="flow-item"><b>Audit data</b><p>Standardize units, retain detection limits, flag missingness, and prevent impossible values.</p></div>
-          <div class="flow-item"><b>Split correctly</b><p>Hold out entire sources and future dates. Never split repeated rows randomly.</p></div>
-          <div class="flow-item"><b>Train baseline</b><p>Fit Elastic Net first, then compare three nonlinear candidates using the same folds.</p></div>
-          <div class="flow-item"><b>Measure error</b><p>Use MAE and RMSE for quantities; recall, precision, and calibration for violations.</p></div>
-          <div class="flow-item"><b>Quantify uncertainty</b><p>Report prediction intervals. A rank without uncertainty is incomplete.</p></div>
-          <div class="flow-item"><b>Rank and monitor</b><p>Apply the policy rule, map risk, then retrain only when new validated data improve it.</p></div>
-        </div>
-      </section>
-
-      <section id="missing-data" aria-labelledby="missing-data-title">
-        <h2 id="missing-data-title">Data the paper used but did not publish</h2>
-        <p class="section-intro">The paper prints examples and final weights, not the complete source data. These missing tables are required to reproduce the fuzzy calculation exactly.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Required table</th><th>What the paper prints</th><th>What is missing</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Sampling-station register</strong></td><td>Table 1 covers site-1, Banthar, and site-2</td><td>Magarwara-I and Magarwara-II station details</td></tr>
-              <tr><td><strong>Laboratory measurements</strong></td><td>Table 2 shows only CETP Unnao inlet and outlet</td><td>Complete 54 effluent and 55 groundwater sample records</td></tr>
-              <tr><td><strong>Expert source ratings</strong></td><td>Table 6 shows nine site-2 sources for C3 only</td><td>Ratings for every source under every criterion</td></tr>
-              <tr><td><strong>Pairwise matrices</strong></td><td>Table 7 shows site-2 under C3 only</td><td>Remaining criteria, sites, and criterion-importance matrices</td></tr>
-              <tr><td><strong>Detailed fuzzy calculations</strong></td><td>Tables 8 and 9 show site-2 under C3 only</td><td>Fuzzy matrices and weights for every remaining criterion and site</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="method" style="margin-top: 12px">
-          <details open>
-            <summary><span class="number">A</span><span>Complete sampling-station register</span><span class="open-label">Partly published</span></summary>
-            <div class="detail-body">
-              <div><h3>What is absent</h3><p>The authors explicitly omit station information for Magarwara-I and Magarwara-II. We need the identity and location of every source, inlet, outlet, drain, river station, and groundwater well.</p></div>
-              <div class="formula">source_id
-industrial_area
-industry_or_drain_name
-sampling_station_id
-station_type
-inlet_or_outlet
-latitude, longitude
-receiving_drain_or_river</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">B</span><span>Complete laboratory measurement table</span><span class="open-label">Highest-value missing table</span></summary>
-            <div class="detail-body">
-              <div><h3>All 109 samples</h3><p>The study used 54 effluent samples and 55 groundwater samples in pre-monsoon and post-monsoon 2012. Only one CETP example is printed. We need every row, including nondetects and missing results.</p></div>
-              <div class="formula">sample_id, source_id, station_id
-sampling_date, season, sample_type
-inlet_or_outlet, discharge_flow
-pH, TDS, TSS, BOD, COD
-Cu, Ni, Pb, Cd, Zn, Cr, As, F, Fe
-unit, detection_limit, QA_flag</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">C</span><span>Complete expert-rating table</span><span class="open-label">About 963 ratings absent</span></summary>
-            <div class="detail-body">
-              <div><h3>Original questionnaire answers</h3><p>A complete table requires 33 sources x 10 criteria x 3 experts, or 990 source-level ratings. Table 6 prints only 27 ratings for nine site-2 sources under C3, leaving about 963 unprinted.</p></div>
-              <div class="formula">expert_id
-expert_role
-industrial_area
-source_id
-criterion_id
-linguistic_rating
-numeric_rating
-questionnaire_date</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">D</span><span>Pairwise-comparison matrices</span><span class="open-label">Can be regenerated</span></summary>
-            <div class="detail-body">
-              <div><h3>Derived, not essential to request</h3><p>The complete AHP matrices and inconsistency ratios are absent. If we receive the original expert ratings and the exact comparison rule, we can calculate these again.</p></div>
-              <div class="formula">expert_id
-industrial_area
-criterion_id
-source_i, source_j
-pairwise_value
-matrix_IR</div>
-            </div>
-          </details>
-
-          <details>
-            <summary><span class="number">E</span><span>Fuzzy matrices and intermediate weights</span><span class="open-label">Can be regenerated</span></summary>
-            <div class="detail-body">
-              <div><h3>Derived, not raw data</h3><p>The full interval-valued matrices, row geometric means, normalized fuzzy weights, and defuzzified weights are not printed. They can be reproduced after obtaining the expert ratings and resolving the paper's pairwise-rule ambiguity.</p></div>
-              <div class="formula">p_prime, p, q, r, r_prime
-row_geometric_mean
-normalized_fuzzy_weight
-defuzzified_local_weight
-final_weight</div>
-            </div>
-          </details>
-        </div>
-
-        <div class="decision" style="margin-top: 12px">
-          <p><strong>Minimum request to reproduce the paper:</strong> the complete station register, all 109 laboratory records, all 990 expert source ratings, and the exact rule or software export used to convert rating differences into pairwise values.</p>
-          <p><strong>For ML:</strong> do not use expert ratings, pairwise matrices, fuzzy weights, or Table 10 final scores as training labels. Use repeated measured environmental outcomes from the next section.</p>
-        </div>
-      </section>
-
-      <section id="data" aria-labelledby="data-title">
-        <h2 id="data-title">Exact data needed</h2>
-        <p class="section-intro">Priority runs from low to highest. One observation must join source conditions and environmental outcomes from the same sampling event.</p>
-
-        <div class="priority-list">
-          <div class="priority-item">
-            <b>Priority 1<br>Low</b>
-            <div><h3>Administrative context</h3><p>Stable source ID, industry type, products, applicable legal limits, inspection history, complaints, and enforcement history.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 2<br>Low-medium</b>
-            <div><h3>Spatial context</h3><p>Outlet coordinates, river reach, flow direction, distances, upstream and downstream stations, nearby and control wells, settlements, drinking-water intakes, drainage, and aquifer information.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 3<br>Medium</b>
-            <div><h3>Time, weather, and river conditions</h3><p>Date and time, season, recent rainfall, river level, river discharge, and water temperature where relevant.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 4<br>Medium-high</b>
-            <div><h3>Treatment and production</h3><p>ETP or CETP type, operating status, design capacity, actual inflow, inlet and outlet flow, downtime, maintenance, production rate, chemical use, and process settings.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 5<br>High</b>
-            <div><h3>Repeated effluent measurements</h3><p>At each outlet: discharge flow, pH, BOD, COD, TSS, TDS, chromium, fluoride, lead, nickel, cadmium, arsenic, iron, copper, zinc, and industry-specific toxic pollutants.</p><p>For every result: unit, laboratory method, detection limit, quantification limit, replicate or quality-control flag, and missing-value reason.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 6<br>Very high</b>
-            <div><h3>Paired measured outcomes</h3><p>On matching dates, measure the same pollutant panel upstream and downstream, in a nearby well and a comparable control well. These paired differences are the labels used to train the environmental-impact models.</p></div>
-          </div>
-          <div class="priority-item">
-            <b>Priority 7<br>Highest</b>
-            <div><h3>Repeated observations over time</h3><p>Repeat the complete sampling event at fixed sources and stations, monthly if practical, across all seasons and preferably multiple years. Keep source and station IDs unchanged.</p><p>Without repeated paired measurements, there is no defensible supervised model for environmental impact.</p></div>
-          </div>
-        </div>
-
-        <div class="panel" style="margin-top: 12px">
-          <h3>Minimum machine-learning row</h3>
-          <div class="formula">one row = one source x one sampling event x one pollutant
-
-IDs: source_id, outlet_id, station_ids, sample_id
-time: date_time, season
-source: industry_type, production_rate, treatment_status
-hydrology: rainfall, river_flow, discharge_flow
-chemistry: inlet, outlet, upstream, downstream, near_well, control_well
-quality: unit, method, detection_limit, QA_flag, missing_reason
-target: load, river_change, groundwater_change, or violation</div>
-        </div>
-
-        <div class="decision" style="margin-top: 12px">
-          <p><strong>Collection rule:</strong> concentration without discharge flow cannot estimate load. Downstream without upstream cannot isolate river change. A nearby well without a control well cannot estimate local groundwater change. A single visit cannot teach seasonal or future behaviour.</p>
-        </div>
-      </section>
-
-      <section id="limits" aria-labelledby="limits-title">
-        <h2 id="limits-title">What to treat carefully</h2>
-        <p class="section-intro">These issues matter if the method is reproduced or replaced with machine learning.</p>
-        <div class="issues">
-          <div class="issue"><h3>Missing raw judgments</h3><p>Only one complete C3 example is shown. Full expert ratings for all 33 sources and ten criteria are absent.</p></div>
-          <div class="issue"><h3>Pairwise formula mismatch</h3><p>Equation 2 states a ratio. Table 7 behaves like linguistic-level distance on Saaty's scale.</p></div>
-          <div class="issue"><h3>Weights do not sum to one</h3><p>Published criterion weights sum to 1.08. Final score remains relative, not a probability.</p></div>
-          <div class="issue"><h3>Ranking contradiction</h3><p>Site-1 prose names S3 as worst. Table 10 gives S4 a lower score.</p></div>
-          <div class="issue"><h3>Validation is not independent</h3><p>Monitoring observations informed experts, then similar observations were used to support rankings.</p></div>
-          <div class="issue"><h3>No prediction</h3><p>Model aggregates expert preferences. It does not learn temporal patterns or forecast concentrations.</p></div>
-        </div>
-      </section>
-
-      <section aria-labelledby="meaning-title">
-        <div class="panel">
-          <h2 id="meaning-title">Exact role of fuzzy logic</h2>
-          <p>Fuzzy logic preserves disagreement between three experts while AHP calculates relative importance. It replaces a simple average with an interval around the group judgment. Defuzzification then collapses that interval into one ranking weight.</p>
-          <p>It does not model laboratory uncertainty, pollutant transport, future water quality, or cause and effect.</p>
-        </div>
-      </section>
-
-      <footer>
-        Based on: R. Srinivas and Ajit Pratap Singh, "Impact assessment of industrial wastewater discharge in a river basin using interval-valued fuzzy group decision-making and spatial approach," Environment, Development and Sustainability, 2018.
-      </footer>
-    </main>
+<footer>
+  <div class="wrap grid g3">
+    <div><h3>Paper</h3><ul>
+      <li><a href="https://doi.org/10.1007/s10668-017-9994-9">Srinivas &amp; Singh (2018), Environ Dev Sustain 20:2373–2397</a></li></ul></div>
+    <div><h3>Sources used</h3><ul>
+      <li><a href="http://117.252.14.250:8080/jspui/handle/123456789/5036">NIH Roorkee / MoWR committee report (2013)</a></li>
+      <li><a href="https://cpcb.gov.in/wqm/pollution-assessment-ganga-2013.pdf">CPCB: Pollution assessment, River Ganga (2013)</a></li>
+      <li><a href="https://cwc.gov.in/sites/default/files/trace-toxic-report-25-june-2014.pdf">CWC: Trace and toxic metals (2014)</a></li></ul></div>
+    <div><h3>Code</h3><ul>
+      <li><a href="https://github.com/plasmaDestroyer/wq-predict">Repository</a>: <span class="mono">method_a/b/c</span> notebooks, <span class="mono">wqml.py</span>, <span class="mono">data/</span></li></ul></div>
   </div>
+</footer>
 
-  <script>
-    const root = document.documentElement;
-    const toggle = document.getElementById("theme-toggle");
-    const savedTheme = localStorage.getItem("wq-theme");
-    if (savedTheme) root.dataset.theme = savedTheme;
+<div class="tip" id="tip" role="tooltip"></div>
 
-    const currentTheme = () => root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const updateToggle = () => {
-      const next = currentTheme() === "dark" ? "light" : "dark";
-      toggle.textContent = next === "dark" ? "Dark theme" : "Light theme";
-      toggle.setAttribute("aria-label", `Switch to ${next} theme`);
-    };
-    updateToggle();
+<script>
+// within-area Spearman vs paper Table 10 (notebooks method_a/b/c, re-run after the audit fixes)
+const DATA = [
+  { m: "B · equal weights", s: "measurements only", rho: .751, worst: "2/4", n: 33, e: false, key: true },
+  { m: "C · equal weights", s: "+ river load", rho: .749, worst: "3/4", n: 33, e: false },
+  { m: "B · paper's weights", s: "reference", rho: .738, worst: "2/4", n: 33, e: true },
+  { m: "A · PLS model", s: "nested test", rho: .736, worst: "2/4", n: 33, e: true },
+  { m: "B · CRITIC weights", s: "weights from data", rho: .723, worst: "3/4", n: 33, e: false },
+  { m: "Excess × flow", s: "index, sources with flow", rho: .687, worst: "3/4", n: 25, e: false },
+  { m: "Nemerow index", s: "standard index", rho: .556, worst: "1/4", n: 33, e: false },
+  { m: "TOPSIS-CRITIC", s: "standard MCDA", rho: .540, worst: "3/4", n: 33, e: false },
+  { m: "HPI (metals)", s: "standard index", rho: .277, worst: "1/4", n: 28, e: false },
+  { m: "B · per tested parameter", s: "panel-size check", rho: .256, worst: "2/4", n: 33, e: false },
+];
+const BAND = { lo: .376, hi: .808, med: .691 };
+const pct = v => (v * 100) + "%";
+const rows = document.getElementById("rows"), tip = document.getElementById("tip");
+rows.innerHTML = DATA.map((d, i) => `
+  <div class="row${d.key ? " key" : ""}" data-i="${i}" tabindex="0">
+    <div class="lab">${d.m}<small>${d.s}</small></div>
+    <div class="track">
+      ${[.25, .5, .75, 1].map(g => `<span class="grid-l" style="left:${pct(g)}"></span>`).join("")}
+      <span class="bandz" style="left:${pct(BAND.lo)};width:${pct(BAND.hi - BAND.lo)}"></span>
+      <span class="bar ${d.e ? "yes" : "no"}" style="width:0" data-w="${pct(d.rho)}"></span>
+    </div>
+    <div class="val">${d.rho.toFixed(2)}</div>
+  </div>`).join("");
+document.getElementById("ticks").innerHTML = [0, .25, .5, .75, 1].map(g => `<span style="left:${pct(g)}">${g}</span>`).join("");
+setTimeout(() => rows.querySelectorAll(".bar").forEach(b => b.style.width = b.dataset.w), 80);
 
-    toggle.addEventListener("click", () => {
-      const next = currentTheme() === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      localStorage.setItem("wq-theme", next);
-      updateToggle();
-    });
-  </script>
+function show(el, x, y) {
+  const d = DATA[el.dataset.i];
+  tip.innerHTML = `<b>${d.m}</b><br>ρ ${d.rho.toFixed(3)} · same worst ${d.worst} · ${d.n} sources<br>${d.e ? "uses expert input" : "no expert input"}`;
+  tip.style.left = Math.max(8, Math.min(x + 14, innerWidth - 290)) + "px";
+  tip.style.top = (y + 14) + "px";
+  tip.style.opacity = 1;
+}
+rows.addEventListener("mousemove", e => { const r = e.target.closest(".row"); r ? show(r, e.clientX, e.clientY) : (tip.style.opacity = 0); });
+rows.addEventListener("mouseleave", () => tip.style.opacity = 0);
+rows.addEventListener("focusin", e => { const b = e.target.getBoundingClientRect(); show(e.target, b.left + 100, b.bottom); });
+rows.addEventListener("focusout", () => tip.style.opacity = 0);
+
+document.getElementById("tableView").innerHTML = `<table><thead><tr><th>Method</th><th>Expert input</th><th class="n">ρ within area</th><th class="n">Same worst</th><th class="n">Sources</th></tr></thead><tbody>${
+  DATA.map(d => `<tr><td>${d.m}</td><td>${d.e ? "yes" : "no"}</td><td class="n">${d.rho.toFixed(3)}</td><td class="n">${d.worst}</td><td class="n">${d.n}</td></tr>`).join("")
+}<tr><td>Random weights (median of 2,000)</td><td>no</td><td class="n">${BAND.med}</td><td class="n">–</td><td class="n">33</td></tr></tbody></table>`;
+const tg = document.getElementById("viewToggle");
+tg.addEventListener("click", () => {
+  const showTable = document.getElementById("tableView").hidden;
+  document.getElementById("tableView").hidden = !showTable;
+  document.getElementById("chartView").hidden = showTable;
+  tg.textContent = showTable ? "Show chart" : "Show table";
+  tg.setAttribute("aria-pressed", String(showTable));
+});
+
+// theme: remembered per viewer when storage works; the page works without it
+const root = document.documentElement;
+try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+document.getElementById("theme").addEventListener("click", () => {
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+});
+</script>
 </body>
 </html>
