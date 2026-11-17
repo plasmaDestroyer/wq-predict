@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unnao Wastewater Ranking</title>
-<meta name="description" content="Can the 2012 lab data rank 33 industrial wastewater sources in Unnao (Ganges basin) as well as the three experts of Srinivas & Singh (2018)? Data, methods and results.">
+<meta name="description" content="Re-analysis of Srinivas & Singh (2018): can the 2012 lab data rank 33 industrial wastewater sources near Unnao as well as three experts? Paper method, data, methods, results and open work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
@@ -13,6 +13,7 @@
   --bg: #fdfcf9; --ink: #1a1a1a; --ink-2: #444; --muted: #6b6b6b; --rule: #cfcac0; --faint: #ece8df;
   --link: #1d4e89; --band: rgba(0,0,0,.06);
   --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -28,39 +29,45 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.62 var(--serif);
   font-variant-numeric: oldstyle-nums proportional-nums; -webkit-font-smoothing: antialiased; }
-main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+main { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
 a { color: var(--link); text-underline-offset: 2px; }
 a:focus-visible, button:focus-visible, .row:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
-.meta { font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.meta { font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; }
 .meta button { font: inherit; color: var(--muted); background: none; border: 0; border-bottom: 1px dotted var(--muted); padding: 0; cursor: pointer; }
-h1 { font-size: clamp(28px, 4.4vw, 38px); line-height: 1.18; font-weight: 600; margin: 0 0 12px; letter-spacing: -.2px; }
-.byline { font-size: 15px; color: var(--ink-2); margin: 0 0 32px; }
-.abstract { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 18px 0; margin: 0 0 40px; font-size: 16.5px; }
-.abstract b:first-child { font-variant: small-caps; letter-spacing: .04em; margin-right: 6px; }
-h2 { font-size: 22px; font-weight: 600; margin: 48px 0 12px; }
-h2 span { color: var(--muted); font-weight: 400; margin-right: 10px; }
-h3 { font-size: 18px; font-weight: 600; font-style: italic; margin: 28px 0 6px; }
-p { margin: 0 0 14px; }
-.num { font-variant-numeric: lining-nums tabular-nums; }
-sup a { text-decoration: none; font-size: .75em; }
+h1 { font-size: clamp(27px, 4.2vw, 36px); line-height: 1.18; font-weight: 600; margin: 0 0 10px; letter-spacing: -.2px; }
+.byline { font-size: 15px; color: var(--ink-2); margin: 0 0 22px; }
 
-/* booktabs-style tables */
-.tbl { overflow-x: auto; margin: 18px 0 8px; }
-table { width: 100%; border-collapse: collapse; font-size: 15.5px; font-variant-numeric: lining-nums tabular-nums; }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px 20px; border-bottom: 1px solid var(--ink); margin: 0 0 34px; padding: 10px 0 6px; position: sticky; top: 0; background: var(--bg); z-index: 3; }
+.tabs button { font: 400 15.5px var(--serif); color: var(--ink-2); background: none; border: 0; padding: 2px 0; cursor: pointer; border-bottom: 2px solid transparent; }
+.tabs button[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--ink); }
+.tabs button:hover { color: var(--ink); }
+[role="tabpanel"]:focus { outline: none; }
+
+.abstract { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 16px 0; margin: 0 0 30px; font-size: 16.5px; }
+.abstract b:first-child { font-variant: small-caps; letter-spacing: .04em; margin-right: 6px; }
+h2 { font-size: 22px; font-weight: 600; margin: 40px 0 12px; }
+h2:first-child { margin-top: 0; }
+h3 { font-size: 18px; font-weight: 600; font-style: italic; margin: 26px 0 6px; }
+p { margin: 0 0 14px; }
+.num, code { font-variant-numeric: lining-nums tabular-nums; }
+code { font-family: var(--mono); font-size: .82em; background: var(--faint); padding: 1px 4px; border-radius: 3px; }
+sup a { text-decoration: none; font-size: .75em; }
+.lead { font-size: 17px; color: var(--ink-2); }
+
+.tbl { overflow-x: auto; margin: 16px 0 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: lining-nums tabular-nums; }
 thead tr { border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--ink); }
 tbody tr:last-child { border-bottom: 1.5px solid var(--ink); }
 th { font-weight: 600; text-align: left; padding: 7px 8px; }
 td { padding: 5px 8px; vertical-align: top; }
-td.n, th.n { text-align: right; }
+td.n, th.n { text-align: right; white-space: nowrap; }
 caption, figcaption { caption-side: top; text-align: left; font-size: 15px; color: var(--ink-2); padding-bottom: 8px; }
 caption b, figcaption b { color: var(--ink); }
-figcaption.below { margin-top: 10px; }
 
-/* figure 1 */
-figure { margin: 26px 0 8px; }
+figure { margin: 22px 0 8px; }
 .fig-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); margin-bottom: 8px; }
 .key { display: flex; gap: 16px; flex-wrap: wrap; }
-.key i { display: inline-block; width: 18px; height: 9px; vertical-align: 0; margin-right: 6px; border: 1.5px solid var(--ink); }
+.key i { display: inline-block; width: 18px; height: 9px; margin-right: 6px; border: 1.5px solid var(--ink); }
 .key i.f { background: var(--ink); }
 .key i.b { background: var(--band); border: 0; border-left: 1px dashed var(--muted); border-right: 1px dashed var(--muted); }
 .fig-head button { font: inherit; color: var(--link); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
@@ -79,123 +86,304 @@ figure { margin: 26px 0 8px; }
 .tip { position: fixed; z-index: 9; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.4; padding: 6px 9px; max-width: 260px; opacity: 0; }
 [hidden] { display: none !important; }
 
-ol.refs { padding-left: 22px; font-size: 15px; color: var(--ink-2); }
-ol.refs li { margin-bottom: 6px; }
+ol.steps { padding-left: 22px; }
+ol.steps li { margin-bottom: 10px; }
 ul.tight { padding-left: 20px; margin: 0 0 14px; }
-ul.tight li { margin-bottom: 4px; }
+ul.tight li { margin-bottom: 5px; }
+.open { border-top: 1px solid var(--rule); padding: 16px 0 6px; }
+.open h3 { margin-top: 0; font-style: normal; }
+.open h3 span { color: var(--muted); font-weight: 400; margin-right: 8px; }
+.open dl { display: grid; grid-template-columns: 112px 1fr; gap: 4px 14px; margin: 8px 0 10px; font-size: 16px; }
+.open dt { color: var(--muted); font-style: italic; }
+.open dd { margin: 0; }
+ol.refs { padding-left: 22px; font-size: 15px; color: var(--ink-2); }
+ol.refs li { margin-bottom: 8px; }
 footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
 
 @media (max-width: 600px) {
-  main { padding: 36px 16px 60px; }
+  main { padding: 30px 16px 60px; }
   body { font-size: 17px; }
   .row, .axis { grid-template-columns: 112px 1fr 38px; gap: 8px; font-size: 13.5px; }
+  .open dl { grid-template-columns: 1fr; gap: 0; }
+  .open dt { margin-top: 6px; }
 }
-@media print { .meta button, .fig-head button { display: none; } main { max-width: none; } }
+@media print { .meta button, .fig-head button, .tabs { display: none; } [role="tabpanel"][hidden] { display: block !important; } main { max-width: none; } }
 </style>
 </head>
 <body>
 <main>
   <div class="meta"><span>Research note · draft · November 2026</span><button id="theme" type="button">Dark / light</button></div>
-
   <h1>Replacing expert judgment with lab data: a re-analysis of the Unnao industrial wastewater ranking</h1>
-  <p class="byline">Re-analysis of Srinivas &amp; Singh (2018)<sup><a href="#r1">1</a></sup> · code and data: <a href="https://github.com/plasmaDestroyer/wq-predict">github.com/plasmaDestroyer/wq-predict</a></p>
+  <p class="byline">Re-analysis of Srinivas &amp; Singh (2018)<sup><a href="#r1" data-goto="refs">1</a></sup> · code and data: <a href="https://github.com/plasmaDestroyer/wq-predict">github.com/plasmaDestroyer/wq-predict</a></p>
 
-  <div class="abstract">
-    <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, Ganges basin, with the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2">2</a></sup> and tested whether measurements alone reproduce the expert ranking. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>; a regression model trained on the expert scores reaches <span class="num">0.74</span>; standard pollution indices reach <span class="num">0.28–0.69</span>. The agreement falls to <span class="num">0.26</span> when failures are counted per tested parameter, which suggests that the number of parameters tested at each source, rather than pollution alone, drives much of the expert ranking.</p>
-  </div>
+  <nav class="tabs" role="tablist" aria-label="Report sections">
+    <button role="tab" id="t-summary" aria-controls="summary" aria-selected="true">Summary</button>
+    <button role="tab" id="t-paper" aria-controls="paper" aria-selected="false" tabindex="-1">Paper method</button>
+    <button role="tab" id="t-data" aria-controls="data" aria-selected="false" tabindex="-1">Data</button>
+    <button role="tab" id="t-methods" aria-controls="methods" aria-selected="false" tabindex="-1">Methods</button>
+    <button role="tab" id="t-results" aria-controls="results" aria-selected="false" tabindex="-1">Results</button>
+    <button role="tab" id="t-open" aria-controls="open" aria-selected="false" tabindex="-1">Open work</button>
+    <button role="tab" id="t-refs" aria-controls="refs" aria-selected="false" tabindex="-1">References</button>
+  </nav>
 
-  <h2 id="paper"><span>1</span>The original method</h2>
-  <p>The paper scores each source from 0 to 1 within its industrial area (four areas, low = more polluting). Three experts, from a pollution control board, an impact-assessment practice and a research institute, rated each source on ten criteria: effluent discharge (C1), treatment efficiency (C2), number of critical parameters before and after the monsoon (C3, C4), effluent type (C5), impact on the river (C6, C7) and on groundwater (C8, C9) in both seasons, and public health (C10). Pairwise matrices built from the ratings (a rating gap of <i>k</i> levels becomes 2<i>k</i>+1), interval fuzzy numbers and defuzzification give a local weight per source and criterion; the final score is the sum of criterion weight × local weight.</p>
-  <p>We reproduced the paper's arithmetic: all 33 final scores in its Table 10 follow from the printed weights to within 0.001, and its Table 8 follows from Table 7. The step this work replaces is the expert rating of each source.</p>
-
-  <h2 id="data"><span>2</span>Data</h2>
-  <p>The paper's reference "UPPCB (2013)" is the Ministry of Water Resources committee report prepared by NIH Roorkee<sup><a href="#r2">2</a></sup>. Its CETP Unnao table equals the paper's Table 2 value for value. We extracted all tables and checked them against the PDF pages (Table 1).</p>
-  <div class="tbl"><table>
-    <caption><b>Table 1.</b> Data recovered from the cited sources.</caption>
-    <thead><tr><th>Data</th><th class="n">Amount</th><th>Source</th></tr></thead>
-    <tbody>
-      <tr><td>Wastewater stations, mapped to the 33 sources</td><td class="n">54</td><td>Report Tables 5.1, 7.1–7.27</td></tr>
-      <tr><td>Effluent values (538 measured, 55 not detected), 18 parameters, May and November 2012</td><td class="n">593</td><td>same</td></tr>
-      <tr><td>Well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</td><td class="n">60</td><td>Tables 5.2, 7.28</td></tr>
-      <tr><td>Sources with discharge flow and production</td><td class="n">25 / 33</td><td>Table 3.1</td></tr>
-      <tr><td>Further groundwater and effluent samples, 2010–2012 (127 from wells)</td><td class="n">162</td><td>Annexes III–V (CGWB)</td></tr>
-      <tr><td>Monthly river Ganga records, Kanpur and Bhitaura, 2001–2011</td><td class="n">240</td><td>Annexes VI–VII (CWC)</td></tr>
-      <tr><td>Drain records, Loni and City Jail drains, 2012 and 2018–2023</td><td class="n">16</td><td>CPCB<sup><a href="#r3">3</a></sup></td></tr>
-      <tr><td>Village coordinates near the industrial area (locating 17 of 55 wells)</td><td class="n">14</td><td>Report §3.6</td></tr>
-      <tr><td>Bore wells with GPS and basic chemistry</td><td class="n">10</td><td>Dwivedi &amp; Vankar<sup><a href="#r4">4</a></sup></td></tr>
-      <tr><td>Drain sampling points with chemistry and metals, 2016</td><td class="n">5</td><td>Joint drain report<sup><a href="#r5">5</a></sup></td></tr>
-    </tbody>
-  </table></div>
-  <p>The comparison also exposed errors in the paper: the "TDS 145" of Sadaf Enterprises is TSS 145 in the report, and the ACI Oils outlet BOD is 157, not 150. The paper omits the station register for two of its four areas; for 11 of those 15 sources the assignment to the paper's labels follows the report's station order and is not confirmed by values.</p>
-
-  <h2 id="methods"><span>3</span>Methods</h2>
-  <p>All methods start from one row per source with the criteria computed from the lab data: failures against the CPCB discharge limits (pH outside 5.5–9.0; a non-detect counts as a pass), treatment efficiency (inlet versus outlet), flow, and the toxicity-weighted excess over the limits. Because the paper ranks only within areas, agreement is measured within each area (Spearman ρ, averaged over the four areas) and by whether the most-polluting source matches.</p>
-  <h3>A. Learning the expert scores</h3>
-  <p>Twelve scikit-learn regressors were compared by leave-one-out cross-validation, with the target normalised by the training labels only. Partial least squares with two components gave the lowest error; in a nested test (model choice inside each fold) it was selected in 29 of 33 folds.</p>
-  <h3>B. Computing the criteria</h3>
-  <p>Sources are ranked within their area on each criterion, the ranks are scaled to the shape of the paper's local weights, and the criteria are combined with equal weights. Missing values are neutral. No expert input is used, and each rank can be traced to measurements.</p>
-  <h3>C. Adding river and groundwater</h3>
-  <p>As B, plus limit-weighted river load (C6, C7) and a groundwater model per locality (C8, C9). The groundwater model did not beat the mean in a leave-one-locality-out test, so C8 and C9 remain neutral.</p>
-
-  <h2 id="results"><span>4</span>Results</h2>
-  <figure>
-    <figcaption><b>Figure 1.</b> Agreement with the expert ranking (mean within-area Spearman ρ, 1 = same order). Filled bars use no expert input; hollow bars use the expert scores or weights. The shaded band is the 5–95% range over 2,000 random weightings of method B.</figcaption>
-    <div class="fig-head">
-      <div class="key" aria-hidden="true"><span><i class="f"></i>no expert input</span><span><i></i>uses expert input</span><span><i class="b"></i>random weights</span></div>
-      <button id="viewToggle" type="button" aria-pressed="false">table view</button>
+  <section id="summary" role="tabpanel" aria-labelledby="t-summary" tabindex="0">
+    <div class="abstract">
+      <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, Ganges basin, with the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2" data-goto="refs">2</a></sup> and tested whether measurements alone reproduce the expert ranking. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>; a regression model trained on the expert scores reaches <span class="num">0.74</span>; standard pollution indices reach <span class="num">0.28–0.69</span>. The agreement falls to <span class="num">0.26</span> when failures are counted per tested parameter, which suggests that the number of parameters tested at each source, rather than pollution alone, drives much of the expert ranking.</p>
     </div>
-    <div id="chartView">
-      <div id="rows" role="img" aria-label="Bar chart of agreement by method; the same values are in the table view"></div>
-      <div class="axis" aria-hidden="true"><div></div><div id="ticks"></div><div></div></div>
+    <h2>Main findings</h2>
+    <ul class="tight">
+      <li>The paper's raw data is public: the cited "UPPCB (2013)" report contains every lab table the experts used. Its CETP table matches the paper value for value.</li>
+      <li>Without any expert input, a ranking computed from the measurements comes close to the experts' ranking (ρ 0.75), as close as a model trained on their scores (ρ 0.74).</li>
+      <li>Much of this agreement may come from how many parameters were tested at each source. This is the main open question (see <a href="#open" data-goto="open">Open work</a>).</li>
+      <li>The groundwater criteria cannot be computed per source: no open source locates the individual plants, and well pollution shows no gradient with distance from the industrial areas.</li>
+      <li>Agreement with the experts is not proof of a better assessment. There is no measured "true impact" to test against.</li>
+    </ul>
+    <p class="lead">Detail: <a href="#paper" data-goto="paper">paper method</a> · <a href="#data" data-goto="data">data</a> · <a href="#methods" data-goto="methods">methods</a> · <a href="#results" data-goto="results">results</a> · <a href="#open" data-goto="open">open work</a>.</p>
+  </section>
+
+  <section id="paper" role="tabpanel" aria-labelledby="t-paper" tabindex="0" hidden>
+    <h2>What the paper does</h2>
+    <p>The study ranks 33 sources (tanneries, two common effluent treatment plants, drains, textile, meat, paper and other plants) in four industrial areas near Unnao. Three experts, from a pollution control board, an impact-assessment practice and a research institute, judged each source from the 2012 lab tables. The output is a score from 0 to 1 per source, relative within its area; a low score means more polluting (Table 10 of the paper).</p>
+    <h3>Steps</h3>
+    <ol class="steps">
+      <li><b>Ratings.</b> Each expert rates the importance of each criterion and the performance of each source on each criterion on a five-level scale (1, 3, 5, 7, 9).</li>
+      <li><b>Pairwise matrices.</b> Every pair of sources is compared. Equal ratings give 1; a gap of <i>k</i> levels gives 2<i>k</i>+1 (3, 5, 7, 9); the reverse direction gets the reciprocal. We confirmed this rule from the paper's Tables 6 and 7.</li>
+      <li><b>Consistency.</b> II = (λ<sub>max</sub> − n) / (n − 1), IR = II / RII; matrices with IR ≥ 0.1 go back to the experts.</li>
+      <li><b>Interval fuzzy numbers.</b> The three experts' values for a pair become [(p′, p); q; (r, r′)]: q = geometric mean, p′ = minimum, r′ = maximum, p and r = midpoints between them.</li>
+      <li><b>Fuzzy weights.</b> Row geometric mean of each fuzzy matrix, then normalisation by the sum of all rows.</li>
+      <li><b>Defuzzification.</b> W = (w₁′ + w₁ + 2w₂ + w₃ + w₃′) / 6 gives one local weight per source and criterion.</li>
+      <li><b>Final score.</b> Score = Σ criterion weight × local weight. Sources are ranked within each area.</li>
+    </ol>
+    <div class="tbl"><table>
+      <caption><b>Table P1.</b> The ten criteria and the paper's expert weights.</caption>
+      <thead><tr><th>Criterion</th><th>Meaning</th><th class="n">Weight</th></tr></thead>
+      <tbody>
+        <tr><td>C1</td><td>Effluent discharge</td><td class="n">0.139</td></tr>
+        <tr><td>C2</td><td>Efficiency of the effluent treatment plant</td><td class="n">0.072</td></tr>
+        <tr><td>C3 / C4</td><td>Number of critical parameters, pre- / post-monsoon</td><td class="n">0.148 / 0.096</td></tr>
+        <tr><td>C5</td><td>Type of effluent</td><td class="n">0.096</td></tr>
+        <tr><td>C6 / C7</td><td>Impact on the river Ganga, pre- / post-monsoon</td><td class="n">0.139 / 0.030</td></tr>
+        <tr><td>C8 / C9</td><td>Impact on groundwater, pre- / post-monsoon</td><td class="n">0.096 / 0.029</td></tr>
+        <tr><td>C10</td><td>Harmful impact on public health</td><td class="n">0.235</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Reproduction</h3>
+    <p>All 33 final scores of the paper's Table 10 follow from its printed weights to within 0.001; the weights add up to 1.08, not 1. The fuzzy weights of Table 8 follow from Table 7. Only the ratings of one criterion in one area (C3, Site-2) are printed; the other source ratings are not published, so the full fuzzy calculation cannot be repeated.</p>
+    <h3>What this work replaces</h3>
+    <p>The expert <i>rating of each source</i> (the performance part of step 1). The paper's criteria and the within-area ranking are kept, so the results can be compared one to one.</p>
+  </section>
+
+  <section id="data" role="tabpanel" aria-labelledby="t-data" tabindex="0" hidden>
+    <h2>Data recovered</h2>
+    <p>The paper's reference "UPPCB (2013)" is the Ministry of Water Resources committee report prepared by NIH Roorkee<sup><a href="#r2" data-goto="refs">2</a></sup>. We extracted its tables with a script (<code>data/uppcb/extract.py</code>) and checked them against the PDF pages: row counts per table, cell-by-cell comparison of the hardest tables, and the paper's own printed values.</p>
+    <div class="tbl"><table>
+      <caption><b>Table D1.</b> Data recovered from the cited sources.</caption>
+      <thead><tr><th>Data</th><th class="n">Amount</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Wastewater stations, mapped to the 33 sources</td><td class="n">54</td><td>Report Tables 5.1, 7.1–7.27</td></tr>
+        <tr><td>Effluent values (538 measured, 55 not detected), 18 parameters, May and November 2012</td><td class="n">593</td><td>same</td></tr>
+        <tr><td>Well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</td><td class="n">60</td><td>Tables 5.2, 7.28</td></tr>
+        <tr><td>Sources with discharge flow and production</td><td class="n">25 / 33</td><td>Table 3.1</td></tr>
+        <tr><td>Further groundwater and effluent samples, 2010–2012 (127 from wells)</td><td class="n">162</td><td>Annexes III–V (CGWB)</td></tr>
+        <tr><td>Monthly river Ganga records, Kanpur and Bhitaura, 2001–2011</td><td class="n">240</td><td>Annexes VI–VII (CWC)</td></tr>
+        <tr><td>Drain records, Loni and City Jail drains, 2012 and 2018–2023</td><td class="n">16</td><td>CPCB<sup><a href="#r3" data-goto="refs">3</a></sup></td></tr>
+        <tr><td>Drain sampling points with chemistry and metals, 2016</td><td class="n">5</td><td>Joint drain report<sup><a href="#r5" data-goto="refs">5</a></sup></td></tr>
+        <tr><td>Village coordinates (locating 17 of 55 wells)</td><td class="n">14</td><td>Report §3.6</td></tr>
+        <tr><td>Bore wells with GPS and basic chemistry</td><td class="n">10</td><td>Dwivedi &amp; Vankar<sup><a href="#r4" data-goto="refs">4</a></sup></td></tr>
+      </tbody>
+    </table></div>
+    <h3>Coverage and gaps</h3>
+    <ul class="tight">
+      <li>Panels differ: sources were tested for 1 to 17 parameters. No parameter was tested at all 33; BOD at 32, pH at 29, chromium at 28, COD at 22. Drains were tested for a median of 17 parameters, meat plants for 1.5.</li>
+      <li>Only 18 of 33 sources were sampled before the monsoon, so C3 is missing for 15.</li>
+      <li>Flow is missing for 5 drains and 3 plants.</li>
+      <li>Upstream and downstream samples exist only along the Loni drain (3 sources).</li>
+      <li>Not-detected values carry no detection limit; they count as a pass.</li>
+    </ul>
+    <h3>Corrections to the paper</h3>
+    <ul class="tight">
+      <li>The "TDS 145" of Sadaf Enterprises is TSS 145 in the report (Table 7.8).</li>
+      <li>The ACI Oils outlet BOD is 157, not 150 (Table 7.24).</li>
+      <li>Omega International's BOD of 353 is genuine (station SW-28), not a copy of the CETP value.</li>
+      <li>The paper omits the station register for its two Magarwara areas. For 11 of those 15 sources the assignment follows the report's station order and is not confirmed by values.</li>
+    </ul>
+    <p>Files: <code>data/uppcb/</code> (report extraction), <code>data/paper/</code> (paper tables), <code>data/cpcb/</code>, <code>data/geo/</code> (coordinates, with a source note).</p>
+  </section>
+
+  <section id="methods" role="tabpanel" aria-labelledby="t-methods" tabindex="0" hidden>
+    <h2>Criteria from measurements</h2>
+    <p>All methods start from one row per source with the paper's criteria computed from the lab data (<code>wqml.summarise</code>).</p>
+    <div class="tbl"><table>
+      <caption><b>Table M1.</b> How each criterion is computed.</caption>
+      <thead><tr><th>Criterion</th><th>Computed as</th><th>Worse when</th></tr></thead>
+      <tbody>
+        <tr><td>C1</td><td>Mean discharge flow (MLD)</td><td>higher</td></tr>
+        <tr><td>C2</td><td>Mean (inlet − outlet) / inlet</td><td>lower</td></tr>
+        <tr><td>C3 / C4</td><td>Parameters over the CPCB limit per sampling round, pre- / post-monsoon; pH outside 5.5–9.0; not detected = pass</td><td>higher</td></tr>
+        <tr><td>C5</td><td>Industry type mapped to the paper's 1–9 effluent scale (placeholder)</td><td>lower</td></tr>
+        <tr><td>C6 / C7</td><td>Downstream − upstream (B); limit-weighted load = Σ concentration / limit × toxicity × flow (C)</td><td>higher</td></tr>
+        <tr><td>C8 / C9</td><td>Groundwater model per locality (C); neutral, no signal</td><td>higher</td></tr>
+        <tr><td>C10</td><td>Σ toxicity × amount over the limit, per sampling round</td><td>higher</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>A. Learning the expert scores</h3>
+    <p>A regression model learns the paper's scores from the criteria, so the experts are needed once, for the training labels. The target is each score divided by the mean score of its area, computed from the training sources only, so a held-out source's own score never enters its target. Twelve scikit-learn regressors (linear, penalised linear, PLS, nearest neighbours, SVR, tree ensembles, Gaussian process) were compared by leave-one-out cross-validation. A nested test (model choice inside each fold) estimates the procedure without selection bias.</p>
+
+    <h3>B. Computing the criteria</h3>
+    <p>For each criterion, sources are ranked within their area (worse = lower). Measured ranks are stretched onto the full scale so that their mean is the neutral middle; missing values are neutral; a criterion measured for fewer than two sources in an area is neutral there. Ranks are scaled to sum to 1 per area, the shape of the paper's local weights, and added with fixed weights: equal, CRITIC (from the spread and correlation of the data), or the paper's (reference only). No expert rates a source, and each rank can be traced to measurements.</p>
+
+    <h3>C. Adding river and groundwater</h3>
+    <p>As B, plus the limit-weighted river load (C6, C7) and a groundwater model (C8, C9) that predicts a well contamination index (fluoride and TDS against drinking-water limits) from the industrial load of the well's locality, tested leave-one-locality-out with nested model choice. A drain-to-river concentration ratio is reported only as a labelled scenario: it is not a measured delivered fraction.</p>
+
+    <h3>Evaluation</h3>
+    <p>The paper ranks only within areas, so agreement is the Spearman ρ between a method's scores and the paper's within each of the four areas, averaged, plus whether the most-polluting source matches (tied sources count as a set). Standard indices (Nemerow, HPI, excess × flow, TOPSIS) are computed with the definitions in <code>method_b_compute.ipynb</code>.</p>
+  </section>
+
+  <section id="results" role="tabpanel" aria-labelledby="t-results" tabindex="0" hidden>
+    <h2>Agreement with the expert ranking</h2>
+    <figure>
+      <figcaption><b>Figure 1.</b> Mean within-area Spearman ρ with the paper's ranking (1 = same order). Filled bars use no expert input; hollow bars use the expert scores or weights. The shaded band is the 5–95% range over 2,000 random weightings of method B.</figcaption>
+      <div class="fig-head">
+        <div class="key" aria-hidden="true"><span><i class="f"></i>no expert input</span><span><i></i>uses expert input</span><span><i class="b"></i>random weights</span></div>
+        <button id="viewToggle" type="button" aria-pressed="false">table view</button>
+      </div>
+      <div id="chartView">
+        <div id="rows" role="img" aria-label="Bar chart of agreement by method; the same values are in the table view"></div>
+        <div class="axis" aria-hidden="true"><div></div><div id="ticks"></div><div></div></div>
+      </div>
+      <div id="tableView" class="tbl" hidden></div>
+    </figure>
+
+    <div class="tbl"><table>
+      <caption><b>Table R1.</b> Within-area Spearman ρ by area.</caption>
+      <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B</th><th class="n">A</th><th class="n">C</th></tr></thead>
+      <tbody>
+        <tr><td>Site-1 and Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
+        <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
+        <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
+        <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Model choice (method A)</h3>
+    <p>Partial least squares with two components had the lowest leave-one-out error (MAE 0.233 on the area-normalised score). Linear models outperformed tree ensembles and the Gaussian process, as expected with 33 sources. The nested estimate is ρ 0.736 (MAE 0.225); PLS was selected in 29 of 33 folds. The model leans mostly on C4 and C10.</p>
+
+    <h3>Sensitivity (method B)</h3>
+    <ul class="tight">
+      <li>Weights: 2,000 random weightings give a median ρ of 0.69 (5–95%: 0.38–0.81). Equal weights (0.75) and the paper's weights (0.74) are near the top, so the weights matter less than the measurements.</li>
+      <li>Single criteria: C4 alone gives ρ 0.71, C10 alone 0.66, C1 alone 0.39.</li>
+      <li>Panel size: counting failures and excess per tested parameter lowers ρ from 0.75 to 0.26.</li>
+    </ul>
+
+    <h3>Groundwater</h3>
+    <p>No model predicted well contamination better than the mean in a leave-one-locality-out test, so C8 and C9 stay neutral. With coordinates for 27 wells, TDS, fluoride, Cr(VI) and conductivity show no decrease with distance to the nearest industrial area (Spearman ρ between −0.18 and 0.51; the only significant value, for TDS, has the wrong sign).</p>
+  </section>
+
+  <section id="open" role="tabpanel" aria-labelledby="t-open" tabindex="0" hidden>
+    <h2>What is left, and why it matters</h2>
+    <p>Ordered by how much each item could change the conclusions.</p>
+
+    <div class="open">
+      <h3><span>1</span>Panel size versus pollution</h3>
+      <dl>
+        <dt>What</dt><dd>Sources were tested for different numbers of parameters (1 to 17). Drains and treatment plants got the full panel; most plants 1 to 4. Criteria that count failures (C3, C4) or add up excess (C10) grow with the panel.</dd>
+        <dt>Why it matters</dt><dd>A source can look worse simply because more was measured. When the counts are taken per tested parameter, agreement falls from 0.75 to 0.26. The experts read the same tables, so their ranking may carry the same effect. Any ranking used for regulation must compare like with like.</dd>
+        <dt>Next step</dt><dd>Re-run B on the parameters tested almost everywhere (BOD 32 of 33, pH 29, chromium 28). Long term: the same panel at every outlet.</dd>
+      </dl>
     </div>
-    <div id="tableView" class="tbl" hidden></div>
-  </figure>
+    <div class="open">
+      <h3><span>2</span>Unconfirmed source assignments</h3>
+      <dl>
+        <dt>What</dt><dd>The paper labels sources S1–S9 per area but does not list the Magarwara stations. 11 of the 15 Magarwara sources were matched to the report's stations by order only.</dd>
+        <dt>Why it matters</dt><dd>One third of the labels depend on them. A wrong match pairs measurements of one plant with the expert score of another, which lowers or raises agreement for the wrong reason.</dd>
+        <dt>Next step</dt><dd>Confirmation from the authors or UPPCB. Agreement in the Magarwara areas (0.83, 0.75) is similar to the other areas, which suggests, but does not prove, that the order is right.</dd>
+      </dl>
+    </div>
+    <div class="open">
+      <h3><span>3</span>Value choices still open</h3>
+      <dl>
+        <dt>What</dt><dd>The mapping of industry type to the effluent scale (C5), the toxicity factors in C10 and the pH range are placeholders.</dd>
+        <dt>Why it matters</dt><dd>They are judgments, not measurements, and they change the ranking. A method that claims "no expert input" must state them openly and have them agreed by regulators or domain experts once.</dd>
+        <dt>Next step</dt><dd>Review by the pollution control board or a domain expert; then fix them in <code>wqml.py</code>.</dd>
+      </dl>
+    </div>
+    <div class="open">
+      <h3><span>4</span>Groundwater per source</h3>
+      <dl>
+        <dt>What</dt><dd>Two of the ten criteria (C8, C9) concern groundwater. No open source gives the locations of the individual plants, and well pollution shows no gradient with distance from the industrial areas.</dd>
+        <dt>Why it matters</dt><dd>Without them the ranking covers effluent and river impact only. Groundwater is the main exposure route for people near tanneries (chromium).</dd>
+        <dt>Next step</dt><dd>Plant and outlet coordinates (field GPS or UPPCB consent records), and wells paired near and away from each source.</dd>
+      </dl>
+    </div>
+    <div class="open">
+      <h3><span>5</span>Drain survey not yet used</h3>
+      <dl>
+        <dt>What</dt><dd>The 2016 joint survey gives flow, chemistry and metals at the Loni and City Jail drains.</dd>
+        <dt>Why it matters</dt><dd>It allows a mass-balance check: does the sum of the plant loads computed for C6/C7 match what the drains carry to the Ganga?</dd>
+        <dt>Next step</dt><dd>Compare drain loads with the summed plant loads per drain, keeping in mind the four-year gap.</dd>
+      </dl>
+    </div>
+    <div class="open">
+      <h3><span>6</span>No independent test of "impact"</h3>
+      <dl>
+        <dt>What</dt><dd>All results measure agreement with three experts. There is no measured outcome (river change, health data) per source to test against.</dd>
+        <dt>Why it matters</dt><dd>A ranking that matches the experts can still be wrong in the same way they were. Only an independent outcome can show which ranking is right.</dd>
+        <dt>Next step</dt><dd>Repeated paired monitoring (upstream and downstream of each outfall, near and control wells) for at least a year.</dd>
+      </dl>
+    </div>
+  </section>
 
-  <p>The computed ranking (B) agrees with the experts as closely as the model trained on their scores (A), and more closely than the standard indices. Agreement is high in three areas and lower in Site-2 (Table 2).</p>
-  <div class="tbl"><table>
-    <caption><b>Table 2.</b> Within-area Spearman ρ with the expert ranking.</caption>
-    <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B</th><th class="n">A</th><th class="n">C</th></tr></thead>
-    <tbody>
-      <tr><td>Site-1 and Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
-      <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
-      <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
-      <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
-    </tbody>
-  </table></div>
-
-  <h2 id="limits"><span>5</span>Limitations</h2>
-  <p><b>Panel size.</b> Sources were tested for between 1 and 17 parameters; drains and treatment plants received the widest panels. Counting failures per tested parameter lowers the agreement of method B from 0.75 to 0.26. Because the experts read the same tables, the expert ranking itself may carry this effect.</p>
-  <ul class="tight">
-    <li>Agreement with the experts is not evidence of a better assessment.</li>
-    <li>The data cover two sampling rounds in 2012; nothing here describes the present or forecasts.</li>
-    <li>One third of the labels depend on source assignments not confirmed by values.</li>
-    <li>Groundwater cannot be linked to single sources. Report village points place 17 of 55 wells, and ten further wells have GPS<sup><a href="#r4">4</a></sup>, but no open source maps the individual plants. At the level of industrial areas, well TDS, fluoride, Cr(VI) and conductivity show no decrease with distance (Spearman ρ between −0.18 and 0.51).</li>
-    <li>The effluent-type classes, toxicity factors and the pH range are placeholders for expert sign-off.</li>
-  </ul>
-  <p>An independent review (GPT Sol) re-ran all computations; the defects it found were corrected before these results were produced.</p>
-
-  <h2><span>6</span>Further data</h2>
-  <ul class="tight">
-    <li>Locations of the individual plants and CETP outfalls, to link groundwater to single sources.</li>
-        <li>A common parameter panel at every outlet, to remove the panel-size effect.</li>
-    <li>Monthly monitoring for at least one year before any forecast.</li>
-  </ul>
-
-  <h2><span></span>References</h2>
-  <ol class="refs">
-    <li id="r1">Srinivas, R., Singh, A. P. (2018). Impact assessment of industrial wastewater discharge in a river basin using interval-valued fuzzy group decision-making and spatial approach. <i>Environment, Development and Sustainability</i> 20, 2373–2397. <a href="https://doi.org/10.1007/s10668-017-9994-9">doi:10.1007/s10668-017-9994-9</a></li>
-    <li id="r2">Ministry of Water Resources / National Institute of Hydrology (2013). Report of the committee on pollution caused by leather tanning industry to the water bodies / groundwater in Unnao district of Uttar Pradesh. <a href="http://117.252.14.250:8080/jspui/handle/123456789/5036">NIH repository</a></li>
-    <li id="r3">Central Pollution Control Board. Pollution assessment: River Ganga (2013), <a href="https://cpcb.gov.in/wqm/pollution-assessment-ganga-2013.pdf">pdf</a>; identified-drains monitoring reports, 2018–2023.</li>
-    <li id="r4">Dwivedi, A. K., Vankar, P. S. (2014). Source identification study of heavy metal contamination in the industrial hub of Unnao, India. <i>Environmental Monitoring and Assessment</i> 186, 3531–3539. <a href="https://www.academia.edu/28733157/Source_identification_study_of_heavy_metal_contamination_in_the_industrial_hub_of_Unnao_India">full text</a></li>
-    <li id="r5">UPJN, UPPCB, CPCB (2017). Assessment of pollution of drains carrying sewage / industrial effluent joining River Ganga and its tributaries. <a href="https://cpcb.nic.in/ngrba/Final_Approved_Drain_Report_27.03.2017.pdf">pdf</a></li>
-  </ol>
+  <section id="refs" role="tabpanel" aria-labelledby="t-refs" tabindex="0" hidden>
+    <h2>References</h2>
+    <ol class="refs">
+      <li id="r1">Srinivas, R., Singh, A. P. (2018). Impact assessment of industrial wastewater discharge in a river basin using interval-valued fuzzy group decision-making and spatial approach. <i>Environment, Development and Sustainability</i> 20, 2373–2397. <a href="https://doi.org/10.1007/s10668-017-9994-9">doi:10.1007/s10668-017-9994-9</a></li>
+      <li id="r2">Ministry of Water Resources / National Institute of Hydrology (2013). Report of the committee on pollution caused by leather tanning industry to the water bodies / groundwater in Unnao district of Uttar Pradesh. <a href="http://117.252.14.250:8080/jspui/handle/123456789/5036">NIH repository</a></li>
+      <li id="r3">Central Pollution Control Board. Pollution assessment: River Ganga (2013), <a href="https://cpcb.gov.in/wqm/pollution-assessment-ganga-2013.pdf">pdf</a>; identified-drains monitoring reports, 2018–2023.</li>
+      <li id="r4">Dwivedi, A. K., Vankar, P. S. (2014). Source identification study of heavy metal contamination in the industrial hub of Unnao, India. <i>Environmental Monitoring and Assessment</i> 186, 3531–3539. <a href="https://doi.org/10.1007/s10661-014-3636-6">doi:10.1007/s10661-014-3636-6</a></li>
+      <li id="r5">UPJN, UPPCB, CPCB (2017). Assessment of pollution of drains carrying sewage / industrial effluent joining River Ganga and its tributaries. <a href="https://cpcb.gov.in/ngrba/Final_Approved_Drain_Report_27.03.2017.pdf">pdf</a></li>
+      <li id="r6">Central Water Commission (2014). Status of trace and toxic metals in Indian rivers. <a href="https://cwc.gov.in/sites/default/files/trace-toxic-report-25-june-2014.pdf">pdf</a></li>
+    </ol>
+    <p>An independent review (GPT Sol) re-ran all computations and checked the claims on this page against the code and the source PDFs; the defects it found were corrected before these results were produced.</p>
+  </section>
 
   <footer>Notebooks <code>method_a_learn_experts</code>, <code>method_b_compute</code>, <code>method_c_measured_criteria</code> reproduce every number on this page.</footer>
 </main>
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script>
-// mean within-area Spearman vs paper Table 10 (notebooks method_a/b/c)
+// tabs: the URL hash selects the tab; arrow keys move between tabs
+const tabs = [...document.querySelectorAll('[role="tab"]')];
+function select(id) {
+  if (!document.getElementById(id)) return;
+  tabs.forEach(t => {
+    const on = t.getAttribute("aria-controls") === id;
+    t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  });
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => { history.replaceState(null, "", "#" + t.getAttribute("aria-controls")); select(t.getAttribute("aria-controls")); });
+  t.addEventListener("keydown", e => {
+    const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!d) return;
+    const n = tabs[(i + d + tabs.length) % tabs.length];
+    n.click(); n.focus();
+  });
+});
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-goto]");
+  if (!a) return;
+  e.preventDefault();
+  history.replaceState(null, "", "#" + a.dataset.goto);
+  select(a.dataset.goto);
+  const target = document.querySelector(a.getAttribute("href"));
+  (target && target.id !== a.dataset.goto ? target : document.querySelector(".tabs")).scrollIntoView();
+});
+const initial = location.hash.slice(1);
+select(document.getElementById(initial)?.getAttribute("role") === "tabpanel" ? initial : "summary");
+
+// figure 1: mean within-area Spearman vs paper Table 10 (notebooks method_a/b/c)
 const DATA = [
   { m: "B, equal weights", rho: .751, worst: "2/4", n: 33, e: false },
   { m: "C, equal weights", rho: .749, worst: "3/4", n: 33, e: false },
@@ -234,6 +422,8 @@ tg.addEventListener("click", () => {
   tg.textContent = showTable ? "chart view" : "table view";
   tg.setAttribute("aria-pressed", String(showTable));
 });
+
+// theme: remembered per viewer when storage works
 const root = document.documentElement;
 try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
 document.getElementById("theme").addEventListener("click", () => {
