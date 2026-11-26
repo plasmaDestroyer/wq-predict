@@ -151,15 +151,15 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
   <section id="summary" class="chapter">
     <h2 class="ch"><span>1</span>Summary</h2>
     <div class="abstract">
-      <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, in the Ganges basin, using the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2">2</a></sup> and asked whether the measurements alone reproduce the expert ranking. They come close. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.75</span>, roughly the same as a regression model trained on the expert scores (<span class="num">0.74</span>); standard pollution indices reach <span class="num">0.28–0.69</span>. Agreement drops to <span class="num">0.50</span> when only the parameters tested almost everywhere are used. The experts' own scores track the number of parameters tested at each source (mean ρ <span class="num">−0.56</span>), so much of the expert ranking reflects how much was measured, not merely how much was polluted. In 2012 the sampled plants account for about half of the chromium carried by their drains.</p>
+      <p style="margin:0"><b>Abstract</b>Srinivas &amp; Singh (2018) ranked 33 industrial wastewater sources near Unnao, in the Ganges basin, using the ratings of three experts and an interval-valued fuzzy AHP. We recovered the survey's raw laboratory data from the report the paper cites<sup><a href="#r2">2</a></sup> and asked whether a ranking computed from the measurements, without expert scores, reproduces the expert ranking. It comes close. A transparent computed ranking with equal weights agrees with the experts at a mean within-area Spearman ρ of <span class="num">0.74</span>; a regression model trained on the expert scores reaches only <span class="num">0.58</span> in a nested test, and standard pollution indices reach <span class="num">0.28–0.71</span>. Agreement drops to <span class="num">0.50</span> when only the parameters tested almost everywhere are used. The experts' own scores track the number of parameters tested at each source (mean ρ <span class="num">−0.56</span>), so part of the expert ranking may reflect how much was measured, not only how much was polluted. In 2012 the plant and drain chromium loads do not balance in a consistent way between the two sampling rounds.</p>
     </div>
     <h3 id="summary-1"><span>1.1</span>Main findings</h3>
     <ul class="tight">
       <li>The paper's raw data is public. The cited "UPPCB (2013)" report contains every lab table the experts used, and its CETP table matches the paper value for value.</li>
-      <li>Without any expert input, a ranking computed from the measurements comes close to the experts' ranking (ρ 0.75), roughly as close as a model trained on their scores (ρ 0.74).</li>
-      <li>Much of this agreement comes from how many parameters were tested at each source. The experts themselves scored sources tested more often as more polluting (ρ −0.41 to −0.80 in every area). The number of tests alone reproduces their ranking at ρ 0.56. On a common panel (BOD, pH, chromium), the computed ranking agrees at ρ 0.50.</li>
-      <li>In 2012 the sampled plants explain only about 53% (Loni) and 39% (City Jail) of the chromium in their drains, so part of the load comes from sources not in the data.</li>
-      <li>The groundwater criteria cannot be computed per source. No open source locates the individual plants, and well pollution shows no gradient with distance from the industrial areas.</li>
+      <li>Without expert scores, a ranking computed from the measurements (plus an assigned industry class) comes close to the experts' ranking (ρ 0.74). A model trained on their scores does worse in a nested test (ρ 0.58).</li>
+      <li>Much of this agreement goes with how many parameters were tested at each source. The experts themselves scored sources tested more often as more polluting (ρ −0.41 to −0.80 in every area); this is an association, not proof of cause. The number of tests alone reproduces their ranking at ρ 0.56. On a common panel (BOD, pH, chromium), the computed ranking agrees at ρ 0.50.</li>
+      <li>In 2012 the plant and drain chromium loads do not balance in a consistent way: in May one Loni plant alone gives 358% of the drain load, in November the sampled plants give 39%. The data cannot show how much comes from sources not sampled.</li>
+      <li>The groundwater criteria cannot be computed per source. No open source locates most plants, and the few located wells show no clear gradient with distance from the industrial areas.</li>
       <li>Agreement with the experts is not proof of a better assessment. There is no measured "true impact" to test against.</li>
     </ul>
     <p class="lead">Detail: <a href="#paper">paper method</a> · <a href="#data">data</a> · <a href="#methods">methods</a> · <a href="#results">results</a> · <a href="#open">open work</a>.</p>
@@ -209,7 +209,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
         <tr><td>Wastewater stations, mapped to the 33 sources</td><td class="n">54</td><td>Report Tables 5.1, 7.1–7.27</td></tr>
         <tr><td>Effluent values (538 measured, 55 not detected), 18 parameters, May and November 2012</td><td class="n">593</td><td>same</td></tr>
         <tr><td>Well samples (7 pre-, 53 post-monsoon), 1,147 values; 55 wells registered</td><td class="n">60</td><td>Tables 5.2, 7.28</td></tr>
-        <tr><td>Sources with discharge flow and production</td><td class="n">25 / 33</td><td>Table 3.1</td></tr>
+        <tr><td>Sources with discharge flow</td><td class="n">25 / 33</td><td>Table 3.1</td></tr>
         <tr><td>Further groundwater and effluent samples, 2010–2012 (127 from wells)</td><td class="n">162</td><td>Annexes III–V (CGWB)</td></tr>
         <tr><td>Monthly river Ganga records, Kanpur and Bhitaura, 2001–2011</td><td class="n">240</td><td>Annexes VI–VII (CWC)</td></tr>
         <tr><td>Drain records, Loni and City Jail drains, 2012 and 2018–2023</td><td class="n">16</td><td>CPCB<sup><a href="#r3">3</a></sup></td></tr>
@@ -222,7 +222,8 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     <ul class="tight">
       <li>Panels differ: sources were tested for 1 to 17 parameters. No parameter was tested at all 33; BOD at 32, pH at 29, chromium at 28, COD at 22. Drains were tested for a median of 17 parameters, meat plants for 1.5.</li>
       <li>Only 18 of 33 sources were sampled before the monsoon, so C3 is missing for 15.</li>
-      <li>Flow is missing for 5 drains and 3 plants.</li>
+      <li>Flow is missing for 7 drains and 1 plant.</li>
+      <li>Limits: each result is compared with the standard the report prints beside it (sector-specific where given, e.g. ACI Oils BOD 100, COD 200 mg/L; none for steel-plant fluoride), and with the CPCB standard where the report prints none.</li>
       <li>Upstream and downstream samples exist only along the Loni drain (3 sources).</li>
       <li>Not-detected values carry no detection limit; they count as a pass.</li>
     </ul>
@@ -264,7 +265,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     <p>Method C follows B and adds the limit-weighted river load (C6, C7) and a groundwater model (C8, C9). The model predicts a well contamination index (fluoride and TDS against drinking-water limits) from the industrial load of the well's locality. We test it leave-one-locality-out, with nested model choice. A drain-to-river concentration ratio appears only as a labelled scenario: it is not a measured delivered fraction.</p>
 
     <h4 id="methods-5"><span>4.5</span>Evaluation</h4>
-    <p>The paper ranks sources only within areas. We therefore measure agreement as the Spearman ρ between a method's scores and the paper's scores in each of the four areas, then average the four values. We also record whether the most-polluting source matches; tied sources count as a set. We compute standard indices (Nemerow, HPI, excess × flow, TOPSIS) using the definitions in <code>method_b_compute.ipynb</code>.</p>
+    <p>The paper ranks sources only within areas. We therefore measure agreement as the Spearman ρ between a method's scores and the paper's scores in each of the four areas, then average the four values. We also record whether the most-polluting source matches; tied sources count as a set, so a method that scores every source the same would also match. We use this count only beside ρ. We compute standard indices (Nemerow, HPI, excess × flow, TOPSIS) using the definitions in <code>method_b_compute.ipynb</code>.</p>
   </section>
 
   <section id="results" class="chapter">
@@ -284,24 +285,25 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     </figure>
 
     <div class="tbl"><table>
-      <caption><b>Table R1.</b> Within-area Spearman ρ by area.</caption>
+      <caption><b>Table R1.</b> Within-area Spearman ρ by area. A = PLS, leave-one-out (mean 0.71); Figure 1 shows the nested estimate.</caption>
       <thead><tr><th>Area</th><th class="n">Sources</th><th class="n">B</th><th class="n">A</th><th class="n">C</th></tr></thead>
       <tbody>
         <tr><td>Site-1 and Banthar</td><td class="n">9</td><td class="n">0.90</td><td class="n">0.88</td><td class="n">0.93</td></tr>
-        <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.85</td><td class="n">0.65</td></tr>
-        <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.71</td><td class="n">0.71</td></tr>
-        <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.75</td><td class="n">0.54</td><td class="n">0.70</td></tr>
+        <tr><td>Site-2</td><td class="n">9</td><td class="n">0.52</td><td class="n">0.83</td><td class="n">0.65</td></tr>
+        <tr><td>Magarwara-I</td><td class="n">8</td><td class="n">0.83</td><td class="n">0.81</td><td class="n">0.71</td></tr>
+        <tr><td>Magarwara-II</td><td class="n">7</td><td class="n">0.71</td><td class="n">0.32</td><td class="n">0.71</td></tr>
       </tbody>
     </table></div>
 
     <h4 id="results-2"><span>5.2</span>Choosing the model (method A)</h4>
-    <p>Two-component partial least squares gave the lowest leave-one-out error: MAE 0.233 on the area-normalised score. With 33 sources, we expected linear models to beat the tree ensembles and the Gaussian process, and they did. The nested estimate is ρ 0.736 (MAE 0.225). PLS was selected in 29 of 33 folds. The model relies mostly on C4 and C10.</p>
+    <p>Two-component partial least squares gave the lowest leave-one-out error: MAE 0.223 on the area-normalised score. PLS, Huber and ridge regression came first; the tree ensembles did worse. The nested estimate, with the model chosen again inside each fold, is ρ 0.577 (MAE 0.238). PLS was selected in 25 of 33 folds, SVR in 5. The model relies mostly on C10 and C4.</p>
 
     <h4 id="results-3"><span>5.3</span>Sensitivity checks (method B)</h4>
     <ul class="tight">
-      <li>Weights: 2,000 random weightings give a median ρ of 0.69 (5–95%: 0.38–0.81). Equal weights (0.75) and the paper's weights (0.74) both sit near the top. The weights matter less than the measurements.</li>
-      <li>Single criteria: C4 alone gives ρ 0.71, C10 alone 0.66 and C1 alone 0.39.</li>
-      <li>Panel size: if we count failures and excess per tested parameter, ρ falls from 0.75 to 0.26.</li>
+      <li>Weights: 2,000 random weightings give a median ρ of 0.65 (5–95%: 0.37–0.79). Equal weights (0.74) and the paper's weights (0.73) both sit near the top. The weights matter less than the measurements.</li>
+      <li>Single criteria: C4 alone gives ρ 0.74, C10 alone 0.57 and C1 alone 0.39.</li>
+      <li>Panel size: if we count failures and excess per parameter tested in the same sampling round, ρ falls from 0.74 to 0.17.</li>
+      <li>Same sources: on the 25 sources that excess × flow can score, B gives ρ 0.69 and excess × flow 0.71.</li>
     </ul>
 
     <h4 id="results-4"><span>5.4</span>Panel size</h4>
@@ -310,31 +312,35 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       <caption><b>Table R2.</b> Agreement when the panel is controlled.</caption>
       <thead><tr><th>Ranking</th><th class="n">ρ within area</th></tr></thead>
       <tbody>
-        <tr><td>B, all parameters (main result)</td><td class="n">0.75</td></tr>
+        <tr><td>B, all parameters (main result)</td><td class="n">0.74</td></tr>
         <tr><td>B, common panel: BOD, pH, chromium</td><td class="n">0.50</td></tr>
         <tr><td>B, common panel: BOD, chromium</td><td class="n">0.44</td></tr>
-        <tr><td>B, BOD only</td><td class="n">0.41</td></tr>
+        <tr><td>B, BOD only</td><td class="n">0.43</td></tr>
         <tr><td>Number of parameters tested, alone</td><td class="n">0.56</td></tr>
       </tbody>
     </table></div>
-    <p>The experts' own scores track the panel size. Inside each area, sources with more parameters tested got worse scores (Spearman ρ −0.41, −0.80, −0.50 and −0.52 for Magarwara-I, Magarwara-II, Site-1 and Banthar, and Site-2). Drains and treatment plants had the full panel and were scored as the most polluting. We cannot separate whether they were also the most polluting from how much was measured.</p>
+    <p>The experts' own scores track the panel size. Inside each area, sources with more parameters tested got worse scores (Spearman ρ −0.41, −0.80, −0.50 and −0.52 for Magarwara-I, Magarwara-II, Site-1 and Banthar, and Site-2). Drains had the full panel (15–17 parameters), treatment plants 13, and they were scored as the most polluting. Industry type and the purpose of sampling change together with panel size, so this association does not show cause. We cannot separate whether they were also the most polluting from how much was measured.</p>
 
     <h4 id="results-5"><span>5.5</span>Mass balance of the drains</h4>
-    <p>We summed plant loads (concentration × flow) for each receiving drain and compared them with the drain's own load (<code>method_c_measured_criteria.ipynb</code>, section 7). Chromium marks tannery effluent. BOD and COD also carry town sewage.</p>
+    <p>We summed plant loads (concentration × flow) for each receiving drain and compared them with the drain's own load in the same sampling round (<code>method_c_measured_criteria.ipynb</code>, section 7). Chromium marks tannery effluent. BOD and COD also carry town sewage.</p>
     <div class="tbl"><table>
-      <caption><b>Table R3.</b> Plants versus drains, kg/day.</caption>
-      <thead><tr><th>Drain</th><th>Parameter</th><th class="n">Plants 2012</th><th class="n">Drain 2012</th><th class="n">Explained</th><th class="n">Drain 2016</th></tr></thead>
+      <caption><b>Table R3.</b> Plants versus drains, kg/day, 2012, per sampling round. Plants = sources with a known flow and a result in that round.</caption>
+      <thead><tr><th>Drain</th><th>Parameter</th><th>Round</th><th class="n">Plants</th><th class="n">Plant load</th><th class="n">Drain load</th><th class="n">Ratio</th></tr></thead>
       <tbody>
-        <tr><td>Loni</td><td>Chromium</td><td class="n">4.6</td><td class="n">8.7</td><td class="n">53%</td><td class="n">4.3</td></tr>
-        <tr><td>Loni</td><td>BOD</td><td class="n">616</td><td class="n">4,306</td><td class="n">14%</td><td class="n">15,949</td></tr>
-        <tr><td>City Jail</td><td>Chromium</td><td class="n">9.5</td><td class="n">24.2</td><td class="n">39%</td><td class="n">192</td></tr>
-        <tr><td>City Jail</td><td>BOD</td><td class="n">2,096</td><td class="n">3,167</td><td class="n">66%</td><td class="n">9,354</td></tr>
+        <tr><td>Loni</td><td>Chromium</td><td>May</td><td class="n">1</td><td class="n">2.2</td><td class="n">0.6</td><td class="n">358%</td></tr>
+        <tr><td>Loni</td><td>Chromium</td><td>Nov</td><td class="n">3</td><td class="n">6.6</td><td class="n">16.8</td><td class="n">39%</td></tr>
+        <tr><td>Loni</td><td>BOD</td><td>May</td><td class="n">3</td><td class="n">277</td><td class="n">4,837</td><td class="n">6%</td></tr>
+        <tr><td>Loni</td><td>BOD</td><td>Nov</td><td class="n">6</td><td class="n">941</td><td class="n">3,775</td><td class="n">25%</td></tr>
+        <tr><td>City Jail</td><td>Chromium</td><td>May</td><td class="n">5</td><td class="n">4.7</td><td class="n">14.1</td><td class="n">34%</td></tr>
+        <tr><td>City Jail</td><td>Chromium</td><td>Nov</td><td class="n">13</td><td class="n">14.1</td><td class="n">34.3</td><td class="n">41%</td></tr>
+        <tr><td>City Jail</td><td>BOD</td><td>May</td><td class="n">5</td><td class="n">457</td><td class="n">1,539</td><td class="n">30%</td></tr>
+        <tr><td>City Jail</td><td>BOD</td><td>Nov</td><td class="n">14</td><td class="n">3,533</td><td class="n">4,795</td><td class="n">74%</td></tr>
       </tbody>
     </table></div>
-    <p>In 2012 the sampled plants account for about half of the chromium in the drains. The rest comes from sources outside our data (unsampled units, untreated discharge, dumping noted in the report). By 2016 the City Jail drain carried four times the 2012 flow and eight times the chromium. The 2016 survey therefore shows changed conditions, not a test of the 2012 loads. The river criteria (C6, C7) rank the sampled plants against each other, but they do not cover the whole load.</p>
+    <p>The ratios do not agree between rounds: in May one Loni plant alone gives more chromium than the drain carries, in November the plants give 39%. Plant and drain samples were taken on different days, flows are estimates, and the plants sampled differ between rounds. So the remainder cannot be assigned to unsampled units or dumping. By 2016 the City Jail drain carried four times the 2012 flow and 192 kg/day of chromium, five to fourteen times the 2012 values. The 2016 survey therefore shows changed conditions, not a test of the 2012 loads. The river criteria (C6, C7) rank the sampled plants against each other, but they do not cover the whole load.</p>
 
     <h4 id="results-6"><span>5.6</span>Groundwater</h4>
-    <p>In a leave-one-locality-out test, no model predicted contamination in wells better than the mean. C8 and C9 therefore stay neutral. We have coordinates for 27 wells. TDS, fluoride, Cr(VI) and conductivity do not fall with distance to the nearest industrial area (Spearman ρ between −0.18 and 0.51). The only significant value, for TDS, has the wrong sign.</p>
+    <p>In a leave-one-locality-out test, no model predicted contamination in wells better than the mean. C8 and C9 therefore stay neutral. We have coordinates for 27 wells. TDS, fluoride, Cr(VI) and conductivity do not fall with distance to the nearest industrial area (Spearman ρ between −0.18 and 0.51). The only significant value, for TDS, has the wrong sign. The test is weak: 17 report wells share 11 village points, so it cannot rule out a gradient.</p>
   </section>
 
   <section id="open" class="chapter">
@@ -346,8 +352,8 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       <h4 id="open-2"><span>6.2</span>Panel size versus pollution · <i>analysed</i></h4>
       <dl>
         <dt>What</dt><dd>Different sources were tested for different numbers of parameters, from 1 to 17. Drains and treatment plants got the full panel; most plants got 1 to 4. Criteria that count failures (C3, C4) or add up excess (C10) grow with the panel.</dd>
-        <dt>Why it matters</dt><dd>A source can look worse just because more was measured. When the counts are taken per tested parameter, agreement falls from 0.75 to 0.26. The experts read the same tables, so their ranking may carry the same effect. Any ranking used for regulation must compare like with like.</dd>
-        <dt>Done</dt><dd>On a common panel (BOD, pH, chromium), agreement is 0.50. The experts' own scores follow the panel size in every area (ρ −0.41 to −0.80). The effect is real, and it sits in the expert ranking too (<a href="#results">Results</a>, Table R2).</dd>
+        <dt>Why it matters</dt><dd>A source can look worse just because more was measured. When the counts are taken per tested parameter, agreement falls from 0.74 to 0.17. The experts read the same tables, so their ranking may carry the same effect. Any ranking used for regulation must compare like with like.</dd>
+        <dt>Done</dt><dd>On a common panel (BOD, pH, chromium), agreement is 0.50. The experts' own scores follow the panel size in every area (ρ −0.41 to −0.80). The effect is real for the computed ranking, and the expert scores show the same association (<a href="#results">Results</a>, Table R2).</dd>
         <dt>Still needed</dt><dd>The same parameter panel at every outlet, in new sampling. Only then can we separate pollution from testing effort.</dd>
       </dl>
     </div>
@@ -356,7 +362,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       <dl>
         <dt>What</dt><dd>The paper labels sources S1–S9 in each area but does not list the Magarwara stations. 11 of the 15 Magarwara sources were matched to the report's stations by order only.</dd>
         <dt>Why it matters</dt><dd>One third of the labels rest on those matches. A wrong match pairs the measurements of one plant with the expert score of another, which lowers or raises agreement for the wrong reason.</dd>
-        <dt>Next step</dt><dd>Confirmation from the authors or UPPCB. Agreement in the Magarwara areas (0.83, 0.75) is similar to the other areas. That suggests, but does not prove, that the order is right.</dd>
+        <dt>Next step</dt><dd>Confirmation from the authors or UPPCB. Agreement scores cannot confirm the order: a wrong match can raise agreement as easily as lower it.</dd>
       </dl>
     </div>
     <div class="open">
@@ -370,8 +376,8 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     <div class="open">
       <h4 id="open-5"><span>6.5</span>Groundwater per source</h4>
       <dl>
-        <dt>What</dt><dd>Two of the ten criteria (C8, C9) concern groundwater. No open source gives the locations of the individual plants. Well pollution shows no gradient with distance from the industrial areas.</dd>
-        <dt>Why it matters</dt><dd>Without them the ranking covers effluent and river impact only. Groundwater is the main exposure route for people near tanneries (chromium).</dd>
+        <dt>What</dt><dd>Two of the ten criteria (C8, C9) concern groundwater. No open source gives the locations of most plants. Well pollution shows no gradient with distance from the industrial areas.</dd>
+        <dt>Why it matters</dt><dd>Without them the ranking covers effluent and river impact only. Groundwater is a likely exposure route for people near tanneries (chromium).</dd>
         <dt>Next step</dt><dd>Plant and outlet coordinates, from field GPS or UPPCB consent records, and wells paired near and away from each source.</dd>
       </dl>
     </div>
@@ -380,7 +386,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
       <dl>
         <dt>What</dt><dd>The 2016 joint survey gives flow, chemistry and metals at the Loni and City Jail drains.</dd>
         <dt>Why it matters</dt><dd>That makes a mass-balance check possible. Sum the plant loads computed for C6/C7, then ask whether they match what the drains carry to the Ganga.</dd>
-        <dt>Done</dt><dd>In 2012 the sampled plants explain 53% (Loni) and 39% (City Jail) of the drain chromium. The 2016 survey shows much larger City Jail loads, so conditions changed (Table R3).</dd>
+        <dt>Done</dt><dd>Per sampling round, plant and drain chromium loads do not balance in a consistent way (Loni 358% in May, 39% in November), so the gap cannot be assigned to a source. The 2016 survey shows much larger City Jail loads, so conditions changed (Table R3).</dd>
         <dt>Still needed</dt><dd>Flow and chemistry for the unsampled units that discharge to each drain.</dd>
       </dl>
     </div>
@@ -406,7 +412,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule);
     </ol>
   </section>
 
-  <footer>Notebooks <code>method_a_learn_experts</code>, <code>method_b_compute</code>, <code>method_c_measured_criteria</code> reproduce every number on this page.</footer>
+  <footer>Notebooks <code>method_a_learn_experts</code>, <code>method_b_compute</code>, <code>method_c_measured_criteria</code> reproduce the numbers in chapters 3–5, except the well-distance test.</footer>
 </main>
 <div class="tip" id="tip" role="tooltip"></div>
 
@@ -415,18 +421,18 @@ document.getElementById("pdf").addEventListener("click", () => window.print()); 
 
 // figure 1: mean within-area Spearman vs paper Table 10 (notebooks method_a/b/c)
 const DATA = [
-  { m: "B, equal weights", rho: .751, worst: "2/4", n: 33, e: false },
-  { m: "C, equal weights", rho: .749, worst: "3/4", n: 33, e: false },
-  { m: "B, paper's weights", rho: .738, worst: "2/4", n: 33, e: true },
-  { m: "A, PLS (nested)", rho: .736, worst: "2/4", n: 33, e: true },
-  { m: "B, CRITIC weights", rho: .723, worst: "3/4", n: 33, e: false },
-  { m: "Excess × flow", rho: .687, worst: "3/4", n: 25, e: false },
-  { m: "Nemerow index", rho: .556, worst: "1/4", n: 33, e: false },
-  { m: "TOPSIS-CRITIC", rho: .540, worst: "3/4", n: 33, e: false },
+  { m: "C, equal weights", rho: .752, worst: "2/4", n: 33, e: false },
+  { m: "B, equal weights", rho: .742, worst: "1/4", n: 33, e: false },
+  { m: "B, paper's weights", rho: .729, worst: "1/4", n: 33, e: true },
+  { m: "B, CRITIC weights", rho: .729, worst: "3/4", n: 33, e: false },
+  { m: "Excess × flow", rho: .713, worst: "2/4", n: 25, e: false },
+  { m: "A, nested model choice", rho: .577, worst: "1/4", n: 33, e: true },
+  { m: "TOPSIS-CRITIC", rho: .534, worst: "2/4", n: 33, e: false },
+  { m: "Nemerow index", rho: .422, worst: "0/4", n: 33, e: false },
   { m: "HPI (metals)", rho: .277, worst: "1/4", n: 28, e: false },
-  { m: "B, per tested parameter", rho: .256, worst: "2/4", n: 33, e: false },
+  { m: "B, per tested parameter", rho: .168, worst: "1/4", n: 33, e: false },
 ];
-const BAND = { lo: .376, hi: .808, med: .691 };
+const BAND = { lo: .370, hi: .789, med: .652 };
 const pct = v => (v * 100) + "%";
 const rows = document.getElementById("rows"), tip = document.getElementById("tip");
 rows.innerHTML = DATA.map((d, i) => `<div class="row" data-i="${i}" tabindex="0"><div>${d.m}</div><div class="track">${

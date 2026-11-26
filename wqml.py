@@ -165,7 +165,7 @@ def prepare(df):
         df[c] = df[c].mask((df[c] == 0) & df["detection_limit"].notna(), df["detection_limit"] / 2)
     if "limit" not in df:  # a limit column in the data wins; else CPCB
         df["limit"] = df["pollutant"].map(LIMITS)
-    df["outlet_load_kg_day"] = df["outlet"] * df["discharge_flow_mld"]  # mg/L x ML/day = kg/day
+    df["outlet_load_kg_day"] = (df["outlet"] * df["discharge_flow_mld"]).where(df["pollutant"] != "pH")  # mg/L x ML/day = kg/day
     df["river_change"] = df["downstream"] - df["upstream"]
     df["gw_change"] = df["near_well"] - df["control_well"]
     df["exceedance_ratio"] = df["outlet"] / df["limit"]
@@ -352,8 +352,9 @@ C5_CLASS = {"tannery": 1, "steel": 1, "chemical": 1, "cetp": 3, "drain": 3, "tex
             "sewage_drain": 5, "food": 5, "meat": 5, "animal_byproduct": 5, "oil": 5, "paper_pulp": 5}
 
 
-def summarise(df):
-    """Prepared rows -> one row per industry, one column per paper criterion C1-C10."""
+def summarise(df, how="sum"):
+    """Prepared rows -> one row per industry, one column per paper criterion C1-C10.
+    how="mean": C3/C4/C10 per parameter tested in that same sampling event (panel-size check)."""
     d = df.copy()
     # event = one sampling round: date, else season (paper rows are undated), else one 'undated' round
     d["event"] = d["sample_date"].dt.strftime("%Y-%m-%d").fillna(d["season"]).fillna("undated")
@@ -366,7 +367,8 @@ def summarise(df):
     eff = ((d["inlet"] - d["outlet"]) / d["inlet"]).where(d["inlet"].gt(0) & d["pollutant"].ne("pH"))
 
     def per_event(mask, col):  # sum over pollutants within one sampling event, then mean over events
-        return d[mask].groupby(["source_id", "event"])[col].sum(min_count=1).groupby(level=0).mean()
+        g = d[mask].groupby(["source_id", "event"])[col]
+        return (g.sum(min_count=1) if how == "sum" else g.mean()).groupby(level=0).mean()
 
     s = pd.DataFrame({
         "C1": d.groupby("source_id")["discharge_flow_mld"].mean(),
@@ -420,7 +422,8 @@ def agreement(t, col, ref="fuzzy_weight"):
     the two sets of tied-worst industries overlap)."""
     from scipy.stats import spearmanr
     by_area = t.groupby("industrial_area")
-    rho = {a: spearmanr(g[col], g[ref]).statistic for a, g in by_area if len(g) > 2}
+    # a source with no value for `col` is left out of its area, not the whole area
+    rho = {a: spearmanr(g[col], g[ref], nan_policy="omit").statistic for a, g in by_area if g[col].notna().sum() > 2}
     worst = lambda x: set(x.index[x == x.min()])
     # an area whose scores are all equal has no order (rho undefined): left out of the mean
     out = {"spearman_within_area": float(np.nanmean(list(rho.values())))} | {f"spearman_{a}": v for a, v in rho.items()}
@@ -457,8 +460,24 @@ def load(paths=("data/measurements.csv", "data/samples.csv", "data/stations.csv"
         reg = pd.read_csv(stations if stations.exists() else UPPCB / "stations.csv")
         return reshape(pd.read_csv(samples), reg), "user"
     if (UPPCB / "samples.csv").exists():
-        return reshape(pd.read_csv(UPPCB / "samples.csv"), pd.read_csv(UPPCB / "stations.csv")), "uppcb"
+        return printed_limits(reshape(pd.read_csv(UPPCB / "samples.csv"), pd.read_csv(UPPCB / "stations.csv"))), "uppcb"
     return dummy(), "dummy"
+
+
+def printed_limits(raw):
+    """The source report prints the standard that applies to each outlet result (sector-specific, e.g.
+    ACI Oils BOD 100 / COD 200; '-' = no standard prescribed, e.g. steel-plant fluoride). Use it; CPCB
+    (LIMITS) only where the report prints nothing. Ranges (pH) stay with the PH_RANGE rule."""
+    e = pd.read_csv(UPPCB / "effluent_long.csv").dropna(subset=["standard"])
+    st = pd.read_csv(UPPCB / "stations.csv").query("role == 'outlet'")[["station_id", "source_id"]]
+    e = e.merge(st, on="station_id")
+    e["limit"] = pd.to_numeric(e["standard"], errors="coerce")  # '-' and ranges -> NaN (no ceiling)
+    lim = e.groupby(["source_id", "season", "pollutant"])["limit"].first()
+    key = pd.MultiIndex.from_frame(raw[["source_id", "season", "pollutant"]])
+    raw = raw.copy()
+    raw["limit"] = np.where(key.isin(lim.index), lim.reindex(key).to_numpy(), raw["pollutant"].map(LIMITS))
+    raw.loc[raw["pollutant"] == "pH", "limit"] = np.nan
+    return raw
 
 
 if __name__ == "__main__":
